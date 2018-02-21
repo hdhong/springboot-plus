@@ -1,0 +1,20 @@
+<!--# /*简单一级字典下拉列表控件*/  -->
+<div class="${style!'layui-input-inline'}">
+	<select data-group="${group!}" name="${name}" ${has(id)?("id="+id):''}>
+	<option value="">请选择</option>
+	<!--# 
+		var dicts = [];
+		if(isNotEmpty(type)&&isEmpty(value)){
+			dicts = core.dictDownQuery(type);
+		}else if(isNotEmpty(value)){
+			dicts = core.dictListByValue(value);
+		}
+		var expected = value!"";
+		for(dict in dicts){
+	 -->
+	 
+    <option value="${dict.value}" ${dict.value==expected?'selected'}>${dict.name}</option>
+      
+   <!--#}-->
+    </select>
+</div>

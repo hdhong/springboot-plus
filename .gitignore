@@ -1,0 +1,4 @@
+admin-core/target/*
+admin-console/target/*
+.*
+!.gitignore

@@ -1,0 +1,76 @@
+<!--# layout("/common/layout.html",{"jsBase":"/js/admin/cmsBlog/"}){ -->
+
+<form class="layui-form layui-form-pane" id="updateForm"
+	action="/admin/cmsBlog/update.json">
+	<div class="layui-row">
+	   <div class="layui-form-item">
+		
+			<div class="layui-inline">
+			<label class="layui-form-label">title</label>
+			<div class="layui-input-inline">
+				<input type="text" name="title"  value="${cmsBlog.title}"
+					 class="layui-input" >
+			</div>
+			</div>
+		
+		
+			<div class="layui-inline">
+			<label class="layui-form-label">content</label>
+			<div class="layui-input-inline">
+				<input type="text" name="content"  value="${cmsBlog.content}"
+					 class="layui-input" >
+			</div>
+			</div>
+		
+		</div>
+		
+	</div>
+	<div class="layui-row">
+	   <div class="layui-form-item">
+		
+			<div class="layui-inline">
+			<label class="layui-form-label">createTime</label>
+			<div class="layui-input-inline">
+				<input type="text" name="createTime"  value="${cmsBlog.createTime}"
+					 class="layui-input" >
+			</div>
+			</div>
+		
+		
+			<div class="layui-inline">
+			<label class="layui-form-label">createUserId</label>
+			<div class="layui-input-inline">
+				<input type="text" name="createUserId"  value="${cmsBlog.createUserId}"
+					 class="layui-input" >
+			</div>
+			</div>
+		
+		</div>
+		
+	</div>
+	<div class="layui-row">
+	   <div class="layui-form-item">
+		
+			<div class="layui-inline">
+			<label class="layui-form-label">type</label>
+			<div class="layui-input-inline">
+				<input type="text" name="type"  value="${cmsBlog.type}"
+					 class="layui-input" >
+			</div>
+			</div>
+		
+		</div>
+		
+	</div>
+	<input type="hidden" name="id" value=${cmsBlog.id} />
+	
+	<layui:submitButtons id="updateButton" />
+</form>
+<!--#} -->
+<script>
+layui.use(['edit'], function(){
+  var cmsBlogEdit = layui.edit
+  cmsBlogEdit.init();
+});
+
+</script>
