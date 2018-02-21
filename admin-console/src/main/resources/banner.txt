@@ -1,1 +1,1 @@
-***  Spring Boot 2 Admin
+***  Spring Boot 2 plus
