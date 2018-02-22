@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.beetl.sql.core.annotatoin.AutoID;
 import org.beetl.sql.core.annotatoin.SeqID;
+import org.beetl.sql.core.annotatoin.UpdateIgnore;
 
 import com.ibeetl.admin.core.annotation.Dict;
 import com.ibeetl.admin.core.util.ValidateConfig;
@@ -27,6 +28,7 @@ public class CoreMenu extends BaseEntity {
     protected Long id;
 
     //创建时间
+	@UpdateIgnore
     protected Date createTime;
 
     //菜单代码

@@ -37,18 +37,27 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				}, {
 					field : 'code',
 					title : '菜单代码',
-					width : 150
+					width : 120
 				}, {
 					field : 'name',
 					title : '菜单名称',
-					width : 150,
+					width : 120,
 					sort : true
 				}, {
 					field : 'accessUrl',
 					title : '菜单入口地址',
-					width : 300,
+					width : 250,
 					sort : true
-				}, {
+				} , {
+					field : 'icon',
+					title : '图标',
+					width : 80
+				},{
+					field : 'seq',
+					title : '排序',
+					width : 80,
+					sort : true
+				},{
 					field : 'parentMenuName',
 					title : '上一级菜单',
 					width : 120,
@@ -56,7 +65,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				},{
 					field : 'typeText',
 					title : '菜单类型',
-					width : 120,
+					width : 100,
 					sort : true
 				},
 				{
