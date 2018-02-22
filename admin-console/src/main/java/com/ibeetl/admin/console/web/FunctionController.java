@@ -1,20 +1,10 @@
 package com.ibeetl.admin.console.web;
 
-import com.ibeetl.admin.console.service.FunctionConsoleService;
-import com.ibeetl.admin.console.web.query.AuditQuery;
-import com.ibeetl.admin.console.web.query.FunctionQuery;
-import com.ibeetl.admin.core.annotation.Function;
-import com.ibeetl.admin.core.annotation.Query;
-import com.ibeetl.admin.core.entity.CoreFunction;
-import com.ibeetl.admin.core.entity.CoreOrg;
-import com.ibeetl.admin.core.rbac.tree.FunctionItem;
-import com.ibeetl.admin.core.service.CorePlatformService;
-import com.ibeetl.admin.core.util.AnnotationUtil;
-import com.ibeetl.admin.core.util.ConvertUtil;
-import com.ibeetl.admin.core.util.FormFieldException;
-import com.ibeetl.admin.core.util.PlatformException;
-import com.ibeetl.admin.core.util.ValidateConfig;
-import com.ibeetl.admin.core.web.JsonResult;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -28,11 +18,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import com.ibeetl.admin.console.service.FunctionConsoleService;
+import com.ibeetl.admin.console.web.query.FunctionQuery;
+import com.ibeetl.admin.core.annotation.Function;
+import com.ibeetl.admin.core.annotation.Query;
+import com.ibeetl.admin.core.entity.CoreFunction;
+import com.ibeetl.admin.core.rbac.tree.FunctionItem;
+import com.ibeetl.admin.core.service.CorePlatformService;
+import com.ibeetl.admin.core.util.AnnotationUtil;
+import com.ibeetl.admin.core.util.ConvertUtil;
+import com.ibeetl.admin.core.util.FormFieldException;
+import com.ibeetl.admin.core.util.PlatformException;
+import com.ibeetl.admin.core.util.ValidateConfig;
+import com.ibeetl.admin.core.web.JsonResult;
+import com.ibeetl.admin.core.web.dto.FunctionNodeView;
 
 /**
  * 描述:  功能点管理
@@ -69,7 +68,7 @@ public class FunctionController {
      }
      @GetMapping(MODEL + "/edit.do")
      @Function("function.edit")
-     public ModelAndView edit(String id) {
+     public ModelAndView edit(Integer id) {
     	 ModelAndView view = new ModelAndView("/admin/function/edit.html");
     	 CoreFunction function = functionConsoleService.queryById(id);
          view.addObject("function", function);
@@ -188,10 +187,8 @@ public class FunctionController {
     @ResponseBody
     public JsonResult batchDel(String ids) {
     		List<Long> dels = ConvertUtil.str2longs(ids);
-        JsonResult result = new JsonResult();
-        //todo 导致缓存多次操作.
         functionConsoleService.batchDeleteFunction(dels);
-        return result.success();
+        return new JsonResult().success();
        
     }
     
@@ -217,6 +214,7 @@ public class FunctionController {
       		view.setCode(item.getData().getCode());
       		view.setName(item.getData().getName());
       		view.setId(item.getData().getId());
+      		view.setAccessUrl(item.getData().getAccessUrl());
       		List<FunctionNodeView> children = this.buildFunctionTree(item);
       		view.setChildren(children);
       		views.add(view);
@@ -224,49 +222,6 @@ public class FunctionController {
       	return views;
      }
     
-  class FunctionNodeView{
-    	
-    	String name;
-    	String code;
-    	Long id;
-    	
-    	String icon;
-    	List<FunctionNodeView> children=new ArrayList<FunctionNodeView>();
-    	
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
-		public String getCode() {
-			return code;
-		}
-		public void setCode(String code) {
-			this.code = code;
-		}
-		public Long getId() {
-			return id;
-		}
-		public void setId(Long id) {
-			this.id = id;
-		}
-		public List<FunctionNodeView> getChildren() {
-			return children;
-		}
-		public void setChildren(List<FunctionNodeView> children) {
-			this.children = children;
-		}
-		
-		public String getIcon() {
-			return icon;
-		}
-		public void setIcon(String icon) {
-			this.icon = icon;
-		}
-		
-    	
-    }
-    
+
     
 }

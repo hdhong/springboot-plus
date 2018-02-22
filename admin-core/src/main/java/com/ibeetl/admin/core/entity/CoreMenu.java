@@ -30,7 +30,7 @@ public class CoreMenu extends BaseEntity {
     protected Date createTime;
 
     //菜单代码
-    @NotBlank(message = "菜单编码不能为空", groups = ValidateConfig.ADD.class)
+    @NotBlank(message = "菜单代码不能为空", groups = ValidateConfig.ADD.class)
     private String code;
 
     //功能id

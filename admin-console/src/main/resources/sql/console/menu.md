@@ -21,6 +21,10 @@ queryByCondtion
 	@if(!isEmpty(name)){
 	    and  m.name like #'%'+name+"%"#
 	@}
+	
+	@if(!isEmpty(parentMenuId)){
+	    and  m.parent_menu_id = #parentMenuId#
+	@}
 
 	
 

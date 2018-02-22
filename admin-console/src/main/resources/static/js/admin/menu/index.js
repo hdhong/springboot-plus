@@ -2,7 +2,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 	var form = layui.form;
 	var laydate = layui.laydate;
 	var table = layui.table;
-	var functionTable = null;
+	var menuTable = null;
 	var view ={
 		
 		init:function(){
@@ -10,17 +10,17 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 			this.initSearchForm();
 			this.initToolBar();
 			window.dataReload = function(){
-				Lib.doSearchForm($("#functionSearchForm"),functionTable,form)
+				Lib.doSearchForm($("#menuSearchForm"),menuTable,form)
 			}
 			
 			
 		},
 		initTable:function(){
-			functionTable = table.render({
-				elem : '#functionTable',
+			menuTable = table.render({
+				elem : '#menuTable',
 				height : 'full-280',
 				method : 'post',
-				url : Common.CTX + '/admin/function/list.json' //数据接口
+				url : Common.CTX + '/admin/menu/list.json' //数据接口
 				,page : {"layout":['count','prev', 'page', 'next']} //开启分页
 				,limit : 10,
 				cols : [ [ //表头
@@ -36,26 +36,26 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 					sort : true
 				}, {
 					field : 'code',
-					title : '功能代码',
+					title : '菜单代码',
 					width : 150
 				}, {
 					field : 'name',
-					title : '功能名称',
+					title : '菜单名称',
 					width : 150,
 					sort : true
 				}, {
 					field : 'accessUrl',
-					title : '访问地址',
+					title : '菜单入口地址',
 					width : 300,
 					sort : true
 				}, {
-					field : 'parentFunctionText',
-					title : '上一级功能',
+					field : 'parentMenuName',
+					title : '上一级菜单',
 					width : 120,
 					sort : true
 				},{
 					field : 'typeText',
-					title : '功能类型',
+					title : '菜单类型',
 					width : 120,
 					sort : true
 				},
@@ -75,21 +75,21 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 		},
 		
 		initSearchForm:function(){
-			Lib.initSearchForm( $("#functionSearchForm"),functionTable,form);
+			Lib.initSearchForm( $("#menuSearchForm"),menuTable,form);
 		},
 		initToolBar:function(){
 			toolbar = {
 					add : function() { //获取选中数据
-						var url = "/admin/function/add.do";
-						Common.openDlg(url,"功能点管理>新增");
+						var url = "/admin/menu/add.do";
+						Common.openDlg(url,"菜单管理>新增");
 					},
 					edit : function() { //获取选中数目
-						var data = Common.getOneFromTable(table,"functionTable");
+						var data = Common.getOneFromTable(table,"menuTable");
 						if(data==null){
 							return ;
 						}
-						var url = "/admin/function/edit.do?id="+data.id;
-						Common.openDlg(url,"功能点管理>编辑");
+						var url = "/admin/menu/edit.do?id="+data.id;
+						Common.openDlg(url,"菜单管理>编辑");
 						
 					},
 					del : function() { 

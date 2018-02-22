@@ -24,7 +24,9 @@ import com.ibeetl.admin.core.service.CorePlatformService;
 import com.ibeetl.admin.core.util.beetl.DictQueryByValueFunction;
 import com.ibeetl.admin.core.util.beetl.DictQueryFunction;
 import com.ibeetl.admin.core.util.beetl.DictUpQueryFunction;
+import com.ibeetl.admin.core.util.beetl.FunAccessUrlFunction;
 import com.ibeetl.admin.core.util.beetl.FunFunction;
+import com.ibeetl.admin.core.util.beetl.MenuFunction;
 import com.ibeetl.admin.core.util.beetl.OrgFunction;
 import com.ibeetl.admin.core.util.beetl.RoleFunction;
 import com.ibeetl.admin.core.util.beetl.SearchCondtionFunction;
@@ -70,6 +72,12 @@ public class BeetlConf {
     @Autowired
     FunFunction funFunction;
     
+    @Autowired
+    FunAccessUrlFunction funAccessUrlFunction;
+    
+    @Autowired
+    MenuFunction menuFunction;
+    
     @Bean
     public WebSimulate getWebSimulate(GroupTemplate gt, ObjectMapper objectMapper) {
         return new WebSimulate(gt, new ObjectMapperJsonUtil(objectMapper)) {
@@ -88,6 +96,8 @@ public class BeetlConf {
                 groupTemplate.registerFunctionPackage("queryCondtion", new QueryParser());
                 groupTemplate.registerFunction("core.orgName", orgFunction);
                 groupTemplate.registerFunction("core.functionName", funFunction);
+                groupTemplate.registerFunction("core.funAccessUrl", funAccessUrlFunction);
+                groupTemplate.registerFunction("core.menuName", menuFunction);
                 groupTemplate.registerFunction("core.searchCondtion", searchCondtionFunction);
                 groupTemplate.registerFunction("core.dictDownQuery", dictDownQueryFunction);
                 groupTemplate.registerFunction("core.dictLevel", dictUpQueryFunction);

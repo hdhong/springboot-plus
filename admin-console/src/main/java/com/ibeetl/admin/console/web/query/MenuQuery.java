@@ -16,6 +16,8 @@ public class MenuQuery extends PageParam {
     @Query(name = "菜单入口地址", display = true,fuzzy=true)
     private String url;
   
+    @Query(name="上一级菜单",display=true,type=Query.TYPE_CONTROL,control="menu")
+	private Long parentMenuId;
   
 	public String getCode() {
 		return code;
@@ -34,6 +36,12 @@ public class MenuQuery extends PageParam {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	public Long getParentMenuId() {
+		return parentMenuId;
+	}
+	public void setParentMenuId(Long parentMenuId) {
+		this.parentMenuId = parentMenuId;
 	}
 	
 	

@@ -52,6 +52,56 @@ var Lib = {
 			var zTreeObj = $.fn.zTree.init($("#_treeDemo"), {}, zNodes);
 		})
 	},
+	loadMenuPanel : function(container, textInput, valueInput) {
+		$.post(Common.CTX + "/core/user/menu/tree.json", {}, function(response) {
+			var zNodes = response.data;
+			// todo id别冲突了
+			var index = layer.open({
+				type : 0, // page层
+				area : [ '500px', '400px' ],
+				offset : 't',
+				anim : 5,
+				title : '选择菜单',
+				content : "<ul id='_treeDemo' class='ztree'></ul>",
+				yes : function(index, layero) {
+					var nodes = zTreeObj.getSelectedNodes();
+
+					if (nodes.length == 1) {
+						var fun = nodes[0];
+						valueInput.val(fun.id);
+						textInput.val(fun.name);
+					}
+					layer.close(index); // 如果设定了yes回调，需进行手工关闭
+				}
+			});
+			var zTreeObj = $.fn.zTree.init($("#_treeDemo"), {}, zNodes);
+		})
+	},
+	loadMenuFunPanel : function(container, textInput, valueInput) {
+		$.post(Common.CTX + "/core/user/function/tree.json", {}, function(response) {
+			var zNodes = response.data;
+			// todo id别冲突了
+			var index = layer.open({
+				type : 0, // page层
+				area : [ '500px', '400px' ],
+				offset : 't',
+				anim : 5,
+				title : '选择功能点',
+				content : "<ul id='_treeDemo' class='ztree'></ul>",
+				yes : function(index, layero) {
+					var nodes = zTreeObj.getSelectedNodes();
+
+					if (nodes.length == 1) {
+						var fun = nodes[0];
+						valueInput.val(fun.id);
+						textInput.val(fun.name + '：' + fun.accessUrl );
+					}
+					layer.close(index); // 如果设定了yes回调，需进行手工关闭
+				}
+			});
+			var zTreeObj = $.fn.zTree.init($("#_treeDemo"), {}, zNodes);
+		})
+	},
 	/* 初始化搜索 */
 	initSearchForm : function(form, tableIns, layuiForm) {
 		id = form.attr("id");

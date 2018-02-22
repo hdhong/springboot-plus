@@ -8,7 +8,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,6 +22,9 @@ import com.ibeetl.admin.core.service.CorePlatformService;
 import com.ibeetl.admin.core.service.CoreUserService;
 import com.ibeetl.admin.core.util.DictUtil;
 import com.ibeetl.admin.core.util.HttpRequestLocal;
+import com.ibeetl.admin.core.web.dto.FunctionNodeView;
+import com.ibeetl.admin.core.web.dto.MenuNodeView;
+import com.ibeetl.admin.core.web.dto.SystemMenuView;
 
 @Controller
 @SuppressWarnings("unchecked")
@@ -197,7 +199,7 @@ public class CoreUserController {
 	 * 
 	 * @return
 	 */
-	@GetMapping(MODEL + "/menu/tree.json")
+	@PostMapping(MODEL + "/menu/tree.json")
 	@ResponseBody
 	public JsonResult<List<MenuNodeView>> getMenuTree() {
 		MenuItem menuItem = platformService.buildMenu();
@@ -251,161 +253,12 @@ public class CoreUserController {
       		view.setCode(item.getData().getCode());
       		view.setName(item.getData().getName());
       		view.setId(item.getData().getId());
+      		view.setAccessUrl(item.getData().getAccessUrl());
       		List<FunctionNodeView> children = this.buildFunctionTree(item);
       		view.setChildren(children);
       		views.add(view);
       	}
       	return views;
      }
-    
-	class SystemMenuView {
-		String code;
-		Long id;
-		String name;
-		String icon;
-
-		public SystemMenuView(Long id, String code, String name) {
-			this.id = id;
-			this.code = code;
-			this.name = name;
-		}
-
-		public String getCode() {
-			return code;
-		}
-
-		public void setCode(String code) {
-			this.code = code;
-		}
-
-		public Long getId() {
-			return id;
-		}
-
-		public void setId(Long id) {
-			this.id = id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getIcon() {
-			return icon;
-		}
-
-		public void setIcon(String icon) {
-			this.icon = icon;
-		}
-
-	}
-
-	class MenuNodeView {
-
-		String name;
-		String code;
-		Long id;
-		String path;
-		String icon;
-		List<MenuNodeView> children = new ArrayList<MenuNodeView>();
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public String getCode() {
-			return code;
-		}
-
-		public void setCode(String code) {
-			this.code = code;
-		}
-
-		public Long getId() {
-			return id;
-		}
-
-		public void setId(Long id) {
-			this.id = id;
-		}
-
-		public List<MenuNodeView> getChildren() {
-			return children;
-		}
-
-		public void setChildren(List<MenuNodeView> children) {
-			this.children = children;
-		}
-
-		public String getPath() {
-			return path;
-		}
-
-		public void setPath(String path) {
-			this.path = path;
-		}
-
-		public String getIcon() {
-			return icon;
-		}
-
-		public void setIcon(String icon) {
-			this.icon = icon;
-		}
-
-	}
-	
-	class FunctionNodeView{
-    	
-    	String name;
-    	String code;
-    	Long id;
-    	
-    	String icon;
-    	List<FunctionNodeView> children=new ArrayList<FunctionNodeView>();
-    	
-		public String getName() {
-			return name;
-		}
-		public void setName(String name) {
-			this.name = name;
-		}
-		public String getCode() {
-			return code;
-		}
-		public void setCode(String code) {
-			this.code = code;
-		}
-		public Long getId() {
-			return id;
-		}
-		public void setId(Long id) {
-			this.id = id;
-		}
-		public List<FunctionNodeView> getChildren() {
-			return children;
-		}
-		public void setChildren(List<FunctionNodeView> children) {
-			this.children = children;
-		}
-		
-		public String getIcon() {
-			return icon;
-		}
-		public void setIcon(String icon) {
-			this.icon = icon;
-		}
-		
-    	
-    }
-    
 
 }

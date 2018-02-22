@@ -10,5 +10,5 @@ deleteRoleMenu
 
 * 删除菜单对应的角色关系
 
-	delete CORE_ROLE_MENU where menu_id in ( #join(ids)# )
+	delete from CORE_ROLE_MENU where menu_id in ( #join(ids)# )
 	
