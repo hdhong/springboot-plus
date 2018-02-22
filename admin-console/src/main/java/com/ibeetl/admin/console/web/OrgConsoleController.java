@@ -55,7 +55,6 @@ public class OrgConsoleController {
     
     @GetMapping(MODEL + "/index.do")
     @Function("org.query")
-    @ResponseBody
     public ModelAndView index() {
 		ModelAndView view = new ModelAndView("/admin/org/index.html");
 		view.addObject("search", OrgQuery.class.getName());
@@ -64,7 +63,6 @@ public class OrgConsoleController {
     
     @GetMapping(MODEL + "/edit.do")
     @Function("org.edit")
-    @ResponseBody
     public ModelAndView edit(String id) {
     	ModelAndView view = new ModelAndView("/admin/org/edit.html");
         CoreOrg org = orgConsoleService.queryById(id);
@@ -75,7 +73,6 @@ public class OrgConsoleController {
     
     @GetMapping(MODEL + "/user/list.do")
     @Function("org.query")
-    @ResponseBody
     public ModelAndView  getUsers(Long orgId) {
     	ModelAndView view = new ModelAndView("/admin/org/orgUser.html");
         CoreOrg org = orgConsoleService.queryById(orgId);

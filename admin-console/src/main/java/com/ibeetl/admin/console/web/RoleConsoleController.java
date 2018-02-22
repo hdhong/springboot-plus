@@ -63,8 +63,7 @@ public class RoleConsoleController {
     /* 页面 */
 
     @GetMapping(MODEL + "/index.do")
-    @Function("role.edit")
-    @ResponseBody
+    @Function("role")
     public ModelAndView index() {
         ModelAndView view = new ModelAndView("/admin/role/index.html");
         view.addObject("search", RoleQuery.class.getName());
@@ -73,7 +72,6 @@ public class RoleConsoleController {
 
     @GetMapping(MODEL + "/edit.do")
     @Function("role.edit")
-    @ResponseBody
     public ModelAndView edit(String id) {
         ModelAndView view = new ModelAndView("/admin/role/edit.html");
         CoreRole role = roleConsoleService.queryById(id);
@@ -83,7 +81,6 @@ public class RoleConsoleController {
 
     @GetMapping(MODEL + "/add.do")
     @Function("role.add")
-    @ResponseBody
     public ModelAndView add() {
         ModelAndView view = new ModelAndView("/admin/role/add.html");
         return view;
@@ -91,7 +88,6 @@ public class RoleConsoleController {
 
     @GetMapping(MODEL + "/user/list.do")
     @Function("role.user.query")
-    @ResponseBody
     public ModelAndView users(Long roleId) {
         CoreRole role = roleConsoleService.queryById(roleId);
         ModelAndView view = new ModelAndView("/admin/role/roleUser.html");
@@ -102,14 +98,12 @@ public class RoleConsoleController {
 
     @GetMapping(MODEL + "/function.do")
     @Function("role.function.query")
-    @ResponseBody
     public ModelAndView functions() {
         ModelAndView view = new ModelAndView("/admin/role/function.html");
         return view;
     }
     @GetMapping(MODEL + "/data.do")
     @Function("role.function.query")
-    @ResponseBody
     public ModelAndView  data() {
         ModelAndView view = new ModelAndView("/admin/role/data.html");
         return view;

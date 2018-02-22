@@ -40,7 +40,6 @@ public class CmsBlogController{
 
     @GetMapping(MODEL + "/index.do")
     @Function("cmsBlog.query")
-    @ResponseBody
     public ModelAndView index() {
         ModelAndView view = new ModelAndView("/admin/cmsBlog/index.html") ;
         view.addObject("search", CmsBlogQuery.class.getName());
@@ -49,7 +48,6 @@ public class CmsBlogController{
 
     @GetMapping(MODEL + "/edit.do")
     @Function("cmsBlog.edit")
-    @ResponseBody
     public ModelAndView edit(Long id) {
         ModelAndView view = new ModelAndView("/admin/cmsBlog/edit.html");
         CmsBlog cmsBlog = cmsBlogService.queryById(id);
@@ -59,7 +57,6 @@ public class CmsBlogController{
 
     @GetMapping(MODEL + "/add.do")
     @Function("cmsBlog.add")
-    @ResponseBody
     public ModelAndView add() {
         ModelAndView view = new ModelAndView("/admin/cmsBlog/add.html");
         return view;

@@ -58,8 +58,7 @@ public class UserConsoleController {
 	/* 页面 */
 
 	@GetMapping(MODEL + "/index.do")
-	@Function("user.edit")
-	@ResponseBody
+	@Function("user")
 	public ModelAndView index() {
 		ModelAndView view = new ModelAndView("/admin/user/index.html");
 		view.addObject("search", UserQuery.class.getName());
@@ -68,7 +67,6 @@ public class UserConsoleController {
 
 	@GetMapping(MODEL + "/edit.do")
 	@Function("user.edit")
-	@ResponseBody
 	public ModelAndView edit(String id) {
 		ModelAndView view = new ModelAndView("/admin/user/edit.html");
 		CoreUser user = userConsoleService.queryById(id);
@@ -78,7 +76,6 @@ public class UserConsoleController {
 
 	@GetMapping(MODEL + "/add.do")
 	@Function("user.add")
-	@ResponseBody
 	public ModelAndView add() {
 		ModelAndView view = new ModelAndView("/admin/user/add.html");
 		return view;
@@ -86,7 +83,6 @@ public class UserConsoleController {
 
 	@GetMapping(MODEL + "/changePassword.do")
 	@Function("user.add")
-	@ResponseBody
 	public ModelAndView changePassword(Long id) {
 		CoreUser user = userConsoleService.queryById(id);
 		ModelAndView view = new ModelAndView("/admin/user/changePassword.html");
@@ -96,7 +92,6 @@ public class UserConsoleController {
 
 	@GetMapping(MODEL + "/role/list.do")
 	@Function("user.role")
-	@ResponseBody
 	public ModelAndView userRoleIndex(Long id) {
 		CoreUser user = userConsoleService.queryById(id);
 		ModelAndView view = new ModelAndView("/admin/user/userRole.html");
@@ -107,7 +102,6 @@ public class UserConsoleController {
 
 	@GetMapping(MODEL + "/role/add.do")
 	@Function("user.role")
-	@ResponseBody
 	public ModelAndView userRoleAdd(Long id) {
 		CoreUser user = userConsoleService.queryById(id);
 		ModelAndView view = new ModelAndView("/admin/user/userRoleAdd.html");

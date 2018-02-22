@@ -39,7 +39,6 @@ public class DictConsoleController{
 
     @GetMapping(MODEL + "/index.do")
     @Function("dict.query")
-    @ResponseBody
     public ModelAndView index() {
         ModelAndView view = new ModelAndView("/admin/dict/index.html") ;
         view.addObject("search", CoreDictQuery.class.getName());
@@ -48,7 +47,6 @@ public class DictConsoleController{
 
     @GetMapping(MODEL + "/edit.do")
     @Function("dict.edit")
-    @ResponseBody
     public ModelAndView edit(String id) {
         ModelAndView view = new ModelAndView("/admin/dict/edit.html");
         CoreDict dict = dictService.queryById(id);
@@ -58,7 +56,6 @@ public class DictConsoleController{
 
     @GetMapping(MODEL + "/add.do")
     @Function("dict.add")
-    @ResponseBody
     public ModelAndView add() {
         ModelAndView view = new ModelAndView("/admin/dict/add.html");
         return view;
