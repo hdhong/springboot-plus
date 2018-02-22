@@ -6,6 +6,7 @@ import com.ibeetl.admin.console.web.query.FunctionQuery;
 import com.ibeetl.admin.core.annotation.Function;
 import com.ibeetl.admin.core.annotation.Query;
 import com.ibeetl.admin.core.entity.CoreFunction;
+import com.ibeetl.admin.core.entity.CoreOrg;
 import com.ibeetl.admin.core.rbac.tree.FunctionItem;
 import com.ibeetl.admin.core.service.CorePlatformService;
 import com.ibeetl.admin.core.util.AnnotationUtil;
@@ -60,6 +61,21 @@ public class FunctionController {
          return view;
      }
      
+     @GetMapping(MODEL + "/add.do")
+     @Function("function.add")
+     public ModelAndView add() {
+    	 ModelAndView view = new ModelAndView("/admin/function/add.html");
+    	 return view;
+     }
+     @GetMapping(MODEL + "/edit.do")
+     @Function("function.edit")
+     public ModelAndView edit(String id) {
+    	 ModelAndView view = new ModelAndView("/admin/function/edit.html");
+    	 CoreFunction function = functionConsoleService.queryById(id);
+         view.addObject("function", function);
+    	 return view;
+     }
+     
      /*Json*/
      
     @RequestMapping(MODEL + "/add.json")
@@ -85,7 +101,6 @@ public class FunctionController {
     @Function("function.update")
     @ResponseBody
     public JsonResult<?> updateFunction(@Validated(ValidateConfig.UPDATE.class) CoreFunction function) {
-    		String code = function.getCode();
 		CoreFunction dbFunction = functionConsoleService.getFunction(function.getCode());
 		if(dbFunction!=null&&!dbFunction.getId().equals(function.getId())){			
 			throw new FormFieldException(CoreFunction.class.getName(),"code","已经存在");
@@ -94,8 +109,9 @@ public class FunctionController {
 		if(function.getParentId()==null){
 			function.setParentId(0l);
 		}
+//		function.setCreateTime(dbFunction.getCreateTime());
 		functionConsoleService.updateFunction(function);
-    		return JsonResult.success();
+    	return JsonResult.success();
     }
     
     @RequestMapping(MODEL + "/view.json")
