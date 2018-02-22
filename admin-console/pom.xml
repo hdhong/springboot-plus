@@ -4,7 +4,7 @@
     <groupId>com.ibeetl</groupId>
     <artifactId>admin-console</artifactId>
     <version>1.0</version>
-   
+   	<packaging>jar</packaging>
     <parent>
         <groupId>com.ibeetl</groupId>
         <artifactId>admin</artifactId>
@@ -24,14 +24,5 @@
             <version>1.0</version>
         </dependency>
     </dependencies>
-    
-      <!-- Package as an executable jar -->
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+
 </project>
