@@ -5,6 +5,10 @@
 
 基本技术栈来源于我为电子工业出版社编写的的[<<Spring Boot 2 精髓 >>](http://ibeetl.com/sb2/#more) (这本书每一章也有各种例子，但Springboot-plus 更偏向于应用而不是教学)
 
+技术交流群：219324263
+
+开源地址：https://gitee.com/xiandafu/springboot-plus
+
 
 
 ![doc/readme/user.png](doc/readme/user.png)
