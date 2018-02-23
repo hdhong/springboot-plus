@@ -9,8 +9,8 @@ layui.define([ 'form', 'laydate', 'table','roleApi'], function(exports) {
 		
 		init:function(roleId){
 			this.initFunctionTree();
-			this.initRoles();
 			this.initSaveFunction();
+			
 		},
 		initFunctionTree:function(){
 			var that = this;
@@ -18,8 +18,10 @@ layui.define([ 'form', 'laydate', 'table','roleApi'], function(exports) {
 				var zNodes = response.data;
 				var setting  = {"check":{"radioType":true,"enable":true}};
 				zTreeObj = $.fn.zTree.init($("#functionTree"), setting, zNodes);
+				//功能树加载完毕后在初始化其他控件
 				that.initFirstRole();
-				
+				that.initRoles();
+			
 			})
 		},
 		initSaveFunction:function(){

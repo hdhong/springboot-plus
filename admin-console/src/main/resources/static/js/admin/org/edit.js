@@ -9,11 +9,11 @@ layui.define([ 'form', 'laydate', 'table','orgApi'], function(exports) {
 			},
 			initSubmit:function(){
 				$("#saveOrg").click(function(){
-					orgApi.updateOrg(function(){
+					orgApi.updateOrg($("#updateForm"),function(){
+					    parent.window.dataReload();
 						Common.info("更新成功");
 						Lib.closeFrame();
 					});
-					parent.window.dataReload();
 					
 				});
 				

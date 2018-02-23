@@ -9,7 +9,7 @@ layui.define([ 'form', 'laydate', 'table','orgApi'], function(exports) {
 			},
 			initSubmit:function(){
 				$("#saveOrg").click(function(){
-					orgApi.addOrg(function(){
+					orgApi.addOrg($('#addForm'),function(){
 						Common.info("添加成功");
 						Lib.closeFrame();
 					});

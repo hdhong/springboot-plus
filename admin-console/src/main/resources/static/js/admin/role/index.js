@@ -18,7 +18,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 		initTable:function(){
 			roleTable = table.render({
 				elem : '#roleTable',
-				height : 'full-280',
+				height : Lib.getTableHeight(2),
 				method : 'post',
 				url : Common.CTX + '/admin/role/list.json' //数据接口
 				,page : Lib.tablePage //开启分页

@@ -18,7 +18,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 		initTable:function(){
 			userTable = table.render({
 				elem : '#orgTable',
-				height : 'full-280',
+				height : Lib.getTableHeight(2),
 				method : 'post',
 				url : Common.CTX + '/admin/org/list.json' //数据接口
 				,page : {"layout":['count','prev', 'page', 'next']} //开启分页
