@@ -1,7 +1,6 @@
 <!--# layout("/common/layout.html",{"jsBase":"/js/${target.urlBase}/${entity.code}/"}){ -->
 
-<form class="layui-form layui-form-pane" id="addForm"
-	action="/${target.urlBase}/${entity.code}/add.json">
+<form class="layui-form layui-form-pane" id="addForm">
 	@ var list = entity.generalList;
 	@ var size = list.~size; /*一行显示俩个，生成后在根据显示要求调整*/
 	@ for(var i=0;i<size;i++){

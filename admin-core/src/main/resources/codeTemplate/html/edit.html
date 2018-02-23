@@ -1,7 +1,6 @@
 <!--# layout("/common/layout.html",{"jsBase":"/js/${target.urlBase}/${entity.code}/"}){ -->
 
-<form class="layui-form layui-form-pane" id="updateForm"
-	action="/${target.urlBase}/${entity.code}/update.json">
+<form class="layui-form layui-form-pane" id="updateForm">
 	@ var list = entity.generalList;
 	@ var size = list.~size; /*一行显示俩个，生成后在根据显示要求调整*/
 	@ for(var i=0;i<size;i++){
@@ -10,10 +9,9 @@
 	@ i=i+1;
 	@ var array = [item0,item1];
 	<div class="layui-row">
-	   <div class="layui-form-item">
+		<div class="layui-form-item">
 		@for(item in array){
 		@if(item==null){continue;}
-		
 			<div class="layui-inline">
 			<label class="layui-form-label">${item.displayName}</label>
 			<div class="layui-input-inline">
@@ -21,10 +19,8 @@
 					 class="layui-input" >
 			</div>
 			</div>
-		
 		@}
 		</div>
-		
 	</div>
 	@}
 	<input type="hidden" name="${entity.idAttribute.name}" value=\${${entity.code}.${entity.idAttribute.name}} />
@@ -34,8 +30,7 @@
 <!--#} -->
 <script>
 layui.use(['edit'], function(){
-  var ${entity.code}Edit = layui.edit
-  ${entity.code}Edit.init();
+	var ${entity.code}Edit = layui.edit
+	${entity.code}Edit.init();
 });
-
 </script>

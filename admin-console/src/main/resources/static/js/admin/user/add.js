@@ -9,7 +9,7 @@ layui.define([ 'form', 'laydate', 'table','userApi'], function(exports) {
 			},
 			initSubmit:function(){
 				$("#saveUser").click(function(){
-					userApi.addUser(function(){
+					userApi.addUser($('#addForm'),function(){
 						parent.window.dataReload();
 						Common.info("添加成功");
 						Lib.closeFrame();

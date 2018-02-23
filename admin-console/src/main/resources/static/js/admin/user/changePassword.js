@@ -9,7 +9,7 @@ layui.define([ 'form', 'table','userApi'], function(exports) {
 			},
 			initSubmit:function(){
 				$("#savePassword").click(function(){
-					userApi.changePassword(function(){
+					userApi.changePassword($('#changePasswordForm'),function(){
 						Common.info("密码更改成功");
 						Lib.closeFrame();
 					});

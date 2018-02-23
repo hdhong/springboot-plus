@@ -1,8 +1,10 @@
-layui.define([ 'form', 'laydate', 'table' ], function(exports) {
+layui.define([ 'form', 'laydate', 'table','userApi' ], function(exports) {
 	var form = layui.form;
 	var laydate = layui.laydate;
 	var table = layui.table;
+	var userApi=layui.userApi;
 	var userTable = null;
+	
 	var view ={
 		
 		init:function(){
