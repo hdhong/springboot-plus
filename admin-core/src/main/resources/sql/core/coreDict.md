@@ -6,15 +6,6 @@ findAllList
 	@}
 	ORDER BY type, sort DESC
 
-queryByCondtion
-===
-	select
-	@pageTag(){
-	d.*
-	@}
-	from core_DICT d  where del_flag = 0
-    #db.autoCondtion("com.coamc.starter.admin.web.query.DictQuery","d.")#
-
 findTypeList
 ===
     SELECT

@@ -3,10 +3,8 @@ package com.ibeetl.admin.core.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.beetl.sql.core.annotatoin.Param;
 import org.beetl.sql.core.annotatoin.SqlResource;
 import org.beetl.sql.core.annotatoin.SqlStatement;
-import org.beetl.sql.core.engine.PageQuery;
 import org.beetl.sql.core.mapper.BaseMapper;
 
 import com.ibeetl.admin.core.entity.CoreDict;
@@ -24,13 +22,6 @@ public interface CoreDictDao extends BaseMapper<CoreDict> {
      */
     List<CoreDict> findAllList(String type);
 
-    /**
-     * 根据条件查询
-     * @param query
-     */
-    void queryByCondtion(PageQuery query);
-
-   
     /**
      * 查询字段类型列表
      * @param delFlag 删除标记

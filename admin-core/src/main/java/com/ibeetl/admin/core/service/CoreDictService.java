@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.beetl.sql.core.engine.PageQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,16 +178,6 @@ public class CoreDictService extends BaseService<CoreDict> {
 	   return list.get(0);
    }
    
-   
-
-    /**
-     * 根据条件查询
-     * @param query 查询条件
-     */
-    public void queryByCondtion(PageQuery query) {
-        dictDao.queryByCondtion(query);
-    }
-
     /**
      * 查询字段类型列表
      * @return
