@@ -56,7 +56,6 @@ layui.define([ 'form', 'laydate', 'table','roleApi'], function(exports) {
 			roleApi.queryFunctionByRole(roleId,function(fnIds){
 				for(var i=0;i<fnIds.length;i++){
 					var node = zTreeObj.getNodesByParam("id",fnIds[i]);
-//					zTreeObj.selectNode(node[0]);
 					zTreeObj.checkNode(node[0], true, true);
 				}
 			});

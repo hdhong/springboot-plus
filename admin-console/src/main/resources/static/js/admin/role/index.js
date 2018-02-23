@@ -21,7 +21,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				height : 'full-280',
 				method : 'post',
 				url : Common.CTX + '/admin/role/list.json' //数据接口
-				,page : {"layout":['count','prev', 'page', 'next']} //开启分页
+				,page : Lib.tablePage //开启分页
 				,limit : 10,
 				cols : [ [ //表头
 				{

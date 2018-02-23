@@ -8,8 +8,8 @@ layui.define([ 'form', 'laydate', 'table','roleApi'], function(exports) {
 				this.initSubmit();
 			},
 			initSubmit:function(){
-				$("#addButton").click(function(){
-					roleApi.updateRole(function(){
+				$("#updateButton").click(function(){
+					roleApi.updateRole($("#updateForm"),function(){
 						parent.window.dataReload();
 						Common.info("更新成功");
 						Lib.closeFrame();
@@ -18,7 +18,7 @@ layui.define([ 'form', 'laydate', 'table','roleApi'], function(exports) {
 					
 				});
 				
-				$("#addButton-cancel").click(function(){
+				$("#updateButton-cancel").click(function(){
 					Lib.closeFrame();
 				});
 			}

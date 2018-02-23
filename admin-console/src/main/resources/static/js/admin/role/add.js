@@ -8,7 +8,7 @@ layui.define([ 'form', 'laydate', 'table','roleApi'], function(exports) {
 				this.initSubmit();
 			},
 			initSubmit:function(){
-				$("#addButton").click(function(){
+				$("#addButton").click($("#addForm"),function(){
 					roleApi.addRole(function(){
 						parent.window.dataReload();
 						Common.info("添加成功");

@@ -7,21 +7,22 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 		
 		init:function(roleId){
 			this.initTable(roleId);
+			this.initSearchForm();
 			this.initClose();
 		},
 		initClose:function(){
-			
 			$("#close").click(function(){
 				Lib.closeFrame();
 			});
 		},
+		
 		initTable:function(roleId){
 			userTable = table.render({
 				elem : '#userTable',
 				height : 'full-180',
 				method : 'post',
 				url : Common.CTX + '/admin/role/user/list.json?roleId='+roleId //数据接口
-				,page : {"layout":['count','prev', 'page', 'next']} //开启分页
+				,page : Lib.tablePage //开启分页
 				,limit : 10,
 				cols : [ [ //表头
 				{

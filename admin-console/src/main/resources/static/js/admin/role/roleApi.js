@@ -1,11 +1,11 @@
 /*访问后台的代码*/
 layui.define([], function(exports) {
 	var api={
-			updateRole:function(callback){
-				Lib.submitForm($('#updateForm'),{},callback)
+			updateRole:function(form,callback){
+				Lib.submitForm("/admin/role/update.json",form,{},callback)
 			},
-			addRole:function(callback){
-				Lib.submitForm($('#addForm'),{},callback)
+			addRole:function(form,callback){
+				Lib.submitForm("/admin/role/add.json",form,{},callback)
 			},
 			del:function(ids,callback){
 				Common.post("/admin/role/delete.json",{"ids":ids},function(){

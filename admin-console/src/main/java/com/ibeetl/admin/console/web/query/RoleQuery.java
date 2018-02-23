@@ -14,7 +14,7 @@ public class RoleQuery extends PageParam {
     @Query(name = "名称", display = true)
     private String name;
     @Query(name = "业务角色类型", type = Query.TYPE_DICT,dict=CoreDictType.ROLE_TYPE)
-    private Integer type;
+    private String type;
 
 
     public String getCode() {
@@ -33,13 +33,15 @@ public class RoleQuery extends PageParam {
         this.name = name;
     }
 
-	public Integer getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(String type) {
 		this.type = type;
 	}
+
+	
 
 
 }
