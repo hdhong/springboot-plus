@@ -58,7 +58,7 @@
         <dependency>
             <groupId>com.ibeetl</groupId>
             <artifactId>beetl-framework-starter</artifactId>
-            <version>1.1.37.RELEASE</version>
+            <version>1.1.38.RELEASE</version>
         </dependency>
         <dependency>
 		  <groupId>com.trigersoft</groupId>
