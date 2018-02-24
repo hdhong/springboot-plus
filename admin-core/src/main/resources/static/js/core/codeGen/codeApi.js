@@ -2,7 +2,9 @@
 layui.define([], function(exports) {
 	var api={
 			gen:function(callback){
-				Lib.submitForm($('#updateForm'),{},callback)
+			    var form = $('#updateForm');
+                var formPara = form.serializeJson();
+				Common.post("/core/codeGen/gen.json", formPara, callback);
 			},
 			previewHtml:function(callback){
 				var form = $('#updateForm');

@@ -40,6 +40,7 @@ public class CmsBlogController{
 
     @GetMapping(MODEL + "/index.do")
     @Function("cmsBlog.query")
+    @ResponseBody
     public ModelAndView index() {
         ModelAndView view = new ModelAndView("/admin/cmsBlog/index.html") ;
         view.addObject("search", CmsBlogQuery.class.getName());
@@ -48,7 +49,8 @@ public class CmsBlogController{
 
     @GetMapping(MODEL + "/edit.do")
     @Function("cmsBlog.edit")
-    public ModelAndView edit(Long id) {
+    @ResponseBody
+    public ModelAndView edit(Integer id) {
         ModelAndView view = new ModelAndView("/admin/cmsBlog/edit.html");
         CmsBlog cmsBlog = cmsBlogService.queryById(id);
         view.addObject("cmsBlog", cmsBlog);
@@ -57,6 +59,7 @@ public class CmsBlogController{
 
     @GetMapping(MODEL + "/add.do")
     @Function("cmsBlog.add")
+    @ResponseBody
     public ModelAndView add() {
         ModelAndView view = new ModelAndView("/admin/cmsBlog/add.html");
         return view;
@@ -77,7 +80,7 @@ public class CmsBlogController{
     @PostMapping(MODEL + "/add.json")
     @Function("cmsBlog.add")
     @ResponseBody
-    public JsonResult addCmsBlog(@Validated(ValidateConfig.ADD.class)CmsBlog cmsBlog)
+    public JsonResult add(@Validated(ValidateConfig.ADD.class)CmsBlog cmsBlog)
     {
         cmsBlogService.save(cmsBlog);
         return new JsonResult().success();
@@ -100,8 +103,8 @@ public class CmsBlogController{
     @GetMapping(MODEL + "/view.json")
     @Function("cmsBlog.query")
     @ResponseBody
-    public JsonResult<CmsBlog>queryInfo(Long id) {
-        CmsBlog cmsBlog = cmsBlogService.queryById(id);
+    public JsonResult<CmsBlog>queryInfo(Integer id) {
+        CmsBlog cmsBlog = cmsBlogService.queryById( id);
         return  JsonResult.success(cmsBlog);
     }
 

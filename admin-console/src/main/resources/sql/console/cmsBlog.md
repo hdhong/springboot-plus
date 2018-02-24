@@ -13,6 +13,9 @@ queryByCondition
     @if(!isEmpty(id)){
         and  t.id =#id#
     @}
+    @if(!isEmpty(title)){
+        and  t.title =#title#
+    @}
     
     
     
@@ -22,5 +25,5 @@ batchDelCmsBlogByIds
 
 * 批量逻辑删除
 
-    update cms_blog set del_flag = 1 where id in( #join(ids)#)
+    update cms_blog set del_flag = 1 where id  in( #join(ids)#)
     
