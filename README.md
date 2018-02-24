@@ -39,7 +39,7 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 > 建议在彻底熟悉plus系统之前，先暂时不要修改其他配置选项，免得系统无法访问
 >
-> 本系统基于Spring Boot 2 ，因此请务必使用JDK8，且打开编译选项[parameters](https://www.liaoxuefeng.com/article/00141999088629621039ee8c4614579bfedb78a5030bce3000)
+> 本系统基于Spring Boot 2 ，因此请务必使用JDK8，且打开编译选项[parameters](http://www.mamicode.com/info-detail-2162647.html)
 
 ## 1.2 创建子系统
 
