@@ -24,7 +24,7 @@
 * admin-core  ，核心包，包含了缓存，数据权限，公用的JS和HTML页面。
 * admin-console, 系统管理功能，包含了用户，组织机构，角色，权限，数据权限，代码生成等管理功能
 
-com.ibeetl.admin.CosonleApplication 是系统启动类，在admin-console包下,在运行这个之前，还需要初始化数据库，位于doc/starter-mysql.sql,目前只提供mysql脚本。理论上支持所有数据库
+com.ibeetl.admin.CosonleApplication 是系统启动类，在admin-console包下,在运行这个之前，还需要初始化数据库，位于doc/starter-mysql.sql,目前只提供mysql和oracle脚本。理论上支持所有数据库
 
 还需要修改SpringBoot配置文件application.properties,修改你的数据库地址和访问用户
 
@@ -32,7 +32,7 @@ com.ibeetl.admin.CosonleApplication 是系统启动类，在admin-console包下,
 spring.datasource.url=jdbc:mysql://127.0.0.1:3306/starter?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&useSSL=false
 spring.datasource.username=root
 spring.datasource.password=123456
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
 ~~~
 
 运行CosonleApplication，然后访问http://127.0.0.1:8080/  输入admin/123456 则可以直接登录进入管理系统
@@ -173,5 +173,21 @@ public class CMSApplication  extends SpringBootServletInitializer implements Web
 
 在介绍如何利用Plus开发系统之前，先介绍代码生成功能，此功能可以生成前后端代码总计14个文件，你可以通过预览功能了解如何开发这个系统
 
-待续....
+> 如果你用eclipse直接在开发平台上代码生成，默认会生成到console工程下，如果你用IDEA，由于这个时候user.dir设置在了parent maven上，因此生成的目录不对 .建议你使用1.2 创建子系统方式来使用本开发平台而不要直接操作开发平台，或者直接修改MavenProjectTarget.getRootPath。开发平台定位是所你的所有系统的基础平台，不建议上面有你的业务代码
 
+![doc/readme/user.png](doc/readme/codeoverview.png)
+
+
+
+代码生成针对表进行代码生成，包括JS，JAVA，SQL和HTML，可以通过预览功能直接预览。在生成代码到本地前，有写参数需要修改，否则，代码生成后显示的都是英文
+
+* 显示字段 ： 当此实体显示在任何地方的时候，能代表此实体的名称，比如用户名，组织机构名
+* 变量名：可以自己设定一个较短的名字，此变量名会用于前后端的变量
+* urlBase：你规划的子系统，最后访问路径是urlBase+变量名字
+* system: 存放sql目录的的名称
+
+其他修改的地方有
+
+字段信息的显示名字，这个用于前端列表，表单的显示，应当输入中文名字
+
+作为搜索，可以勾选几个搜索条件，系统自动生成一个搜索配置类
