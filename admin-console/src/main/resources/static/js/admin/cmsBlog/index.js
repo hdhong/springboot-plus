@@ -77,4 +77,21 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                         return ;
                     }
                     var url = "/admin/cmsBlog/edit.do?id="+data.id;
-                    Common.openDlg(url,"CmsBlog管理>"+data.
+                    Common.openDlg(url,"CmsBlog管理>"+data.title+">编辑");
+                },
+                del : function() { 
+                    layui.use(['del'], function(){
+                        var delView = layui.del
+                        delView.delBatch();
+                    });
+                }
+            };
+            $('.ext-toolbar').on('click', function() {
+                var type = $(this).data('type');
+                toolbar[type] ? toolbar[type].call(this) : '';
+            });
+        }
+	}
+    exports('index',view);
+	
+});

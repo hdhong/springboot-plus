@@ -10,12 +10,6 @@ queryByCondition
     where 1=1  
     @//数据权限，该sql语句功能点  
     and #function("cmsBlog.query")#
-    @if(!isEmpty(id)){
-        and  t.id =#id#
-    @}
-    @if(!isEmpty(title)){
-        and  t.title =#title#
-    @}
     
     
     
