@@ -1,5 +1,6 @@
 package com.ibeetl.admin.core.web;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,23 +74,16 @@ public class CoreCodeGenController {
 	@PostMapping(MODEL + "/gen.json")
 	@ResponseBody
 	public JsonResult gen(EntityInfo data,String path) {
-		Entity info = data.getEntity();
+		Entity  entity = getEntitiyInfo(data);
 		String urlBase = data.getUrlBase();
 		String basePackage = data.getBasePackage();
-		Entity entity = codeGenService.getEntityInfo(info.getTableName());
-		entity.setCode(info.getCode());
-		entity.setDisplayName(info.getDisplayName());
-		entity.setSystem(info.getSystem());
-		for (int i = 0; i < entity.getList().size(); i++) {
-			entity.getList().get(i).setDisplayName(info.getList().get(i).getDisplayName());
-			entity.getList().get(i).setShowInQuery(info.getList().get(i).isShowInQuery());
-		}
-
-		if (StringUtils.isEmpty(entity.getCode()) || StringUtils.isEmpty(entity.getSystem())) {
-			return JsonResult.failMessage("code,system不能为空");
-		}
+		
 		MavenProjectTarget target = new MavenProjectTarget(entity, basePackage);
 		//生成到path目录下，按照maven工程解构生成
+		File file = new File(path);
+		if(!file.exists()) {
+		    throw new PlatformException("路径不存在 "+path);
+		}
 		target.setTargetPath(path);
 		target.setUrlBase(urlBase);
 

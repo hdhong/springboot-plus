@@ -17,7 +17,7 @@ import com.ibeetl.admin.core.entity.BaseEntity;
 
 /* 
 * 
-* gen by Spring Boot2 Admin 2018-02-17
+* gen by Spring Boot2 Admin 2018-02-24
 */
 public class CmsBlog extends BaseEntity{
 

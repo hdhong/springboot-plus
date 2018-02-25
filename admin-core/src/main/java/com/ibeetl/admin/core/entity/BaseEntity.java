@@ -14,8 +14,8 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 
 public class BaseEntity extends TailBean implements java.io.Serializable {
 
-	protected final static String ORACLE_CORE_SEQ_NAME="core-seq";
-	protected final static String ORACLE_AUDIT_SEQ_NAME="audit-seq";
+	protected final static String ORACLE_CORE_SEQ_NAME="core_seq";
+	protected final static String ORACLE_AUDIT_SEQ_NAME="audit_seq";
 	@JsonAnyGetter
     public Map<String, Object> getTails(){
     	return super.getTails();
