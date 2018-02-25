@@ -31,6 +31,7 @@ import com.ibeetl.admin.core.util.beetl.OrgFunction;
 import com.ibeetl.admin.core.util.beetl.RoleFunction;
 import com.ibeetl.admin.core.util.beetl.SearchCondtionFunction;
 import com.ibeetl.admin.core.util.beetl.SysFunctionTreeFunction;
+import com.ibeetl.admin.core.util.beetl.XXSDefenderFormat;
 import com.ibeetl.admin.core.web.query.QueryParser;
 import com.ibeetl.starter.BeetlTemplateCustomize;
 import com.ibeetl.starter.ObjectMapperJsonUtil;
@@ -103,6 +104,7 @@ public class BeetlConf {
                 groupTemplate.registerFunction("core.dictLevel", dictUpQueryFunction);
                 groupTemplate.registerFunction("core.dictListByValue", dictQueryByValueFunction);
                 groupTemplate.registerFunction("core.roles", roleFunction);
+                groupTemplate.registerFormat("xss", new XXSDefenderFormat());
 
                 // 模板页面判断是否有按钮权限,比如canAccess
                 groupTemplate.registerFunction("canAccess", new Function() {
