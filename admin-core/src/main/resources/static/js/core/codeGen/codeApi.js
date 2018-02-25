@@ -2,7 +2,12 @@
 layui.define([], function(exports) {
 	var api={
 			gen:function(callback){
-				Lib.submitForm($('#updateForm'),{},callback)
+				Common.post("/core/codeGen/getPath.json", {}, function(path){
+					Common.openPrompt("代码保存路径?",path,function(){
+						var url ="/core/codeGen/gen.json"
+						Lib.submitForm(url,$('#updateForm'),{path:path},callback)
+					})
+				});
 			},
 			previewHtml:function(callback){
 				var form = $('#updateForm');
@@ -24,6 +29,7 @@ layui.define([], function(exports) {
 				var formPara = form.serializeJson();
 				Common.post("/core/codeGen/sql.json", formPara, callback);
 			}
+			
 		
 	};
 	

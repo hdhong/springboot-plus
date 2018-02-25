@@ -192,18 +192,13 @@ var Lib = {
 		var index = parent.layer.getFrameIndex(window.name); // 先得到当前iframe层的索引
 		parent.layer.close(index); // 再执行关闭
 	},
-	/*不再使用，因为没有提供url*/
-	submitForm : function(form, paras, callBack) {
-		var url = form.attr("action");
-		var formPara = form.serializeJson();
-		Common.post(url, formPara, callBack);
-
-	},
+	
 	submitForm : function(url,form, paras, callBack) {
-		
 		var formPara = form.serializeJson();
+		for (var key in paras) {  
+           formPara[key]=paras[key];  
+        }
 		Common.post(url, formPara, callBack);
-
 	},
 	getTableHeight : function(queryLine) {
 		// 表格相对高度

@@ -5,16 +5,6 @@ Date.prototype.format=function(format){var d=this,o={"M+":d.getMonth()+1,"d+":d.
 var Common = {
     ctxPath: "",
     version:"",
-    confirm: function (tip, ensure) {
-        parent.layer.confirm(tip, {
-            btn: ['确定', '取消']
-        }, function (index) {
-            ensure();
-            parent.layer.close(index);
-        }, function (index) {
-            parent.layer.close(index);
-        });
-    },
     log: function (info) {
         console.log(info);
     },
@@ -96,6 +86,12 @@ var Common = {
     			layer.close(index);
     		});
 		
+    },
+    openPrompt:function(title,defaultValue,callback){
+    		layer.prompt({title: title, formType: 0,value:defaultValue}, function(value, index,elem){
+    		  layer.close(index);
+    		  callback(value);
+    		});
     },
     concatBatchId:function(data,idField){
     		var ids = ""

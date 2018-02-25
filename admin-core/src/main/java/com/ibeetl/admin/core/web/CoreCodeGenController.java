@@ -72,7 +72,7 @@ public class CoreCodeGenController {
 
 	@PostMapping(MODEL + "/gen.json")
 	@ResponseBody
-	public JsonResult gen(EntityInfo data) {
+	public JsonResult gen(EntityInfo data,String path) {
 		Entity info = data.getEntity();
 		String urlBase = data.getUrlBase();
 		String basePackage = data.getBasePackage();
@@ -89,6 +89,8 @@ public class CoreCodeGenController {
 			return JsonResult.failMessage("code,system不能为空");
 		}
 		MavenProjectTarget target = new MavenProjectTarget(entity, basePackage);
+		//生成到path目录下，按照maven工程解构生成
+		target.setTargetPath(path);
 		target.setUrlBase(urlBase);
 
 		JSGen jsGen = new JSGen();
@@ -104,6 +106,13 @@ public class CoreCodeGenController {
 		mdGen.make(target, entity);
 		return JsonResult.success();
 
+	}
+	
+	@PostMapping(MODEL + "/getPath.json")
+    @ResponseBody
+    public JsonResult<String> getPath() {
+	    String path = MavenProjectTarget.detectRootPath();
+	    return JsonResult.success(path);
 	}
 
 	@PostMapping(MODEL + "/html.json")

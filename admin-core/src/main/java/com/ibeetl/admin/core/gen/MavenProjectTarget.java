@@ -10,6 +10,8 @@ public class MavenProjectTarget extends BaseTarget {
 	Entity entity;
 	String basePackage;
 	String basePackagePath = null;
+	String targetPath = null;
+	
 	public MavenProjectTarget(Entity entity,String basePackage) {
 		this.entity = entity;
 		this.basePackage = basePackage;
@@ -77,24 +79,42 @@ public class MavenProjectTarget extends BaseTarget {
 		
 	}
 
-	private static String getSrcPath() {
+	
+	public String getTargetPath() {
+        return targetPath;
+    }
 
+    public void setTargetPath(String targetPath) {
+        this.targetPath = targetPath;
+    }
+
+    private  String getSrcPath() {
+       
 		return getRootPath() + File.separator + "src/main/java";
 	}
 
-	private static String getResourcePath() {
+	private  String getResourcePath() {
 
 		return getRootPath() + File.separator + "src/main/resources";
 	}
 
-	private static String getRootPath() {
-		String srcPath;
-		String userDir = System.getProperty("user.dir");
-		if (userDir == null) {
-			throw new NullPointerException("用户目录未找到");
-		}
+	public  String getRootPath() {
+	    if(targetPath!=null) {
+	        return targetPath;
+	    }else {
+	        return detectRootPath();
+	    }
+		
+	}
+	
+	public static String detectRootPath() {
+	    String srcPath;
+        String userDir = System.getProperty("user.dir");
+        if (userDir == null) {
+            throw new NullPointerException("用户目录未找到");
+        }
 
-		return userDir;
+        return userDir;
 	}
 
 }
