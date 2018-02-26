@@ -232,10 +232,13 @@ var Lib = {
 	/* 搜索 */
 	doSearchForm : function(form, tableIns, page) {
 		var data = form.serializeJson()
-		if (page == null) {
+		if (page != null) {
 			tableIns.reload({
 				where : data,
-				page : page
+				page: {
+				      curr: page 
+				 }
+				
 			});
 		} else {
 			tableIns.reload({

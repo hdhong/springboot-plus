@@ -8,19 +8,18 @@ queryByCondition
     @}
     from core_dict t
     where del_flag=0  
-    @//数据权限，该sql语句功能点  
-    and #function("dict.query")#
+
     @if(!isEmpty(value)){
-        and  t.VALUE =#value#
+        and  t.VALUE like #"%"+value+"%"#
     @}
     @if(!isEmpty(name)){
-        and  t.NAME =#name#
+        and  t.NAME like #"%"+name+"%"#
     @}
     @if(!isEmpty(typeName)){
-        and  t.TYPE_NAME =#typeName#
+        and  t.TYPE_NAME like #"%"+typeName+"%"#
     @}
     @if(!isEmpty(parent)){
-        and  t.PARENT =#parent#
+        and  t.PARENT like #"%"+parent+"%"#
     @}
 	@pageIgnoreTag(){
 		order by create_time  desc
