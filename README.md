@@ -35,11 +35,11 @@ spring.datasource.password=123456
 
 ~~~
 
-运行CosonleApplication，然后访问http://127.0.0.1:8080/  输入admin/123456 则可以直接登录进入管理系统
-
 > 建议在彻底熟悉plus系统之前，先暂时不要修改其他配置选项，免得系统无法访问
 >
-> 本系统基于Spring Boot 2 ，因此请务必使用JDK8，且打开编译选项[parameters](http://www.mamicode.com/info-detail-2162647.html)
+> 本系统基于Spring Boot 2 ，因此请务必使用JDK8，且打开编译选项[parameters](http://www.mamicode.com/info-detail-2162647.html),<u>如果你没有使用Java8的 parameters 特性，系统不能正常使用</u>
+
+运行CosonleApplication，然后访问http://127.0.0.1:8080/  输入admin/123456 则可以直接登录进入管理系统
 
 ## 1.2 创建子系统
 
@@ -191,3 +191,35 @@ public class CMSApplication  extends SpringBootServletInitializer implements Web
 字段信息的显示名字，这个用于前端列表，表单的显示，应当输入中文名字
 
 作为搜索，可以勾选几个搜索条件，系统自动生成一个搜索配置类
+
+### 1.3.1 前端代码
+
+前端代码采用了layui的JS框架，使用了按需加载的方式，文档参考 http://www.layui.com/doc/base/infrastructure.html.
+
+基础JS
+
+* Common.js: 封装了通常JS功能，如jquery的post方法，layui的窗口方法
+* Lib.js  封装了业务相关方法，如submitForm，loadOrgPanel等方法
+
+1.3.2  HTML代码
+
+页面采用layui，文档参考 http://www.layui.com/demo/
+
+模板语言了使用Beetl，文档参考ibeetl.com
+
+基础UI组件：
+
+* orgInput.tag.html 组织机构输入框
+* simpleDictSelect.tag.html 字典下拉列表
+* childrenDictSelect.tag.html 级联字典下拉列表
+* searchForm.tag.html  通用搜索表单
+* submitButtons.tag.html 提交按钮
+* accessButton.tag.html  普通按钮（含权限）
+* ....
+
+待续....
+
+
+
+
+
