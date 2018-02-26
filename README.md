@@ -144,7 +144,9 @@ SpringBoot-plus 是一个适合大系统拆分成小系统的架构，或者是�
 
 ~~~
 
-* 新创建一个CMSApplication 入口
+### 1.2.1  创建启动程序
+
+  新创建一个CMSApplication 入口
 
 ~~~java
 package com.sample.cms;
@@ -162,18 +164,25 @@ public class CMSApplication  extends SpringBootServletInitializer implements Web
     SpringApplication.run(CMSApplication.class, args);
   }
 }	
-
 ~~~
 
-
-
 运行此程序，然后再次访问http://127.0.0.1:8080/  你会发现你的的CMS子系统已经具备了所有基础功能，你只需要向此工程添加跟CMS相关功能即可
+
+> 如果你不理解Spring Boot，建议你购买我的书来学习Spring Boot
+
+### 1.2.2 创建Controller 
+
+### 1.2.3 创建Service
+
+### 1.2.4 创建Dao
+
+
 
 ## 1.3 代码生成
 
 在介绍如何利用Plus开发系统之前，先介绍代码生成功能，此功能可以生成前后端代码总计14个文件，你可以通过预览功能了解如何开发这个系统
 
-> 如果你用eclipse直接在开发平台上代码生成，默认会生成到console工程下，如果你用IDEA，由于这个时候user.dir设置在了parent maven上，因此生成的目录不对 .建议你使用1.2 创建子系统方式来使用本开发平台而不要直接操作开发平台，或者直接修改MavenProjectTarget.getRootPath。开发平台定位是所你的所有系统的基础平台，不建议上面有你的业务代码
+
 
 ![doc/readme/user.png](doc/readme/codeoverview.png)
 
@@ -196,16 +205,29 @@ public class CMSApplication  extends SpringBootServletInitializer implements Web
 
 前端代码采用了layui的JS框架，使用了按需加载的方式，文档参考 http://www.layui.com/doc/base/infrastructure.html.
 
+* index.js: 系统入口JS，包含了查询和表格
+* add.js : 新增操作的所有JS
+* edit.js: 编辑操作的所有JS
+* del.js: 删除操作的所有JS
+
 基础JS
 
 * Common.js: 封装了通常JS功能，如jquery的post方法，layui的窗口方法
 * Lib.js  封装了业务相关方法，如submitForm，loadOrgPanel等方法
 
-1.3.2  HTML代码
+### 1.3.2  HTML代码
 
 页面采用layui，文档参考 http://www.layui.com/demo/
 
 模板语言了使用Beetl，文档参考ibeetl.com
+
+* index.html: 功能首页
+
+* add.html: 新增首页
+
+* edit.html: 编辑操作首页
+
+  ​
 
 基础UI组件：
 
@@ -217,7 +239,7 @@ public class CMSApplication  extends SpringBootServletInitializer implements Web
 * accessButton.tag.html  普通按钮（含权限）
 * ....
 
-待续....
+
 
 
 
