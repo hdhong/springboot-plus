@@ -126,8 +126,8 @@ layui.define([ 'form', 'laydate', 'table','userApi' ], function(exports) {
 					},
 					exportUsers:function(){
 					    Common.openConfirm("确认要导出这些用户?",function(){
-					        userApi.exportUsers($("#searchForm"),function(){
-					            Common.info("导出成功")
+					        userApi.exportUsers($("#searchForm"),function(fileId){
+					           Lib.download(fileId);
 					        })
 		                })
 

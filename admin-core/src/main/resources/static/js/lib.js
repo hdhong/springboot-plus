@@ -228,6 +228,10 @@ var Lib = {
 							+ "</option>");
 		}
 	},
+	
+	download:function(fileId){
+	  window.location.href =   Common.ctxPath+"/core/file/get.do?id="+fileId
+	},
 
 	/* 搜索 */
 	doSearchForm : function(form, tableIns, page) {

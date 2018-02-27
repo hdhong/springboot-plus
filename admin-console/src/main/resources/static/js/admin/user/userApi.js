@@ -30,8 +30,8 @@ layui.define([], function(exports) {
         },
         exportUsers:function(form,callback){
             var formPara = form.serializeJson();
-            Common.post("/admin/user/excel/export.json", formPara, function() {
-                callback();
+            Common.post("/admin/user/excel/export.json", formPara, function(fileId) {
+                callback(fileId);
             })
         }
 

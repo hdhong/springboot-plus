@@ -278,9 +278,10 @@ public class UserConsoleController {
 	}
 	
 	
-	@GetMapping(MODEL + "/excel/export.json")
+	@PostMapping(MODEL + "/excel/export.json")
 	@Function("user.export")
-	public JsonResult export(HttpServletResponse response,UserQuery condtion) {
+	@ResponseBody
+	public JsonResult<String> export(HttpServletResponse response,UserQuery condtion) {
 		String excelTemplate ="excelTemplates/admin/user/user_collection_template.xls";
 		PageQuery<CoreUser> page = condtion.getPageQuery();
 		//取出全部符合条件的
@@ -297,6 +298,7 @@ public class UserConsoleController {
 	        Context context = new Context();
             context.putVar("users", users);
             JxlsHelper.getInstance().processTemplate(is, os, context);
+            //下载参考FileSystemContorller
             return  JsonResult.success(item.getId());
 	    } catch (IOException e) {
 			throw new PlatformException(e.getMessage());
