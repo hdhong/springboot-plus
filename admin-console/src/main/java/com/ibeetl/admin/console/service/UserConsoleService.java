@@ -1,8 +1,10 @@
 package com.ibeetl.admin.console.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.beetl.sql.core.engine.PageQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,11 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ibeetl.admin.console.dao.UserConsoleDao;
 import com.ibeetl.admin.console.exception.DeletedException;
 import com.ibeetl.admin.console.exception.NoResourceException;
+import com.ibeetl.admin.console.web.dto.UserExcelData;
 import com.ibeetl.admin.console.web.query.UserRoleQuery;
 import com.ibeetl.admin.core.conf.PasswordConfig.PasswordEncryptService;
+import com.ibeetl.admin.core.entity.CoreDict;
 import com.ibeetl.admin.core.entity.CoreUser;
 import com.ibeetl.admin.core.entity.CoreUserRole;
+import com.ibeetl.admin.core.rbac.tree.OrgItem;
 import com.ibeetl.admin.core.service.BaseService;
+import com.ibeetl.admin.core.service.CoreDictService;
+import com.ibeetl.admin.core.service.CorePlatformService;
 import com.ibeetl.admin.core.util.PlatformException;
 import com.ibeetl.admin.core.util.enums.DelFlagEnum;
 import com.ibeetl.admin.core.util.enums.GeneralStateEnum;
@@ -26,10 +33,15 @@ public class UserConsoleService extends BaseService<CoreUser> {
 
 	@Autowired
 	UserConsoleDao userDao;
-	
+
 	@Autowired
 	PasswordEncryptService passwordEncryptService;
+	@Autowired
+	CoreDictService dictService;
 
+	
+	@Autowired
+	CorePlatformService platformService;
 	/**
 	 * 根据条件查询
 	 *
@@ -53,11 +65,11 @@ public class UserConsoleService extends BaseService<CoreUser> {
 			throw new PlatformException("保存用户信息失败,用户已经存在");
 		}
 		user.setCreateTime(new Date());
-        user.setState(GeneralStateEnum.ENABLE.getValue());
+		user.setState(GeneralStateEnum.ENABLE.getValue());
 		user.setPassword(passwordEncryptService.password(user.getPassword()));
 		user.setDelFlag(DelFlagEnum.NORMAL.getValue());
-		userDao.insert(user,true);
-		
+		userDao.insert(user, true);
+
 	}
 
 	/**
@@ -90,7 +102,7 @@ public class UserConsoleService extends BaseService<CoreUser> {
 		if (user == null) {
 			throw new NoResourceException("用户不存在!");
 		}
-		if (user.getDelFlag()==DelFlagEnum.DELETED.getValue()) {
+		if (user.getDelFlag() == DelFlagEnum.DELETED.getValue()) {
 			throw new DeletedException("用户已被删除!");
 		}
 		user = new CoreUser();
@@ -138,27 +150,54 @@ public class UserConsoleService extends BaseService<CoreUser> {
 		user.setUpdateTime(new Date());
 		return userDao.updateTemplateById(user);
 	}
+
+	public List<CoreUserRole> getUserRoles(UserRoleQuery roleQuery) {
+		return userDao.queryUserRole(roleQuery.getUserId(), roleQuery.getOrgId(), roleQuery.getRoleId());
+	}
+
+	public void deleteUserRoles(List<Long> ids) {
+		// 考虑到这个操作较少使用，就不做批处理优化了
+		for (Long id : ids) {
+			sqlManager.deleteById(CoreUserRole.class, id);
+		}
+
+	}
+
+	public void saveUserRole(CoreUserRole userRole) {
+
+		long queryCount = sqlManager.templateCount(userRole);
+
+		if (queryCount > 0) {
+			throw new PlatformException("已存在用户角色关系");
+		}
+		sqlManager.insert(userRole);
+	}
 	
-	  public List<CoreUserRole> getUserRoles(UserRoleQuery roleQuery) {
-	        return userDao.queryUserRole(roleQuery.getUserId(),roleQuery.getOrgId(),roleQuery.getRoleId());
-	  }
-	  
-	  public void deleteUserRoles(List<Long> ids) {
-	        //考虑到这个操作较少使用，就不做批处理优化了
-	        for (Long id : ids) {
-	        	sqlManager.deleteById(CoreUserRole.class, id);
-	        }
-
-	    }
-	    
-	    public void saveUserRole(CoreUserRole userRole) {
-
-	        long queryCount = sqlManager.templateCount(userRole);
-
-	        if (queryCount > 0) {
-	            throw new PlatformException("已存在用户角色关系");
-	        }
-	        sqlManager.insert(userRole);
-	    }
+	public List<UserExcelData> queryExcel(PageQuery<CoreUser> query) {
+		PageQuery<CoreUser> ret = userDao.queryByCondtion(query);
+		List<CoreUser> list = ret.getList();
+		OrgItem orgRoot = platformService.buildOrg();
+		List<UserExcelData> items = new ArrayList<>();
+		for(CoreUser user:list) {
+			UserExcelData userItem = new UserExcelData();
+			userItem.setCode(user.getCode());
+			userItem.setId(user.getId());
+			userItem.setName(user.getName());
+			CoreDict dict = dictService.findCoreDict(user.getState());
+			userItem.setStateText(dict.getName());
+			
+			if(StringUtils.isNotEmpty(user.getJobType1())){
+				dict = dictService.findCoreDict(user.getJobType1());
+				userItem.setJobType1Text(dict.getName());
+			}
+			
+			String orgName = orgRoot.findChild(user.getOrgId()).getName();
+			userItem.setOrgText(orgName);
+			items.add(userItem);
+			
+		}
+		return items;
+		
+	}
 
 }

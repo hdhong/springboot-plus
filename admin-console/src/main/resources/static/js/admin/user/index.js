@@ -123,7 +123,15 @@ layui.define([ 'form', 'laydate', 'table','userApi' ], function(exports) {
 						var url = "/admin/user/changePassword.do?id="+data.id;
 						Common.openDlg(url,"用户管理>更改密码");
 
-					}
+					},
+					exportUsers:function(){
+					    Common.openConfirm("确认要导出这些用户?",function(){
+					        userApi.exportUsers($("#searchForm"),function(){
+					            Common.info("导出成功")
+					        })
+		                })
+
+                    }
 				};
 			$('.ext-toolbar').on('click', function() {
 				var type = $(this).data('type');

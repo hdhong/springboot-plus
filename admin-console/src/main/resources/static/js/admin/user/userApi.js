@@ -28,6 +28,12 @@ layui.define([], function(exports) {
                 callback();
             })
         },
+        exportUsers:function(form,callback){
+            var formPara = form.serializeJson();
+            Common.post("/admin/user/excel/export.json", formPara, function() {
+                callback();
+            })
+        }
 
     };
 

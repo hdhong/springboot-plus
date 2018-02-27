@@ -1,12 +1,20 @@
 package com.ibeetl.admin.console.web;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.beetl.sql.core.engine.PageQuery;
+import org.jxls.common.Context;
+import org.jxls.util.JxlsHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -18,16 +26,19 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ibeetl.admin.console.service.OrgConsoleService;
 import com.ibeetl.admin.console.service.RoleConsoleService;
 import com.ibeetl.admin.console.service.UserConsoleService;
+import com.ibeetl.admin.console.web.dto.UserExcelData;
 import com.ibeetl.admin.console.web.query.UserQuery;
 import com.ibeetl.admin.console.web.query.UserRoleQuery;
 import com.ibeetl.admin.core.annotation.Function;
 import com.ibeetl.admin.core.annotation.Query;
 import com.ibeetl.admin.core.entity.CoreUser;
 import com.ibeetl.admin.core.entity.CoreUserRole;
+import com.ibeetl.admin.core.file.FileItem;
+import com.ibeetl.admin.core.file.FileService;
 import com.ibeetl.admin.core.service.CorePlatformService;
 import com.ibeetl.admin.core.util.AnnotationUtil;
 import com.ibeetl.admin.core.util.ConvertUtil;
-import com.ibeetl.admin.core.util.DictUtil;
+import com.ibeetl.admin.core.util.PlatformException;
 import com.ibeetl.admin.core.util.ValidateConfig;
 import com.ibeetl.admin.core.util.enums.GeneralStateEnum;
 import com.ibeetl.admin.core.web.JsonResult;
@@ -53,7 +64,9 @@ public class UserConsoleController {
 	@Autowired
 	OrgConsoleService orgConsoleService;
 	@Autowired
-	DictUtil dictUtil;
+	FileService fileService;
+	
+	
 
 	/* 页面 */
 
@@ -263,5 +276,35 @@ public class UserConsoleController {
 		this.platformService.clearFunctionCache();
 		return JsonResult.success();
 	}
+	
+	
+	@GetMapping(MODEL + "/excel/export.json")
+	@Function("user.export")
+	public JsonResult export(HttpServletResponse response,UserQuery condtion) {
+		String excelTemplate ="excelTemplates/admin/user/user_collection_template.xls";
+		PageQuery<CoreUser> page = condtion.getPageQuery();
+		//取出全部符合条件的
+		page.setPageSize(Integer.MAX_VALUE);
+		page.setPageNumber(1);
+		page.setTotalRow(Integer.MAX_VALUE);
+		List<UserExcelData> users =userConsoleService.queryExcel(page);
+		try(InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(excelTemplate)) {
+	        if(is==null) {
+	        	throw new PlatformException("模板资源不存在："+excelTemplate);
+	        }
+	        FileItem item = fileService.createFileTemp("user_collection.xls");
+	        OutputStream os = item.openOutpuStream();
+	        Context context = new Context();
+            context.putVar("users", users);
+            JxlsHelper.getInstance().processTemplate(is, os, context);
+            return  JsonResult.success(item.getId());
+	    } catch (IOException e) {
+			throw new PlatformException(e.getMessage());
+		}
+		
+	}
+	
+	
+	
 
 }
