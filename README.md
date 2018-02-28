@@ -37,7 +37,7 @@ spring.datasource.password=123456
 
 > 建议在彻底熟悉plus系统之前，先暂时不要修改其他配置选项，免得系统无法访问
 >
-> 本系统基于Spring Boot 2 ，因此请务必使用JDK8，且打开编译选项[parameters](http://www.mamicode.com/info-detail-2162647.html),<u>如果你没有使用Java8的 parameters 特性，系统不能正常使用</u>
+> 本系统基于Spring Boot 2 ，因此请务必使用JDK8，且打开编译选项[parameters](http://www.mamicode.com/info-detail-2162647.html),<u> 并重新编译工程，如果你没有使用Java8的 parameters 特性，系统不能正常使用</u>
 
 运行CosonleApplication，然后访问http://127.0.0.1:8080/  输入admin/123456 则可以直接登录进入管理系统
 
