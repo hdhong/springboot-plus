@@ -11,7 +11,13 @@ layui.define([], function(exports) {
 				Common.post("/admin/dict/delete.json",{"ids":ids},function(){
 					callback();
 				})
-			}
+			}, 
+			exportExcel:function(form,callback){
+	            var formPara = form.serializeJson();
+	            Common.post("/admin/dict/excel/export.json", formPara, function(fileId) {
+	                callback(fileId);
+	            })
+	        }
 		
 	};
 	

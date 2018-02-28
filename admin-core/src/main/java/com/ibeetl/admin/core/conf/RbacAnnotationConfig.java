@@ -3,6 +3,7 @@ package com.ibeetl.admin.core.conf;
 import java.lang.reflect.Method;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -63,20 +64,20 @@ public class RbacAnnotationConfig {
 			if (function != null) {
 				MethodSignature ms = (MethodSignature)pjp.getSignature();
 			    m = ms.getMethod();
-				createAudit(funCode, user, true, "",m);
+				createAudit(funCode,function.name(), user, true, "",m);
 			}
 			return o;
 
 		} catch (Throwable e) {
 			if (function != null) {
-				createAudit(funCode, user, false, e.getMessage(),m);
+				createAudit(funCode, function.name(),user, false, e.getMessage(),m);
 			}
 			throw e;
 		}
 
 	}
 
-	private void createAudit(String functionCode, CoreUser user, boolean success, String msg, Method m) {
+	private void createAudit(String functionCode, String functionName,CoreUser user, boolean success, String msg, Method m) {
 		boolean enable = env.getProperty("audit.enable", Boolean.class, false);
 		if (!enable) {
 			return;
@@ -86,15 +87,16 @@ public class RbacAnnotationConfig {
 		}
 		
 		CoreAudit audit = new CoreAudit();
-		String functionName = null;
-		CoreFunction fun = this.platformService.getFunction(functionCode);
+		if(StringUtils.isEmpty(functionName)) {
+		    CoreFunction fun = this.platformService.getFunction(functionCode);
 
-		if (fun == null) {
-			// 没有在数据库定义，但写在代码里了
-			log.warn(functionCode + " 未在数据库里定义");
-			functionName = "未定义";
-		} else {
-			functionName = fun.getName();
+	        if (fun == null) {
+	            // 没有在数据库定义，但写在代码里了
+	            log.warn(functionCode + " 未在数据库里定义");
+	            functionName = "未定义";
+	        } else {
+	            functionName = fun.getName();
+	        }
 		}
 		audit.setCreateTime(new Date());
 		audit.setFunctionCode(functionCode);

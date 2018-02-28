@@ -1,13 +1,20 @@
 package com.ibeetl.admin.console.web;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.beetl.sql.core.engine.PageQuery;
+import org.jxls.common.Context;
+import org.jxls.util.JxlsHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -17,10 +24,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ibeetl.admin.console.service.DictConsoleService;
+import com.ibeetl.admin.console.web.dto.UserExcelData;
 import com.ibeetl.admin.console.web.query.CoreDictQuery;
+import com.ibeetl.admin.console.web.query.UserQuery;
 import com.ibeetl.admin.core.annotation.Function;
 import com.ibeetl.admin.core.entity.CoreDict;
+import com.ibeetl.admin.core.entity.CoreUser;
+import com.ibeetl.admin.core.file.FileItem;
+import com.ibeetl.admin.core.file.FileService;
 import com.ibeetl.admin.core.util.ConvertUtil;
+import com.ibeetl.admin.core.util.PlatformException;
 import com.ibeetl.admin.core.util.ValidateConfig;
 import com.ibeetl.admin.core.web.JsonResult;
 
@@ -35,7 +48,8 @@ public class DictConsoleController{
 
 
     @Autowired private DictConsoleService dictService;
-
+    @Autowired
+    FileService fileService;
     /* 页面 */
 
     @GetMapping(MODEL + "/index.do")
@@ -114,6 +128,34 @@ public class DictConsoleController{
     	List<Long> dels = ConvertUtil.str2longs(ids);
         dictService.batchDelCoreDict(dels);
         return new JsonResult().success();
+    }
+    
+    @PostMapping(MODEL + "/excel/export.json")
+    @Function("dict.export")
+    @ResponseBody
+    public JsonResult<String> export(HttpServletResponse response,UserQuery condtion) {
+        String excelTemplate ="excelTemplates/admin/dict/dict_collection_template.xls";
+        PageQuery<CoreUser> page = condtion.getPageQuery();
+        //取出全部符合条件的
+        page.setPageSize(Integer.MAX_VALUE);
+        page.setPageNumber(1);
+        page.setTotalRow(Integer.MAX_VALUE);
+        List<CoreDict> dicts =dictService.queryExcel(page);
+        try(InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(excelTemplate)) {
+            if(is==null) {
+                throw new PlatformException("模板资源不存在："+excelTemplate);
+            }
+            FileItem item = fileService.createFileTemp("dict_collection.xls");
+            OutputStream os = item.openOutpuStream();
+            Context context = new Context();
+            context.putVar("dicts", dicts);
+            JxlsHelper.getInstance().processTemplate(is, os, context);
+            //下载参考FileSystemContorller
+            return  JsonResult.success(item.getId());
+        } catch (IOException e) {
+            throw new PlatformException(e.getMessage());
+        }
+        
     }
 
 }
