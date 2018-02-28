@@ -18,7 +18,7 @@ Date: 2018-02-24 14:59:47
 create sequence core_seq
 minvalue 1
 maxvalue 999999999999999999999999999
-start with 1
+start with 1001
 increment by 1
 nocache;
 
@@ -26,7 +26,7 @@ nocache;
 create sequence audit_seq
 minvalue 1
 maxvalue 999999999999999999999999999
-start with 1
+start with 1001
 increment by 1
 nocache;
 
@@ -149,16 +149,19 @@ INSERT INTO  core_audit VALUES ('45', 'role.query', '未定义', '1', '超级管
 -- Table structure for core_dict
 -- ----------------------------
 DROP TABLE  core_dict;
-CREATE TABLE  core_dict (
-VALUE VARCHAR2(16) NOT NULL ,
-NAME VARCHAR2(128) NOT NULL ,
-TYPE VARCHAR2(64) NOT NULL ,
-TYPE_NAME VARCHAR2(64) NOT NULL ,
-SORT NUMBER(11) NULL ,
-PARENT VARCHAR2(64) NULL ,
-DEL_FLAG NUMBER(11) NULL ,
-REMARK VARCHAR2(255) NULL ,
-CREATE_TIME DATE NULL 
+create table CORE_DICT
+(
+  id          NUMBER(11) not null,
+  value       VARCHAR2(16) not null,
+  name        VARCHAR2(128) not null,
+  type        VARCHAR2(64) not null,
+  type_name   VARCHAR2(64) not null,
+  sort        NUMBER(11),
+  parent      VARCHAR2(64),
+  del_flag    NUMBER(11),
+  remark      VARCHAR2(255),
+  create_time DATE
+  
 )
 LOGGING
 NOCOMPRESS
@@ -175,35 +178,60 @@ COMMENT ON COLUMN  core_dict."DEL_FLAG" IS '删除标记';
 COMMENT ON COLUMN  core_dict."REMARK" IS '备注';
 COMMENT ON COLUMN  core_dict."CREATE_TIME" IS '创建时间';
 
--- ----------------------------
--- Records of core_dict
--- ----------------------------
-INSERT INTO  core_dict VALUES ('DA0', '查看自己', 'data_access_type', '数据权限', '1', null, '0', '11111111111111111123', null);
-INSERT INTO  core_dict VALUES ('DA1', '查看本公司', 'data_access_type', '数据权限', '3', null, '0', 'hello,go', null);
-INSERT INTO  core_dict VALUES ('DA2', '查看同机构', 'data_access_type', '数据权限', '3', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('DA3', '查看本部门', 'data_access_type', '数据权限', '4', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('DA4', '查看集团', 'data_access_type', '数据权限', '5', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('DA5', '查看母公司', 'data_access_type', '数据权限', '6', null, '0', null, TO_DATE('2017-10-14 11:45:02', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  core_dict VALUES ('FN0', '普通功能', 'function_type', '功能点类型', '2', null, '0', null, TO_DATE('2017-10-23 10:18:03', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  core_dict VALUES ('FN1', '含数据权限', 'function_type', '功能点类型', '1', null, '0', null, TO_DATE('2017-10-23 10:20:05', 'YYYY-MM-DD HH24:MI:SS'));
-INSERT INTO  core_dict VALUES ('JT_01', '管理岗位', 'job_type', '岗位类型', '1', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('JT_02', '技术岗位', 'job_type', '岗位类型', '2', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('JT_S_01', '董事会', 'job_sub_managment_type', '管理岗位子类型', '1', 'JT_01', '0', null, null);
-INSERT INTO  core_dict VALUES ('JT_S_02', '秘书', 'job_sub_managment_type', '管理岗位子类型', '2', 'JT_01', '0', null, null);
-INSERT INTO  core_dict VALUES ('JT_S_03', '技术经理', 'job_dev_sub_type', '技术岗位子类型', '1', 'JT_02', '0', null, null);
-INSERT INTO  core_dict VALUES ('JT_S_04', '程序员', 'job_dev_sub_type', '技术岗位子类型', '2', 'JT_02', '0', null, null);
-INSERT INTO  core_dict VALUES ('MENU_M', '菜单', 'menu_type', '菜单类型', '3', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('MENU_N', '导航', 'menu_type', '菜单类型', '2', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('MENU_S', '系统', 'menu_type', '菜单类型', '1', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('ORGT0', '集团总部', 'org_type', '机构类型', '1', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('ORGT1', '分公司', 'org_type', '机构类型', '2', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('ORGT2', '部门', 'org_type', '机构类型', '3', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('ORGT3', '小组', 'org_type', '机构类型', '4', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('R0', '操作角色', 'role_type', '数据权限', '1', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('R1', '工作流角色', 'role_type', '用户角色', '2', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('S0', '禁用', 'user_state', '用户状态', '2', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('S1', '启用', 'user_state', '用户状态', '1', null, '0', null, null);
-INSERT INTO  core_dict VALUES ('sdfsd', 'sdfsdf', 'sdfsdf', 'sdfsdf', '1', 'dsfdsf', '1', 'dsfsdf', TO_DATE('2018-02-18 21:31:02', 'YYYY-MM-DD HH24:MI:SS'));
+
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('DA0', '查看自己', 'data_access_type', '数据权限', 1, null, 0, '11111111111111111123', null, 1);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('DA1', '查看本公司', 'data_access_type', '数据权限', 3, null, 0, 'hello,go', null, 2);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('DA2', '查看同机构', 'data_access_type', '数据权限', 3, null, 0, null, null, 3);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('DA3', '查看本部门', 'data_access_type', '数据权限', 4, null, 0, null, null, 4);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('DA4', '查看集团', 'data_access_type', '数据权限', 5, null, 0, null, null, 5);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('DA5', '查看母公司', 'data_access_type', '数据权限', 6, null, 0, null, to_date('14-10-2017 11:45:02', 'dd-mm-yyyy hh24:mi:ss'), 6);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('FN0', '普通功能', 'function_type', '功能点类型', 2, null, 0, null, to_date('23-10-2017 10:18:03', 'dd-mm-yyyy hh24:mi:ss'), 7);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('FN1', '含数据权限', 'function_type', '功能点类型', 1, null, 0, null, to_date('23-10-2017 10:20:05', 'dd-mm-yyyy hh24:mi:ss'), 8);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('JT_01', '管理岗位', 'job_type', '岗位类型', 1, null, 0, null, null, 9);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('JT_02', '技术岗位', 'job_type', '岗位类型', 2, null, 0, null, null, 10);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('JT_S_01', '董事会', 'job_sub_managment_type', '管理岗位子类型', 1, '10', 0, null, null, 11);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('JT_S_02', '秘书', 'job_sub_managment_type', '管理岗位子类型', 2, '10', 0, null, null, 12);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('JT_S_03', '技术经理', 'job_dev_sub_type', '技术岗位子类型', 1, '11', 0, null, null, 13);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('JT_S_04', '程序员', 'job_dev_sub_type', '技术岗位子类型', 2, '11', 0, null, null, 14);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('MENU_M', '菜单', 'menu_type', '菜单类型', 3, null, 0, null, null, 15);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('MENU_N', '导航', 'menu_type', '菜单类型', 2, null, 0, null, null, 16);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('MENU_S', '系统', 'menu_type', '菜单类型', 1, null, 0, null, null, 17);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('ORGT0', '集团总部', 'org_type', '机构类型', 1, null, 0, null, null, 18);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('ORGT1', '分公司', 'org_type', '机构类型', 2, null, 0, null, null, 19);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('ORGT2', '部门', 'org_type', '机构类型', 3, null, 0, null, null, 20);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('ORGT3', '小组', 'org_type', '机构类型', 4, null, 0, null, null, 21);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('R0', '操作角色', 'role_type', '数据权限', 1, null, 0, null, null, 22);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('R1', '工作流角色', 'role_type', '用户角色', 2, null, 0, null, null, 23);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('S0', '禁用', 'user_state', '用户状态', 2, null, 0, null, null, 24);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('S1', '启用', 'user_state', '用户状态', 1, null, 0, null, null, 25);
+insert into CORE_DICT (value, name, type, type_name, sort, parent, del_flag, remark, create_time, id)
+values ('sdfsd', 'sdfsdf', 'sdfsdf', 'sdfsdf', 1, null, 1, 'dsfsdf', to_date('18-02-2018 21:31:02', 'dd-mm-yyyy hh24:mi:ss'), 26);
+
 
 -- ----------------------------
 -- Table structure for core_file
@@ -623,7 +651,7 @@ ALTER TABLE  core_dict ADD CHECK (TYPE_NAME IS NOT NULL);
 -- ----------------------------
 -- Primary Key structure for table core_dict
 -- ----------------------------
-ALTER TABLE  core_dict ADD PRIMARY KEY (VALUE);
+ALTER TABLE  core_dict ADD PRIMARY KEY (id);
 
 -- ----------------------------
 -- Indexes structure for table core_file
