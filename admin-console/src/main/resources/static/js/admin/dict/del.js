@@ -11,7 +11,7 @@ layui.define(['table', 'dictApi'], function(exports) {
 					return ;
 				}
 				Common.openConfirm("确认要删除这些数据字典?",function(){
-					var ids =Common.concatBatchId(data,"value");
+					var ids =Common.concatBatchId(data,"id");
 					dictApi.del(ids,function(){
 						Common.info("删除成功");
 						dataReload();

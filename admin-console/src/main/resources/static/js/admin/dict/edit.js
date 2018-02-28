@@ -9,24 +9,17 @@ layui.define([ 'form', 'laydate', 'table','dictApi'], function(exports) {
 			},
 			initSubmit:function(){
 				$("#updateButton").click(function(){
-					dictApi.updateDict(function(){
+					dictApi.updateDict($("#updateForm"),function(){
 						parent.window.dataReload();
 						Common.info("更新成功");
 						Lib.closeFrame();
 					});
-					
-					
 				});
 				
 				$("#updateButton-cancel").click(function(){
 					Lib.closeFrame();
 				});
 			}
-				
 	}
-	
-	
-	
 	 exports('edit',view);
-	
 });

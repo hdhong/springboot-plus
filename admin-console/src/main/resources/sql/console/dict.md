@@ -22,7 +22,7 @@ queryByCondition
         and  t.PARENT like #"%"+parent+"%"#
     @}
 	@pageIgnoreTag(){
-		order by create_time  desc
+		order by id  desc
 	@}
 	    
     
@@ -33,5 +33,5 @@ batchDelCoreDictByIds
 
 * 批量逻辑删除
 
-    update core_dict set del_flag = 1 where value in( #join(ids)#)
+    update core_dict set del_flag = 1 where id in( #join(ids)#)
     

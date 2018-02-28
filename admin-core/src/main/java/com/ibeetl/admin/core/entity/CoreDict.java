@@ -19,7 +19,11 @@ import com.ibeetl.admin.core.util.ValidateConfig;
  */
 public class CoreDict extends BaseEntity {
 
-	@AssignID
+	@NotNull(message = "ID不能为空", groups = ValidateConfig.UPDATE.class)
+	@SeqID(name = ORACLE_CORE_SEQ_NAME)
+	@AutoID
+	private Long id;
+	
     private String value;   // 数据值
     //删除标识
     @JsonIgnore
@@ -37,11 +41,20 @@ public class CoreDict extends BaseEntity {
     @NotBlank(message = "字典值名称不能为空")
     private String name;    // 标签名
     private Integer sort;    // 排序
-    private String parent;  //父Id
+    private Long parent;  //父Id
     private String remark;  //备注
 
+    
 
-    public String getType() {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getType() {
         return type;
     }
 
@@ -81,11 +94,11 @@ public class CoreDict extends BaseEntity {
         this.sort = sort;
     }
 
-    public String getParent() {
+    public Long getParent() {
         return parent;
     }
 
-    public void setParent(String parent) {
+    public void setParent(Long parent) {
         this.parent = parent;
     }
 

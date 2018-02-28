@@ -20,6 +20,7 @@ import com.ibeetl.admin.console.service.DictConsoleService;
 import com.ibeetl.admin.console.web.query.CoreDictQuery;
 import com.ibeetl.admin.core.annotation.Function;
 import com.ibeetl.admin.core.entity.CoreDict;
+import com.ibeetl.admin.core.util.ConvertUtil;
 import com.ibeetl.admin.core.util.ValidateConfig;
 import com.ibeetl.admin.core.web.JsonResult;
 
@@ -47,7 +48,7 @@ public class DictConsoleController{
 
     @GetMapping(MODEL + "/edit.do")
     @Function("dict.edit")
-    public ModelAndView edit(String id) {
+    public ModelAndView edit(Long id) {
         ModelAndView view = new ModelAndView("/admin/dict/edit.html");
         CoreDict dict = dictService.queryById(id);
         view.addObject("dict", dict);
@@ -104,16 +105,14 @@ public class DictConsoleController{
         CoreDict dict = dictService.queryById(id);
         return  JsonResult.success(dict);
     }
+    
 
     @PostMapping(MODEL + "/delete.json")
     @Function("dict.delete")
     @ResponseBody
     public JsonResult delete(String ids) {
-        if (ids.endsWith(",")) {
-            ids = StringUtils.substringBeforeLast(ids, ",");
-        }
-        List<String> idList = Arrays.asList(ids.split(","));
-        dictService.batchDelCoreDict(idList);
+    	List<Long> dels = ConvertUtil.str2longs(ids);
+        dictService.batchDelCoreDict(dels);
         return new JsonResult().success();
     }
 

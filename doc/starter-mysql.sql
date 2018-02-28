@@ -1,27 +1,24 @@
--- MySQL dump 10.13  Distrib 5.6.24, for osx10.8 (x86_64)
---
--- Host: 127.0.0.1    Database: starter
--- ------------------------------------------------------
--- Server version	5.6.26
+/*
+Navicat MySQL Data Transfer
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+Source Server         : mysql_local
+Source Server Version : 50624
+Source Host           : 127.0.0.1:3306
+Source Database       : starter
 
---
--- Table structure for table `cms_blog`
---
+Target Server Type    : MYSQL
+Target Server Version : 50624
+File Encoding         : 65001
 
+Date: 2018-02-28 16:05:04
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for cms_blog
+-- ----------------------------
 DROP TABLE IF EXISTS `cms_blog`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cms_blog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
@@ -31,25 +28,17 @@ CREATE TABLE `cms_blog` (
   `type` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `cms_blog`
---
+-- ----------------------------
+-- Records of cms_blog
+-- ----------------------------
+INSERT INTO `cms_blog` VALUES ('1', 'hello', '我的博客，内容是。。。', '2018-02-22 09:53:05', '1', 'F0');
+INSERT INTO `cms_blog` VALUES ('2', 'cccc', '过年回家', '2018-02-13 10:30:01', '1', 'F0');
 
-LOCK TABLES `cms_blog` WRITE;
-/*!40000 ALTER TABLE `cms_blog` DISABLE KEYS */;
-INSERT INTO `cms_blog` VALUES (1,'hello','我的博客，内容是。。。','2018-02-22 09:53:05',1,'F0'),(2,'cccc','过年回家','2018-02-13 10:30:01',1,'F0');
-/*!40000 ALTER TABLE `cms_blog` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_audit`
---
-
+-- ----------------------------
+-- Table structure for core_audit
+-- ----------------------------
 DROP TABLE IF EXISTS `core_audit`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_audit` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `FUNCTION_CODE` varchar(45) DEFAULT NULL,
@@ -63,59 +52,115 @@ CREATE TABLE `core_audit` (
   `ORG_ID` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_audit`
---
+-- ----------------------------
+-- Records of core_audit
+-- ----------------------------
+INSERT INTO `core_audit` VALUES ('1', 'org.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-06 19:58:50.876000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('2', 'org.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-06 19:58:51.377000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('3', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:00:10.972000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('4', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:00:11.130000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('5', 'user.add', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:00:39.562000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('6', 'user.edit', '用户编辑', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:10:15.399000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('7', 'user.query', '用户列表', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:10:15.846000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('8', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:10:16.882000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('9', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:10:17.056000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('10', 'user.edit', '用户编辑', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:14:46.789000', '0', 'java.sql.SQLException: Error on delete of \'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\#sql978_2c3_6.MYI\' (Errcode: 13 - Permission denied)', null);
+INSERT INTO `core_audit` VALUES ('11', 'user.edit', '用户编辑', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:15:12.861000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('12', 'user.query', '用户列表', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:15:13.294000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('13', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:15:14.636000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('14', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:15:14.876000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('15', 'audit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-06 20:16:23.824000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('16', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:42:58.091000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('17', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:42:58.394000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('18', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:53:11.745000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('19', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:53:11.943000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('20', 'user.add', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:53:13.058000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('21', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:53:28.999000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('22', 'role.add', '角色添加', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:53:29.162000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('23', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:53:43.017000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('24', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:53:43.148000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('25', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:53:45.338000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('26', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:56:03.185000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('27', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:56:03.646000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('28', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:56:06.264000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('29', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:56:07.508000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('30', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:56:09.524000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('31', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 09:56:10.738000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('32', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:02:00.590000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('33', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:02:00.803000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('34', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:02:02.991000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('35', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:05:40.367000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('36', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:05:40.496000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('37', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:05:42.173000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('38', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:06:02.218000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('39', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:07:45.273000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('40', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:07:45.943000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('41', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:07:47.715000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('42', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:08:03.378000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('43', 'role.update', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:08:03.484000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('44', 'role.edit', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:08:16.535000', '1', '', null);
+INSERT INTO `core_audit` VALUES ('45', 'role.query', '未定义', '1', '超级管理员', '172.16.49.65', '2018-02-07 10:08:16.691000', '1', '', null);
 
-LOCK TABLES `core_audit` WRITE;
-/*!40000 ALTER TABLE `core_audit` DISABLE KEYS */;
-INSERT INTO `core_audit` VALUES (1,'org.query','未定义',1,'超级管理员','172.16.49.65','2018-02-06 19:58:50.876000',1,'',NULL),(2,'org.query','未定义',1,'超级管理员','172.16.49.65','2018-02-06 19:58:51.377000',1,'',NULL),(3,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-06 20:00:10.972000',1,'',NULL),(4,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-06 20:00:11.130000',1,'',NULL),(5,'user.add','未定义',1,'超级管理员','172.16.49.65','2018-02-06 20:00:39.562000',1,'',NULL),(6,'user.edit','用户编辑',1,'超级管理员','172.16.49.65','2018-02-06 20:10:15.399000',1,'',NULL),(7,'user.query','用户列表',1,'超级管理员','172.16.49.65','2018-02-06 20:10:15.846000',1,'',NULL),(8,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-06 20:10:16.882000',1,'',NULL),(9,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-06 20:10:17.056000',1,'',NULL),(10,'user.edit','用户编辑',1,'超级管理员','172.16.49.65','2018-02-06 20:14:46.789000',0,'java.sql.SQLException: Error on delete of \'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\#sql978_2c3_6.MYI\' (Errcode: 13 - Permission denied)',NULL),(11,'user.edit','用户编辑',1,'超级管理员','172.16.49.65','2018-02-06 20:15:12.861000',1,'',NULL),(12,'user.query','用户列表',1,'超级管理员','172.16.49.65','2018-02-06 20:15:13.294000',1,'',NULL),(13,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-06 20:15:14.636000',1,'',NULL),(14,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-06 20:15:14.876000',1,'',NULL),(15,'audit','未定义',1,'超级管理员','172.16.49.65','2018-02-06 20:16:23.824000',1,'',NULL),(16,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:42:58.091000',1,'',NULL),(17,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:42:58.394000',1,'',NULL),(18,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:53:11.745000',1,'',NULL),(19,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:53:11.943000',1,'',NULL),(20,'user.add','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:53:13.058000',1,'',NULL),(21,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:53:28.999000',1,'',NULL),(22,'role.add','角色添加',1,'超级管理员','172.16.49.65','2018-02-07 09:53:29.162000',1,'',NULL),(23,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:53:43.017000',1,'',NULL),(24,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:53:43.148000',1,'',NULL),(25,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:53:45.338000',1,'',NULL),(26,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:56:03.185000',1,'',NULL),(27,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:56:03.646000',1,'',NULL),(28,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:56:06.264000',1,'',NULL),(29,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:56:07.508000',1,'',NULL),(30,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:56:09.524000',1,'',NULL),(31,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 09:56:10.738000',1,'',NULL),(32,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:02:00.590000',1,'',NULL),(33,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:02:00.803000',1,'',NULL),(34,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:02:02.991000',1,'',NULL),(35,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:05:40.367000',1,'',NULL),(36,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:05:40.496000',1,'',NULL),(37,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:05:42.173000',1,'',NULL),(38,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:06:02.218000',1,'',NULL),(39,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:07:45.273000',1,'',NULL),(40,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:07:45.943000',1,'',NULL),(41,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:07:47.715000',1,'',NULL),(42,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:08:03.378000',1,'',NULL),(43,'role.update','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:08:03.484000',1,'',NULL),(44,'role.edit','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:08:16.535000',1,'',NULL),(45,'role.query','未定义',1,'超级管理员','172.16.49.65','2018-02-07 10:08:16.691000',1,'',NULL);
-/*!40000 ALTER TABLE `core_audit` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_dict`
---
-
+-- ----------------------------
+-- Table structure for core_dict
+-- ----------------------------
 DROP TABLE IF EXISTS `core_dict`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_dict` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `VALUE` varchar(16) NOT NULL,
   `NAME` varchar(128) NOT NULL COMMENT '名称',
   `TYPE` varchar(64) NOT NULL COMMENT '字典编码',
   `TYPE_NAME` varchar(64) NOT NULL COMMENT '类型描述',
   `SORT` int(6) DEFAULT NULL COMMENT '排序',
-  `PARENT` varchar(64) DEFAULT NULL COMMENT '父id',
+  `PARENT` int(64) DEFAULT NULL COMMENT '父id',
   `DEL_FLAG` int(6) DEFAULT NULL COMMENT '删除标记',
   `REMARK` varchar(255) DEFAULT NULL COMMENT '备注',
   `CREATE_TIME` datetime(6) DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`VALUE`),
+  PRIMARY KEY (`ID`),
   KEY `idx_code` (`TYPE`),
   KEY `idx_pid` (`PARENT`),
   KEY `idx_value` (`VALUE`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='字典表';
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='字典表';
 
---
--- Dumping data for table `core_dict`
---
+-- ----------------------------
+-- Records of core_dict
+-- ----------------------------
+INSERT INTO `core_dict` VALUES ('1', 'DA0', '查看自己', 'data_access_type', '数据权限', '1', null, '0', '11111111111111111123', null);
+INSERT INTO `core_dict` VALUES ('2', 'DA1', '查看本公司', 'data_access_type', '数据权限', '3', null, '0', 'hello,go', null);
+INSERT INTO `core_dict` VALUES ('3', 'DA2', '查看同机构', 'data_access_type', '数据权限', '3', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('4', 'DA3', '查看本部门', 'data_access_type', '数据权限', '4', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('5', 'DA4', '查看集团', 'data_access_type', '数据权限', '5', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('6', 'DA5', '查看母公司', 'data_access_type', '数据权限', '6', null, '0', null, '2017-10-14 11:45:02.000000');
+INSERT INTO `core_dict` VALUES ('7', 'FN0', '普通功能', 'function_type', '功能点类型', '2', null, '0', null, '2017-10-23 10:18:03.000000');
+INSERT INTO `core_dict` VALUES ('8', 'FN1', '含数据权限', 'function_type', '功能点类型', '1', null, '0', null, '2017-10-23 10:20:05.000000');
+INSERT INTO `core_dict` VALUES ('9', 'JT_01', '管理岗位', 'job_type', '岗位类型', '1', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('10', 'JT_02', '技术岗位', 'job_type', '岗位类型', '2', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('11', 'JT_S_01', '董事会', 'job_sub_managment_type', '管理岗位子类型', '1', '9', '0', null, null);
+INSERT INTO `core_dict` VALUES ('12', 'JT_S_02', '秘书', 'job_sub_managment_type', '管理岗位子类型', '2', '9', '0', null, null);
+INSERT INTO `core_dict` VALUES ('13', 'JT_S_03', '技术经理', 'job_dev_sub_type', '技术岗位子类型', '1', '10', '0', null, null);
+INSERT INTO `core_dict` VALUES ('14', 'JT_S_04', '程序员', 'job_dev_sub_type', '技术岗位子类型', '2', '10', '0', null, null);
+INSERT INTO `core_dict` VALUES ('15', 'MENU_M', '菜单', 'menu_type', '菜单类型', '3', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('16', 'MENU_N', '导航', 'menu_type', '菜单类型', '2', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('17', 'MENU_S', '系统', 'menu_type', '菜单类型', '1', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('18', 'ORGT0', '集团总部', 'org_type', '机构类型', '1', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('19', 'ORGT1', '分公司', 'org_type', '机构类型', '2', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('20', 'ORGT2', '部门', 'org_type', '机构类型', '3', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('21', 'ORGT3', '小组', 'org_type', '机构类型', '4', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('22', 'R0', '操作角色', 'role_type', '数据权限', '1', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('23', 'R1', '工作流角色', 'role_type', '用户角色', '2', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('24', 'S0', '禁用', 'user_state', '用户状态', '2', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('25', 'S1', '启用', 'user_state', '用户状态', '1', null, '0', null, null);
+INSERT INTO `core_dict` VALUES ('26', '昂按', '随碟附送分', 'kkkk', '水电费水电费', null, null, '0', '', '2018-02-28 15:43:34.447000');
+INSERT INTO `core_dict` VALUES ('27', '昂按', '随碟附送分', 'kkkk', '水电费水电费', null, null, '0', '', '2018-02-28 15:46:08.035000');
+INSERT INTO `core_dict` VALUES ('28', 'sdf', 'sdfsdf', 'sfsdf', 'sdfsdf', '1', null, '1', '', '2018-02-28 15:47:56.384000');
+INSERT INTO `core_dict` VALUES ('29', 'asas', 'sdfsd', 'sd', 'sd', null, null, '1', '', '2018-02-28 15:50:32.214000');
+INSERT INTO `core_dict` VALUES ('30', 'asas', 'sdfsd', 'sd', 'sd', null, null, '1', '', '2018-02-28 15:50:50.241000');
 
-LOCK TABLES `core_dict` WRITE;
-/*!40000 ALTER TABLE `core_dict` DISABLE KEYS */;
-INSERT INTO `core_dict` VALUES ('DA0','查看自己','data_access_type','数据权限',1,'',0,'11111111111111111123',NULL),('DA1','查看本公司','data_access_type','数据权限',3,'',0,'hello,go',NULL),('DA2','查看同机构','data_access_type','数据权限',3,NULL,0,NULL,NULL),('DA3','查看本部门','data_access_type','数据权限',4,NULL,0,NULL,NULL),('DA4','查看集团','data_access_type','数据权限',5,NULL,0,NULL,NULL),('DA5','查看母公司','data_access_type','数据权限',6,NULL,0,NULL,'2017-10-14 11:45:02.000000'),('FN0','普通功能','function_type','功能点类型',2,NULL,0,NULL,'2017-10-23 10:18:03.000000'),('FN1','含数据权限','function_type','功能点类型',1,NULL,0,NULL,'2017-10-23 10:20:05.000000'),('JT_01','管理岗位','job_type','岗位类型',1,NULL,0,NULL,NULL),('JT_02','技术岗位','job_type','岗位类型',2,NULL,0,NULL,NULL),('JT_S_01','董事会','job_sub_managment_type','管理岗位子类型',1,'JT_01',0,NULL,NULL),('JT_S_02','秘书','job_sub_managment_type','管理岗位子类型',2,'JT_01',0,NULL,NULL),('JT_S_03','技术经理','job_dev_sub_type','技术岗位子类型',1,'JT_02',0,NULL,NULL),('JT_S_04','程序员','job_dev_sub_type','技术岗位子类型',2,'JT_02',0,NULL,NULL),('MENU_M','菜单','menu_type','菜单类型',3,NULL,0,NULL,NULL),('MENU_N','导航','menu_type','菜单类型',2,NULL,0,NULL,NULL),('MENU_S','系统','menu_type','菜单类型',1,NULL,0,NULL,NULL),('ORGT0','集团总部','org_type','机构类型',1,NULL,0,NULL,NULL),('ORGT1','分公司','org_type','机构类型',2,NULL,0,NULL,NULL),('ORGT2','部门','org_type','机构类型',3,NULL,0,NULL,NULL),('ORGT3','小组','org_type','机构类型',4,NULL,0,NULL,NULL),('R0','操作角色','role_type','数据权限',1,NULL,0,NULL,NULL),('R1','工作流角色','role_type','用户角色',2,NULL,0,NULL,NULL),('S0','禁用','user_state','用户状态',2,NULL,0,NULL,NULL),('S1','启用','user_state','用户状态',1,NULL,0,NULL,NULL),('sdfsd','sdfsdf','sdfsdf','sdfsdf',1,'dsfdsf',1,'dsfsdf','2018-02-18 21:31:02.720000');
-/*!40000 ALTER TABLE `core_dict` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_file`
---
-
+-- ----------------------------
+-- Table structure for core_file
+-- ----------------------------
 DROP TABLE IF EXISTS `core_file`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_file` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `NAME` varchar(64) DEFAULT NULL COMMENT '文件名称',
@@ -128,25 +173,17 @@ CREATE TABLE `core_file` (
   `UPLOAD_USER_ORG` int(20) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文件表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_file`
---
+-- ----------------------------
+-- Records of core_file
+-- ----------------------------
+INSERT INTO `core_file` VALUES ('1', '文件1', '/dal', '1', '1', null, '0', null, '1');
+INSERT INTO `core_file` VALUES ('2', 'ajls', '/aefs', '2', '2', null, '0', null, '1');
 
-LOCK TABLES `core_file` WRITE;
-/*!40000 ALTER TABLE `core_file` DISABLE KEYS */;
-INSERT INTO `core_file` VALUES (1,'文件1','/dal','1',1,NULL,0,NULL,1),(2,'ajls','/aefs','2',2,NULL,0,NULL,1);
-/*!40000 ALTER TABLE `core_file` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_file_tag`
---
-
+-- ----------------------------
+-- Table structure for core_file_tag
+-- ----------------------------
 DROP TABLE IF EXISTS `core_file_tag`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_file_tag` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `KEY` varchar(64) NOT NULL COMMENT 'key，关键字',
@@ -154,25 +191,17 @@ CREATE TABLE `core_file_tag` (
   `FILE_ID` int(20) NOT NULL COMMENT 'sys_file的id，文件id',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='文件标签';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_file_tag`
---
+-- ----------------------------
+-- Records of core_file_tag
+-- ----------------------------
+INSERT INTO `core_file_tag` VALUES ('1', 'customer', '12332', '1');
+INSERT INTO `core_file_tag` VALUES ('2', 'type', 'crdit', '2');
 
-LOCK TABLES `core_file_tag` WRITE;
-/*!40000 ALTER TABLE `core_file_tag` DISABLE KEYS */;
-INSERT INTO `core_file_tag` VALUES (1,'customer','12332',1),(2,'type','crdit',2);
-/*!40000 ALTER TABLE `core_file_tag` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_function`
---
-
+-- ----------------------------
+-- Table structure for core_function
+-- ----------------------------
 DROP TABLE IF EXISTS `core_function`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_function` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `CODE` text,
@@ -183,25 +212,34 @@ CREATE TABLE `core_function` (
   `TYPE` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_function`
---
+-- ----------------------------
+-- Records of core_function
+-- ----------------------------
+INSERT INTO `core_function` VALUES ('1', 'user', '用户功能', null, '/admin/user/index.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('2', 'user.query', '用户列表', null, null, '1', 'FN1');
+INSERT INTO `core_function` VALUES ('3', 'user.edit', '用户编辑', null, null, '1', 'FN0');
+INSERT INTO `core_function` VALUES ('6', 'org', '组织机构', null, '/admin/org/index.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('7', 'role', '角色管理', null, '/admin/role/index.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('8', 'menu', '菜单管理', null, '/admin/menu/index.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('9', 'function', '功能点管理', null, '/admin/function/index.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('10', 'roleFunction', '角色功能授权', null, '/admin/role/function.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('11', 'roleDataAccess', '角色数据授权', null, '/admin/role/data.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('12', 'code', '代码生成', null, '/core/codeGen/index.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('13', 'dict', '字典管理', null, '/admin/dict/index.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('18', 'trace', '审计查询', null, '/admin/audit/index.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('19', 'file', '相关文档', null, '/trade/interAndRelate/file.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('91', 'test', '测试', '2017-10-11 16:59:01.000000', '/test/test.do', '6', 'FN0');
+INSERT INTO `core_function` VALUES ('161', 'role.add', '角色添加', '2017-10-23 09:45:05.000000', null, '7', 'FN0');
+INSERT INTO `core_function` VALUES ('167', 'workflow.admin', '工作流监控', null, '/admin/workflow/index.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('180', 'code.query', '代码生成测试', null, null, '12', 'FN0');
+INSERT INTO `core_function` VALUES ('181', 'blog.query', '博客查询功能', null, '', '182', 'FN0');
+INSERT INTO `core_function` VALUES ('182', 'blog', '博客测试', null, '/admin/blog/index.do', '0', 'FN0');
 
-LOCK TABLES `core_function` WRITE;
-/*!40000 ALTER TABLE `core_function` DISABLE KEYS */;
-INSERT INTO `core_function` VALUES (1,'user','用户功能',NULL,'/admin/user/index.do',0,'FN0'),(2,'user.query','用户列表',NULL,NULL,1,'FN1'),(3,'user.edit','用户编辑',NULL,NULL,1,'FN0'),(6,'org','组织机构',NULL,'/admin/org/index.do',0,'FN0'),(7,'role','角色管理',NULL,'/admin/role/index.do',0,'FN0'),(8,'menu','菜单管理',NULL,'/admin/menu/index.do',0,'FN0'),(9,'function','功能点管理',NULL,'/admin/function/index.do',0,'FN0'),(10,'roleFunction','角色功能授权',NULL,'/admin/role/function.do',0,'FN0'),(11,'roleDataAccess','角色数据授权',NULL,'/admin/role/data.do',0,'FN0'),(12,'code','代码生成',NULL,'/core/codeGen/index.do',0,'FN0'),(13,'dict','字典管理',NULL,'/admin/dict/index.do',0,'FN0'),(18,'trace','审计查询',NULL,'/admin/audit/index.do',0,'FN0'),(19,'file','相关文档',NULL,'/trade/interAndRelate/file.do',0,'FN0'),(91,'test','测试','2017-10-11 16:59:01.000000','/test/test.do',6,'FN0'),(161,'role.add','角色添加','2017-10-23 09:45:05.000000',NULL,7,'FN0'),(167,'workflow.admin','工作流监控',NULL,'/admin/workflow/index.do',0,'FN0'),(180,'code.query','代码生成测试',NULL,NULL,12,'FN0'),(181,'blog.query','博客查询功能',NULL,'',182,'FN0'),(182,'blog','博客测试',NULL,'/admin/blog/index.do',0,'FN0');
-/*!40000 ALTER TABLE `core_function` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_menu`
---
-
+-- ----------------------------
+-- Table structure for core_menu
+-- ----------------------------
 DROP TABLE IF EXISTS `core_menu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_menu` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `CODE` varchar(16) DEFAULT NULL,
@@ -214,25 +252,30 @@ CREATE TABLE `core_menu` (
   `ICON` varchar(255) DEFAULT NULL COMMENT '图标',
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_menu`
---
+-- ----------------------------
+-- Records of core_menu
+-- ----------------------------
+INSERT INTO `core_menu` VALUES ('8', '系统管理', '系统管理', null, null, 'MENU_S', '0', '1', null);
+INSERT INTO `core_menu` VALUES ('10', '用户管理', '用户管理', null, '1', 'MENU_M', '18', '1', null);
+INSERT INTO `core_menu` VALUES ('11', '组织机构管理', '组织机构管理', null, '6', 'MENU_M', '18', '2', null);
+INSERT INTO `core_menu` VALUES ('12', '角色管理', '角色管理', null, '7', 'MENU_M', '18', '3', null);
+INSERT INTO `core_menu` VALUES ('13', '菜单项', '菜单项', null, '8', 'MENU_M', '18', '4', null);
+INSERT INTO `core_menu` VALUES ('14', '功能点管理', '功能点管理', null, '9', 'MENU_M', '18', '5', null);
+INSERT INTO `core_menu` VALUES ('15', '字典数据管理', '字典数据管理', null, '13', 'MENU_M', '18', '6', null);
+INSERT INTO `core_menu` VALUES ('16', '审计查询', '审计查询', null, '18', 'MENU_M', '19', '7', null);
+INSERT INTO `core_menu` VALUES ('17', '代码生成', '代码生成', null, '12', 'MENU_M', '19', '8', null);
+INSERT INTO `core_menu` VALUES ('18', '基础管理', '基础管理', null, null, 'MENU_N', '8', '1', null);
+INSERT INTO `core_menu` VALUES ('19', '监控管理', '监控管理', null, null, 'MENU_N', '8', '2', null);
+INSERT INTO `core_menu` VALUES ('20', '流程监控', '流程监控', null, '167', 'MENU_M', '19', '3', null);
+INSERT INTO `core_menu` VALUES ('21', '角色功能授权', '角色功能授权', null, '10', 'MENU_M', '18', '8', null);
+INSERT INTO `core_menu` VALUES ('22', '角色数据授权', '角色数据授权', null, '11', 'MENU_M', '18', '9', null);
+INSERT INTO `core_menu` VALUES ('23', '博客测试', '博客测试1', null, '182', 'MENU_M', '19', '9', '');
 
-LOCK TABLES `core_menu` WRITE;
-/*!40000 ALTER TABLE `core_menu` DISABLE KEYS */;
-INSERT INTO `core_menu` VALUES (8,'系统管理','系统管理',NULL,NULL,'MENU_S',0,1,NULL),(10,'用户管理','用户管理',NULL,1,'MENU_M',18,1,NULL),(11,'组织机构管理','组织机构管理',NULL,6,'MENU_M',18,2,NULL),(12,'角色管理','角色管理',NULL,7,'MENU_M',18,3,NULL),(13,'菜单项','菜单项',NULL,8,'MENU_M',18,4,NULL),(14,'功能点管理','功能点管理',NULL,9,'MENU_M',18,5,NULL),(15,'字典数据管理','字典数据管理',NULL,13,'MENU_M',18,6,NULL),(16,'审计查询','审计查询',NULL,18,'MENU_M',19,7,NULL),(17,'代码生成','代码生成',NULL,12,'MENU_M',19,8,NULL),(18,'基础管理','基础管理',NULL,NULL,'MENU_N',8,1,NULL),(19,'监控管理','监控管理',NULL,NULL,'MENU_N',8,2,NULL),(20,'流程监控','流程监控',NULL,167,'MENU_M',19,3,NULL),(21,'角色功能授权','角色功能授权',NULL,10,'MENU_M',18,8,NULL),(22,'角色数据授权','角色数据授权',NULL,11,'MENU_M',18,9,NULL),(23,'博客测试','博客测试1',NULL,182,'MENU_M',19,9,'');
-/*!40000 ALTER TABLE `core_menu` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_org`
---
-
+-- ----------------------------
+-- Table structure for core_org
+-- ----------------------------
 DROP TABLE IF EXISTS `core_org`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_org` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `CODE` varchar(16) NOT NULL,
@@ -243,25 +286,22 @@ CREATE TABLE `core_org` (
   `DEL_FLAG` tinyint(6) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_org`
---
+-- ----------------------------
+-- Records of core_org
+-- ----------------------------
+INSERT INTO `core_org` VALUES ('1', '集团公司', '集团', '2018-02-02 17:18:50.000000', null, 'ORGT0', '0');
+INSERT INTO `core_org` VALUES ('3', '信息科技部门', '信息科技部门', null, '1', 'ORGT2', '0');
+INSERT INTO `core_org` VALUES ('4', '贵州银行', '贵州银行', '2018-02-02 17:18:56.000000', '1', 'ORGT1', '0');
+INSERT INTO `core_org` VALUES ('5', '贵州银行金科', '贵州银行金融科技开发公司', null, '4', 'ORGT1', '0');
+INSERT INTO `core_org` VALUES ('6', '金科研发', '金科研发', null, '5', 'ORGT2', '0');
+INSERT INTO `core_org` VALUES ('7', '金科研发部门', '金科研发部门', '2018-02-05 13:49:52.754000', '6', 'ORGT2', '0');
+INSERT INTO `core_org` VALUES ('8', '金科研发2部', '金科研发2部', '2018-02-05 13:50:43.901000', '6', 'ORGT2', '0');
 
-LOCK TABLES `core_org` WRITE;
-/*!40000 ALTER TABLE `core_org` DISABLE KEYS */;
-INSERT INTO `core_org` VALUES (1,'集团公司','集团','2018-02-02 17:18:50.000000',NULL,'ORGT0',0),(3,'信息科技部门','信息科技部门',NULL,1,'ORGT2',0),(4,'贵州银行','贵州银行','2018-02-02 17:18:56.000000',1,'ORGT1',0),(5,'贵州银行金科','贵州银行金融科技开发公司',NULL,4,'ORGT1',0),(6,'金科研发','金科研发',NULL,5,'ORGT2',0),(7,'金科研发部门','金科研发部门','2018-02-05 13:49:52.754000',6,'ORGT2',0),(8,'金科研发2部','金科研发2部','2018-02-05 13:50:43.901000',6,'ORGT2',0);
-/*!40000 ALTER TABLE `core_org` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_role`
---
-
+-- ----------------------------
+-- Table structure for core_role
+-- ----------------------------
 DROP TABLE IF EXISTS `core_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_role` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `CODE` varchar(16) DEFAULT NULL COMMENT '角色编码',
@@ -271,25 +311,25 @@ CREATE TABLE `core_role` (
   PRIMARY KEY (`ID`),
   KEY `code_idx` (`CODE`)
 ) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_role`
---
+-- ----------------------------
+-- Records of core_role
+-- ----------------------------
+INSERT INTO `core_role` VALUES ('1', 'DEPT_MANAGER', '部门管理员', null, 'R0');
+INSERT INTO `core_role` VALUES ('2', 'CEO', '公司CEO', null, 'R0');
+INSERT INTO `core_role` VALUES ('3', 'ASSIST', '助理', null, 'R0');
+INSERT INTO `core_role` VALUES ('12', '111', '2324324', '2017-09-06 04:08:00.000000', 'R0');
+INSERT INTO `core_role` VALUES ('13', '1111', '哈哈', '2017-09-06 04:09:05.000000', 'R0');
+INSERT INTO `core_role` VALUES ('15', 'admin', 'ivy', '2017-09-06 05:35:04.000000', 'R0');
+INSERT INTO `core_role` VALUES ('17', '123', '我', '2017-09-06 21:23:03.000000', 'R0');
+INSERT INTO `core_role` VALUES ('18', '23', '234', '2017-09-06 21:41:03.000000', 'R0');
+INSERT INTO `core_role` VALUES ('19', '132484', '1', '2017-09-06 21:42:02.000000', 'R0');
+INSERT INTO `core_role` VALUES ('173', 'dept.admin', '部门辅助管理员', '2017-10-25 10:29:03.000000', 'R0');
 
-LOCK TABLES `core_role` WRITE;
-/*!40000 ALTER TABLE `core_role` DISABLE KEYS */;
-INSERT INTO `core_role` VALUES (1,'DEPT_MANAGER','部门管理员',NULL,'R0'),(2,'CEO','公司CEO',NULL,'R0'),(3,'ASSIST','助理',NULL,'R0'),(12,'111','2324324','2017-09-06 04:08:00.000000','R0'),(13,'1111','哈哈','2017-09-06 04:09:05.000000','R0'),(15,'admin','ivy','2017-09-06 05:35:04.000000','R0'),(17,'123','我','2017-09-06 21:23:03.000000','R0'),(18,'23','234','2017-09-06 21:41:03.000000','R0'),(19,'132484','1','2017-09-06 21:42:02.000000','R0'),(173,'dept.admin','部门辅助管理员','2017-10-25 10:29:03.000000','R0');
-/*!40000 ALTER TABLE `core_role` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_role_function`
---
-
+-- ----------------------------
+-- Table structure for core_role_function
+-- ----------------------------
 DROP TABLE IF EXISTS `core_role_function`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_role_function` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `ROLE_ID` int(65) DEFAULT NULL,
@@ -298,25 +338,38 @@ CREATE TABLE `core_role_function` (
   `DATA_ACCESS_POLICY` varchar(128) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=207 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_role_function`
---
+-- ----------------------------
+-- Records of core_role_function
+-- ----------------------------
+INSERT INTO `core_role_function` VALUES ('1', '1', '1', '5', null);
+INSERT INTO `core_role_function` VALUES ('2', '1', '2', '1', null);
+INSERT INTO `core_role_function` VALUES ('3', '1', '3', '5', null);
+INSERT INTO `core_role_function` VALUES ('4', '2', '2', '2', null);
+INSERT INTO `core_role_function` VALUES ('5', '3', '2', '5', null);
+INSERT INTO `core_role_function` VALUES ('6', '3', '3', '5', null);
+INSERT INTO `core_role_function` VALUES ('162', '1', '6', null, null);
+INSERT INTO `core_role_function` VALUES ('164', '1', '91', null, null);
+INSERT INTO `core_role_function` VALUES ('174', '173', '1', null, null);
+INSERT INTO `core_role_function` VALUES ('176', '173', '2', '5', null);
+INSERT INTO `core_role_function` VALUES ('177', '173', '3', null, null);
+INSERT INTO `core_role_function` VALUES ('178', '173', '167', null, null);
+INSERT INTO `core_role_function` VALUES ('192', '3', '1', null, null);
+INSERT INTO `core_role_function` VALUES ('194', '3', '12', null, null);
+INSERT INTO `core_role_function` VALUES ('196', '3', '180', '3', null);
+INSERT INTO `core_role_function` VALUES ('197', null, '1', null, null);
+INSERT INTO `core_role_function` VALUES ('198', null, '2', null, null);
+INSERT INTO `core_role_function` VALUES ('199', null, '3', null, null);
+INSERT INTO `core_role_function` VALUES ('200', null, '6', null, null);
+INSERT INTO `core_role_function` VALUES ('201', null, '91', null, null);
+INSERT INTO `core_role_function` VALUES ('202', null, '8', null, null);
+INSERT INTO `core_role_function` VALUES ('205', '1', '182', null, null);
+INSERT INTO `core_role_function` VALUES ('206', '1', '181', null, null);
 
-LOCK TABLES `core_role_function` WRITE;
-/*!40000 ALTER TABLE `core_role_function` DISABLE KEYS */;
-INSERT INTO `core_role_function` VALUES (1,1,1,5,NULL),(2,1,2,1,NULL),(3,1,3,5,NULL),(4,2,2,2,NULL),(5,3,2,5,NULL),(6,3,3,5,NULL),(162,1,6,NULL,NULL),(164,1,91,NULL,NULL),(174,173,1,NULL,NULL),(176,173,2,5,NULL),(177,173,3,NULL,NULL),(178,173,167,NULL,NULL),(192,3,1,NULL,NULL),(194,3,12,NULL,NULL),(196,3,180,3,NULL),(197,NULL,1,NULL,NULL),(198,NULL,2,NULL,NULL),(199,NULL,3,NULL,NULL),(200,NULL,6,NULL,NULL),(201,NULL,91,NULL,NULL),(202,NULL,8,NULL,NULL),(205,1,182,NULL,NULL),(206,1,181,NULL,NULL);
-/*!40000 ALTER TABLE `core_role_function` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_role_menu`
---
-
+-- ----------------------------
+-- Table structure for core_role_menu
+-- ----------------------------
 DROP TABLE IF EXISTS `core_role_menu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_role_menu` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `ROLE_ID` int(65) DEFAULT NULL,
@@ -324,25 +377,24 @@ CREATE TABLE `core_role_menu` (
   `CREATE_TIME` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_role_menu`
---
+-- ----------------------------
+-- Records of core_role_menu
+-- ----------------------------
+INSERT INTO `core_role_menu` VALUES ('1', '1', '10', null);
+INSERT INTO `core_role_menu` VALUES ('163', '1', '11', null);
+INSERT INTO `core_role_menu` VALUES ('175', '173', '10', null);
+INSERT INTO `core_role_menu` VALUES ('193', '3', '10', null);
+INSERT INTO `core_role_menu` VALUES ('195', '3', '17', null);
+INSERT INTO `core_role_menu` VALUES ('196', null, '10', null);
+INSERT INTO `core_role_menu` VALUES ('197', null, '11', null);
+INSERT INTO `core_role_menu` VALUES ('198', null, '13', null);
+INSERT INTO `core_role_menu` VALUES ('200', '1', '23', null);
 
-LOCK TABLES `core_role_menu` WRITE;
-/*!40000 ALTER TABLE `core_role_menu` DISABLE KEYS */;
-INSERT INTO `core_role_menu` VALUES (1,1,10,NULL),(163,1,11,NULL),(175,173,10,NULL),(193,3,10,NULL),(195,3,17,NULL),(196,NULL,10,NULL),(197,NULL,11,NULL),(198,NULL,13,NULL),(200,1,23,NULL);
-/*!40000 ALTER TABLE `core_role_menu` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_user`
---
-
+-- ----------------------------
+-- Table structure for core_user
+-- ----------------------------
 DROP TABLE IF EXISTS `core_user`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_user` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `CODE` varchar(16) DEFAULT NULL,
@@ -357,25 +409,20 @@ CREATE TABLE `core_user` (
   `JOB_TYPE0` varchar(16) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=175 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_user`
---
+-- ----------------------------
+-- Records of core_user
+-- ----------------------------
+INSERT INTO `core_user` VALUES ('1', 'admin', '超级管理员1', '123456', '2017-09-13 09:21:03.000000', '1', 'S1', 'JT_S_01', '0', '2017-09-13 09:21:03', 'JT_01');
+INSERT INTO `core_user` VALUES ('171', 'lixx', '李小小', null, '2018-01-28 11:21:20.914000', '3', 'S1', 'JT_S_04', '0', null, 'JT_02');
+INSERT INTO `core_user` VALUES ('172', 'lixx2', '李xx2', '123456', '2018-01-28 11:22:38.814000', '4', 'S1', 'JT_S_02', '0', null, 'JT_01');
+INSERT INTO `core_user` VALUES ('173', 'test1', 'test1', '123', '2018-01-28 14:44:55.407000', '5', 'S1', 'JT_S_04', '0', null, 'JT_02');
+INSERT INTO `core_user` VALUES ('174', 'hank250', '李小熊', null, '2018-02-16 11:36:41.438000', '4', 'S1', 'JT_S_04', '0', null, 'JT_02');
 
-LOCK TABLES `core_user` WRITE;
-/*!40000 ALTER TABLE `core_user` DISABLE KEYS */;
-INSERT INTO `core_user` VALUES (1,'admin','超级管理员1','123456','2017-09-13 09:21:03.000000',1,'S1','JT_S_01',0,'2017-09-13 09:21:03','JT_01'),(171,'lixx','李小小',NULL,'2018-01-28 11:21:20.914000',3,'S1','JT_S_04',0,NULL,'JT_02'),(172,'lixx2','李xx2','123456','2018-01-28 11:22:38.814000',4,'S1','JT_S_02',0,NULL,'JT_01'),(173,'test1','test1','123','2018-01-28 14:44:55.407000',5,'S1','JT_S_04',0,NULL,'JT_02'),(174,'hank250','李小熊',NULL,'2018-02-16 11:36:41.438000',4,'S1','JT_S_04',0,NULL,'JT_02');
-/*!40000 ALTER TABLE `core_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `core_user_role`
---
-
+-- ----------------------------
+-- Table structure for core_user_role
+-- ----------------------------
 DROP TABLE IF EXISTS `core_user_role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `core_user_role` (
   `ID` int(20) NOT NULL AUTO_INCREMENT,
   `USER_ID` int(20) DEFAULT NULL,
@@ -384,25 +431,30 @@ CREATE TABLE `core_user_role` (
   `CREATE_TIME` datetime(6) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf8 COMMENT='用户角色关系表';
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `core_user_role`
---
-
-LOCK TABLES `core_user_role` WRITE;
-/*!40000 ALTER TABLE `core_user_role` DISABLE KEYS */;
-INSERT INTO `core_user_role` VALUES (1,3,1,4,NULL),(2,4,2,5,NULL),(3,75,3,6,'2017-09-21 18:03:05.000000'),(35,1,1,1,'2017-09-06 01:12:02.000000'),(36,1,3,6,'2017-09-06 03:33:05.000000'),(38,1,1,3,'2017-09-06 03:35:02.000000'),(41,1,1,5,'2017-09-06 03:58:02.000000'),(42,3,3,1,'2017-09-06 04:01:00.000000'),(47,47,3,1,'2017-09-06 22:00:01.000000'),(49,5,3,4,'2017-09-06 22:01:00.000000'),(52,47,2,1,'2017-09-07 01:12:02.000000'),(53,48,3,4,'2017-09-07 01:14:04.000000'),(55,68,2,3,'2017-09-07 21:42:03.000000'),(125,74,1,4,'2017-10-17 09:37:02.000000'),(144,74,3,NULL,'2017-10-17 16:55:00.000000'),(145,67,3,NULL,'2017-10-17 16:55:01.000000'),(146,73,3,NULL,'2017-10-17 16:55:02.000000'),(147,22,3,NULL,'2017-10-17 16:55:04.000000'),(148,68,3,NULL,'2017-10-17 16:56:00.000000'),(168,72,1,3,'2017-10-24 14:40:04.000000'),(169,41,1,NULL,'2017-10-25 08:58:01.000000'),(171,170,1,5,'2017-10-25 09:08:05.000000'),(172,171,1,4,'2018-02-02 09:36:40.967000');
-/*!40000 ALTER TABLE `core_user_role` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-02-23 20:07:56
+-- ----------------------------
+-- Records of core_user_role
+-- ----------------------------
+INSERT INTO `core_user_role` VALUES ('1', '3', '1', '4', null);
+INSERT INTO `core_user_role` VALUES ('2', '4', '2', '5', null);
+INSERT INTO `core_user_role` VALUES ('3', '75', '3', '6', '2017-09-21 18:03:05.000000');
+INSERT INTO `core_user_role` VALUES ('35', '1', '1', '1', '2017-09-06 01:12:02.000000');
+INSERT INTO `core_user_role` VALUES ('36', '1', '3', '6', '2017-09-06 03:33:05.000000');
+INSERT INTO `core_user_role` VALUES ('38', '1', '1', '3', '2017-09-06 03:35:02.000000');
+INSERT INTO `core_user_role` VALUES ('41', '1', '1', '5', '2017-09-06 03:58:02.000000');
+INSERT INTO `core_user_role` VALUES ('42', '3', '3', '1', '2017-09-06 04:01:00.000000');
+INSERT INTO `core_user_role` VALUES ('47', '47', '3', '1', '2017-09-06 22:00:01.000000');
+INSERT INTO `core_user_role` VALUES ('49', '5', '3', '4', '2017-09-06 22:01:00.000000');
+INSERT INTO `core_user_role` VALUES ('52', '47', '2', '1', '2017-09-07 01:12:02.000000');
+INSERT INTO `core_user_role` VALUES ('53', '48', '3', '4', '2017-09-07 01:14:04.000000');
+INSERT INTO `core_user_role` VALUES ('55', '68', '2', '3', '2017-09-07 21:42:03.000000');
+INSERT INTO `core_user_role` VALUES ('125', '74', '1', '4', '2017-10-17 09:37:02.000000');
+INSERT INTO `core_user_role` VALUES ('144', '74', '3', null, '2017-10-17 16:55:00.000000');
+INSERT INTO `core_user_role` VALUES ('145', '67', '3', null, '2017-10-17 16:55:01.000000');
+INSERT INTO `core_user_role` VALUES ('146', '73', '3', null, '2017-10-17 16:55:02.000000');
+INSERT INTO `core_user_role` VALUES ('147', '22', '3', null, '2017-10-17 16:55:04.000000');
+INSERT INTO `core_user_role` VALUES ('148', '68', '3', null, '2017-10-17 16:56:00.000000');
+INSERT INTO `core_user_role` VALUES ('168', '72', '1', '3', '2017-10-24 14:40:04.000000');
+INSERT INTO `core_user_role` VALUES ('169', '41', '1', null, '2017-10-25 08:58:01.000000');
+INSERT INTO `core_user_role` VALUES ('171', '170', '1', '5', '2017-10-25 09:08:05.000000');
+INSERT INTO `core_user_role` VALUES ('172', '171', '1', '4', '2018-02-02 09:36:40.967000');

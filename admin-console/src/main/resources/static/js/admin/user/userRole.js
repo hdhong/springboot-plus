@@ -16,7 +16,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				Lib.closeFrame();
 			});
 			window.dataReload = function(){
-				Lib.doSearchForm($("#userRoleSearchForm"),userRoleTable,form)
+				Lib.doSearchForm($("#userRoleSearchForm"),userRoleTable)
 			}
 			
 		},

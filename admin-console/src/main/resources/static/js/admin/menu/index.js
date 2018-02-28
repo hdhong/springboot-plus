@@ -10,7 +10,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 			this.initSearchForm();
 			this.initToolBar();
 			window.dataReload = function(){
-				Lib.doSearchForm($("#menuSearchForm"),menuTable,form)
+				Lib.doSearchForm($("#menuSearchForm"),menuTable)
 			}
 			
 			

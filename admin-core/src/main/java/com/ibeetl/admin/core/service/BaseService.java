@@ -3,20 +3,16 @@ package com.ibeetl.admin.core.service;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.beetl.sql.core.SQLManager;
 import org.beetl.sql.core.TailBean;
-import org.beetl.sql.core.db.KeyHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ibeetl.admin.core.annotation.Dict;
-import com.ibeetl.admin.core.util.DictUtil;
-import com.ibeetl.admin.core.util.FieldDict;
+import com.ibeetl.admin.core.entity.CoreDict;
 import com.ibeetl.admin.core.util.PlatformException;
 import com.ibeetl.admin.core.util.enums.DelFlagEnum;
 
@@ -27,7 +23,7 @@ import com.ibeetl.admin.core.util.enums.DelFlagEnum;
 public class BaseService<T> {
 
     @Autowired
-    protected DictUtil dictUtil;
+    protected CoreDictService dictUtil;
     @Autowired
     protected SQLManager sqlManager;
     
@@ -153,16 +149,7 @@ public class BaseService<T> {
     private Class<T> getCurrentEntityClassz() {
         return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
-    
-    public void queryListAfter(List list,FieldDict[] more){
-    	 for (Object bean : list) {
-             queryEntityAfter(bean,more);
-         }
-    }
-    
-    public void queryEntityAfter(Object  bean){
-    	 this.queryEntityAfter(bean, null);
-    }
+
 
     public void queryListAfter(List list) {
         for (Object bean : list) {
@@ -170,7 +157,7 @@ public class BaseService<T> {
         }
     }
 
-    public void queryEntityAfter(Object  bean,FieldDict[] more) {
+    public void queryEntityAfter(Object  bean) {
         if (bean == null) {
             return;
         }
@@ -190,7 +177,8 @@ public class BaseService<T> {
                     String display = "";
                     Object fieldValue = field.get(ext);
                     if (fieldValue != null) {
-                        display = dictUtil.getDictName(fieldValue.toString());
+                        CoreDict  dbDict = dictUtil.findCoreDict(dict.type(),fieldValue.toString());
+                        display = dbDict!=null?dbDict.getName():null;
                     }
                     ext.set(field.getName() + dict.suffix(), display);
                 } catch (Exception e) {
@@ -198,21 +186,6 @@ public class BaseService<T> {
                 }
 
             }
-        }
-        
-        if(more==null){
-        	return ;
-        }
-        
-        for(FieldDict desc:more){
-        	
-        	Object fieldValue = ext.get(desc.getField());
-        	String display = "";
-        	if (fieldValue != null) {
-                display = dictUtil.getDictName(fieldValue.toString());
-            }
-        	ext.set(desc.getDisplayField(), display);
-        	
         }
         
     }

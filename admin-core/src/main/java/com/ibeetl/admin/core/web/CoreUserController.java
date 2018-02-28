@@ -20,7 +20,6 @@ import com.ibeetl.admin.core.rbac.tree.MenuItem;
 import com.ibeetl.admin.core.rbac.tree.OrgItem;
 import com.ibeetl.admin.core.service.CorePlatformService;
 import com.ibeetl.admin.core.service.CoreUserService;
-import com.ibeetl.admin.core.util.DictUtil;
 import com.ibeetl.admin.core.util.HttpRequestLocal;
 import com.ibeetl.admin.core.web.dto.FunctionNodeView;
 import com.ibeetl.admin.core.web.dto.MenuNodeView;
@@ -41,8 +40,7 @@ public class CoreUserController {
 	@Autowired
 	HttpRequestLocal httpRequestLocal;
 
-	@Autowired
-	DictUtil dictUtil;
+
 
 	
 	@Autowired

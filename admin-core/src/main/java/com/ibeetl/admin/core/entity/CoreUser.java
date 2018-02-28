@@ -12,6 +12,7 @@ import org.beetl.sql.core.annotatoin.SeqID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ibeetl.admin.core.annotation.Dict;
 import com.ibeetl.admin.core.util.ValidateConfig;
+import com.ibeetl.admin.core.util.enums.CoreDictType;
 
 /*
 *   用户实体
@@ -51,14 +52,14 @@ public class CoreUser extends BaseEntity  {
 	@JsonIgnore
 	private String password;
 	
-	@Dict
+	@Dict(type=CoreDictType.USER_STATE)
 	private String state;
 	
 	//扩展例子
 	@Dict(type="job_type")
 	private String jobType0;
 	
-	@Dict
+	@Dict(type="job_type")
 	private String jobType1;
 	
 	

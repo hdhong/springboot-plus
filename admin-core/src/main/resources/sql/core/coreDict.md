@@ -22,7 +22,7 @@ findChildByParent
         *
     FROM core_dict
     WHERE
-    parent = #parentValue# and del_flag = 0 order by sort DESC
+    parent = #id# and del_flag = 0 order by sort DESC
 
 
 bathDelByValue

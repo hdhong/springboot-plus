@@ -21,9 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ibeetl.admin.core.rbac.DataAccess;
 import com.ibeetl.admin.core.rbac.DataAccessFactory;
 import com.ibeetl.admin.core.service.CorePlatformService;
-import com.ibeetl.admin.core.util.beetl.DictQueryByValueFunction;
 import com.ibeetl.admin.core.util.beetl.DictQueryFunction;
-import com.ibeetl.admin.core.util.beetl.DictUpQueryFunction;
 import com.ibeetl.admin.core.util.beetl.FunAccessUrlFunction;
 import com.ibeetl.admin.core.util.beetl.FunFunction;
 import com.ibeetl.admin.core.util.beetl.MenuFunction;
@@ -52,11 +50,8 @@ public class BeetlConf {
 
     @Autowired
     DictQueryFunction dictDownQueryFunction;
-    @Autowired
-    DictUpQueryFunction dictUpQueryFunction;
+  
 
-    @Autowired
-    DictQueryByValueFunction dictQueryByValueFunction;
 
     @Autowired
     RoleFunction roleFunction;
@@ -100,11 +95,10 @@ public class BeetlConf {
                 groupTemplate.registerFunction("core.funAccessUrl", funAccessUrlFunction);
                 groupTemplate.registerFunction("core.menuName", menuFunction);
                 groupTemplate.registerFunction("core.searchCondtion", searchCondtionFunction);
-                groupTemplate.registerFunction("core.dictDownQuery", dictDownQueryFunction);
-                groupTemplate.registerFunction("core.dictLevel", dictUpQueryFunction);
-                groupTemplate.registerFunction("core.dictListByValue", dictQueryByValueFunction);
                 groupTemplate.registerFunction("core.roles", roleFunction);
                 groupTemplate.registerFormat("xss", new XXSDefenderFormat());
+                
+                groupTemplate.registerFunctionPackage("dict", dictDownQueryFunction);
 
                 // 模板页面判断是否有按钮权限,比如canAccess
                 groupTemplate.registerFunction("canAccess", new Function() {

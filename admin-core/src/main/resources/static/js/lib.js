@@ -203,7 +203,8 @@ var Lib = {
 		value = data.value;
 		if (value != "") {
 			Common.post("/core/dict/viewChildren.json", {
-				"value" : value
+				"value" : value,
+				"group":groupName
 			}, function(serverData) {
 				Lib._resetDictSelect(selects[start], serverData);
 				layuiForm.render();

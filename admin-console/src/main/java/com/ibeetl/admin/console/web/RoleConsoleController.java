@@ -32,7 +32,6 @@ import com.ibeetl.admin.core.entity.CoreUser;
 import com.ibeetl.admin.core.service.CorePlatformService;
 import com.ibeetl.admin.core.util.AnnotationUtil;
 import com.ibeetl.admin.core.util.ConvertUtil;
-import com.ibeetl.admin.core.util.DictUtil;
 import com.ibeetl.admin.core.util.ValidateConfig;
 import com.ibeetl.admin.core.web.JsonResult;
 
@@ -56,9 +55,6 @@ public class RoleConsoleController {
 
     @Autowired
     private OrgConsoleService orgConsoleService;
-
-    @Autowired
-    DictUtil dictUtil;
 
     /* 页面 */
 

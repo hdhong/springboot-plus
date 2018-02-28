@@ -28,8 +28,9 @@ public class DictConsoleService extends BaseService<CoreDict>{
         return ret;
     }
 
-    public void batchDelCoreDict(List<String> ids){
+    public void batchDelCoreDict(List<Long> ids){
         try {
+        	//TODO,找到数据字典所有子类，设置删除标记
             dictDao.batchDelCoreDictByIds(ids);
         } catch (Exception e) {
             throw new PlatformException("批量删除CoreDict失败", e);

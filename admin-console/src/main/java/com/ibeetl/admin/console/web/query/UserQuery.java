@@ -21,10 +21,10 @@ public class UserQuery extends PageParam {
 	@Query(name="状态",display=true,type=Query.TYPE_DICT,dict=CoreDictType.USER_STATE)
 	private String state;
 	
-	@Query(name="职务",display=true,type=Query.TYPE_DICT,dict="job_type",group="jobType")
+	@Query(name="职务",display=true,type=Query.TYPE_DICT,dict="job_type",group="job_type")
 	private String jobType0;
 	
-	@Query(name="职务明细",display=true,type=Query.TYPE_DICT,dict="",group="jobType")
+	@Query(name="职务明细",display=true,type=Query.TYPE_DICT,dict="",group="job_type")
     private String jobType1;
 	
 	

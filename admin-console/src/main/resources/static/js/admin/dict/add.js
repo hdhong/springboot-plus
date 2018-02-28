@@ -9,7 +9,7 @@ layui.define([ 'form', 'laydate', 'table','dictApi'], function(exports) {
 			},
 			initSubmit:function(){
 				$("#addButton").click(function(){
-					dictApi.addDict(function(){
+					dictApi.addDict($("#addForm"),function(){
 						parent.window.dataReload();
 						Common.info("添加成功");
 						Lib.closeFrame();

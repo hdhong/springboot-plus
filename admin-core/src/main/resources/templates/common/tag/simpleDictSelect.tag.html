@@ -4,10 +4,11 @@
 	<option value="">请选择</option>
 	<!--# 
 		var dicts = [];
-		if(isNotEmpty(type)&&isEmpty(value)){
-			dicts = core.dictDownQuery(type);
-		}else if(isNotEmpty(value)){
-			dicts = core.dictListByValue(value);
+		if(isNotEmpty(type)){
+			dicts = dict.dictDownQuery(type);
+		}else if(isNotEmpty(group)&&isNotEmpty(value)){
+			//级联选择
+			dicts = dict.dictListByValue(group,value);
 		}
 		var expected = value!"";
 		for(dict in dicts){

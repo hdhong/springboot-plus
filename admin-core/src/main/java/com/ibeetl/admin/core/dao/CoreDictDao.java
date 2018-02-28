@@ -37,7 +37,7 @@ public interface CoreDictDao extends BaseMapper<CoreDict> {
      * @param id 父节点id
      * @return
      */
-    List<CoreDict> findChildByParent(String parentValue);
+    List<CoreDict> findChildByParent(Long id);
 
     int bathDelByValue(List<String> values);
 }

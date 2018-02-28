@@ -52,6 +52,7 @@ public class CorePlatformService {
     //字典列表
     public static final String DICT_CACHE_TYPE = "cache:core:dictType";
     public static final String DICT_CACHE_VALUE = "cache:core:dictValue";
+    public static final String DICT_CACHE_SAME_LEVEL = "cache:core:ditcSameLevel";
     public static final String DICT_CACHE_CHILDREN = "cache:core:dictChildren";
     public static final String USER_FUNCTION_ACCESS_CACHE = "cache:core:userFunctionAccess";
     public static final String USER_FUNCTION_CHIDREN_CACHE = "ccache:core:functionChildren";
@@ -369,7 +370,7 @@ public class CorePlatformService {
         //没有做任何事情，交给spring cache来处理了
     }
 
-    @CacheEvict(cacheNames = {CorePlatformService.DICT_CACHE_CHILDREN,CorePlatformService.DICT_CACHE_TYPE,CorePlatformService.DICT_CACHE_VALUE}, allEntries = true)
+    @CacheEvict(cacheNames = {CorePlatformService.DICT_CACHE_SAME_LEVEL,CorePlatformService.DICT_CACHE_TYPE,CorePlatformService.DICT_CACHE_VALUE}, allEntries = true)
     public void clearDictCache() {
     }
     

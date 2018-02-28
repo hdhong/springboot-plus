@@ -24,6 +24,7 @@ import com.ibeetl.admin.core.service.BaseService;
 import com.ibeetl.admin.core.service.CoreDictService;
 import com.ibeetl.admin.core.service.CorePlatformService;
 import com.ibeetl.admin.core.util.PlatformException;
+import com.ibeetl.admin.core.util.enums.CoreDictType;
 import com.ibeetl.admin.core.util.enums.DelFlagEnum;
 import com.ibeetl.admin.core.util.enums.GeneralStateEnum;
 
@@ -183,11 +184,11 @@ public class UserConsoleService extends BaseService<CoreUser> {
 			userItem.setCode(user.getCode());
 			userItem.setId(user.getId());
 			userItem.setName(user.getName());
-			CoreDict dict = dictService.findCoreDict(user.getState());
+			CoreDict dict = dictService.findCoreDict(CoreDictType.USER_STATE,user.getState());
 			userItem.setStateText(dict.getName());
 			
 			if(StringUtils.isNotEmpty(user.getJobType1())){
-				dict = dictService.findCoreDict(user.getJobType1());
+				dict = dictService.findCoreDict("job_type",user.getJobType1());
 				userItem.setJobType1Text(dict.getName());
 			}
 			

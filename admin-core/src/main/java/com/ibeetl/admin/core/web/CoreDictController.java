@@ -1,9 +1,7 @@
 package com.ibeetl.admin.core.web;
 
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ibeetl.admin.core.entity.CoreDict;
 import com.ibeetl.admin.core.service.CoreDictService;
 import com.ibeetl.admin.core.service.CorePlatformService;
-import com.ibeetl.admin.core.util.DictUtil;
 
 @Controller
 @SuppressWarnings("unchecked")
@@ -29,8 +26,6 @@ public class CoreDictController {
     @Autowired
     CoreDictService dictService;
 
-    @Autowired
-    DictUtil dictUtil;
  
 
     /**
@@ -53,43 +48,12 @@ public class CoreDictController {
   
     @RequestMapping(MODEL + "/viewChildren.json")
     @ResponseBody
-    public JsonResult<List<CoreDict>> viewChild(String value) {
-        List<CoreDict> list = dictService.findChildrenByValue(value);
+    public JsonResult<List<CoreDict>> viewChild(String group,String value) {
+        CoreDict dict = dictService.findCoreDict(group,value);
+        List<CoreDict> list = dictService.findChildByParent(dict.getId());
         return  JsonResult.success(list);
     }
     
-    /**
-     * 查看字典值的所有后代字典
-     * @param value
-     * @return
-     */
-    @RequestMapping(MODEL + "/batchViewChildren.json")
-    @ResponseBody
-    public JsonResult<List<List<CoreDict>>> batchViewChildren(String value) {
-        List<List<CoreDict>> list = dictService.batchFindChidren(value);
-        return  JsonResult.success(list);
-    }
-
     
-
-
-   
-    /**
-     * 批量获取字典数据
-     * @param types
-     * @return
-     */
-    @RequestMapping(MODEL + "/batchView.json")
-    @ResponseBody
-    public JsonResult<Map<String, List<CoreDict>>> batchView(String types) {
-        String[] strs = types.split(",");
-        //按照顺序返回
-        Map<String, List<CoreDict>> map = new LinkedHashMap<String, List<CoreDict>>();
-        for (int i = 0; i < strs.length; i++) {
-            List<CoreDict> list = dictService.findAllByType(strs[i]);
-            map.put(strs[i], list);
-        }
-        return JsonResult.success(map);
-    }
 
 }

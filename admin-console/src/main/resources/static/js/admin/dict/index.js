@@ -10,7 +10,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 			this.initSearchForm();
 			this.initToolBar();
 			window.dataReload = function(){
-				Lib.doSearchForm($("#searchForm"),dictTable,form)
+				Lib.doSearchForm($("#searchForm"),dictTable)
 			}
 			
 			
@@ -24,14 +24,19 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				,page : Lib.tablePage //开启分页
 				,limit : 10,
 				cols : [ [ //表头
-				{
-					type : 'checkbox',
-					fixed:'left',
-				}, 
+			    {
+                    type : 'checkbox',
+                    fixed:'left',
+                }, {
+                    field : 'id',
+                    title : 'id',
+                    width : 80,
+                    fixed:'left',
+                    sort : true
+                },
 				{
 					field : 'value',
-					title : '字典值',
-					
+					title : '字典值1',
 					fixed:'left',
 					width : 120,
 				}, 
@@ -94,7 +99,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 						if(data==null){
 							return ;
 						}
-						var url = "/admin/dict/edit.do?id="+data.value;
+						var url = "/admin/dict/edit.do?id="+data.id;
 						Common.openDlg(url,"字典数据管理>"+data.value+">编辑");
 						
 					},
