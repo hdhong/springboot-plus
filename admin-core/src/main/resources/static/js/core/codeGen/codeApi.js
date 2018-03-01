@@ -3,9 +3,9 @@ layui.define([], function(exports) {
 	var api={
 			gen:function(callback){
 				Common.post("/core/codeGen/getPath.json", {}, function(path){
-					Common.openPrompt("代码保存路径?",path,function(){
-						var url ="/core/codeGen/gen.json"
-						Lib.submitForm(url,$('#updateForm'),{path:path},callback)
+					Common.openPrompt("代码保存路径?",path,function(newPath){
+						var url ="/core/codeGen/gen.json";
+						Lib.submitForm(url,$('#updateForm'),{path:newPath},callback)
 					})
 				});
 			},

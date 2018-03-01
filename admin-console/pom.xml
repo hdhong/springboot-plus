@@ -19,11 +19,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.jxls</groupId>
-			<artifactId>jxls-reader</artifactId>
-			<version>2.0.3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jxls</groupId>
 			<artifactId>jxls-poi</artifactId>
 			<version>1.0.14</version>
 		</dependency>
