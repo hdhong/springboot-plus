@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2018-02-28 16:05:04
+Date: 2018-03-01 11:53:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -211,7 +211,7 @@ CREATE TABLE `core_function` (
   `PARENT_ID` int(65) DEFAULT NULL,
   `TYPE` varchar(4) DEFAULT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=183 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=184 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of core_function
@@ -235,6 +235,7 @@ INSERT INTO `core_function` VALUES ('167', 'workflow.admin', '工作流监控', 
 INSERT INTO `core_function` VALUES ('180', 'code.query', '代码生成测试', null, null, '12', 'FN0');
 INSERT INTO `core_function` VALUES ('181', 'blog.query', '博客查询功能', null, '', '182', 'FN0');
 INSERT INTO `core_function` VALUES ('182', 'blog', '博客测试', null, '/admin/blog/index.do', '0', 'FN0');
+INSERT INTO `core_function` VALUES ('183', 'code.project', '项目生成', '2018-03-01 09:38:17.068000', '/core/codeGen/project.do', '12', 'FN0');
 
 -- ----------------------------
 -- Table structure for core_menu
@@ -251,7 +252,7 @@ CREATE TABLE `core_menu` (
   `SEQ` int(65) DEFAULT NULL,
   `ICON` varchar(255) DEFAULT NULL COMMENT '图标',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of core_menu
@@ -264,13 +265,15 @@ INSERT INTO `core_menu` VALUES ('13', '菜单项', '菜单项', null, '8', 'MENU
 INSERT INTO `core_menu` VALUES ('14', '功能点管理', '功能点管理', null, '9', 'MENU_M', '18', '5', null);
 INSERT INTO `core_menu` VALUES ('15', '字典数据管理', '字典数据管理', null, '13', 'MENU_M', '18', '6', null);
 INSERT INTO `core_menu` VALUES ('16', '审计查询', '审计查询', null, '18', 'MENU_M', '19', '7', null);
-INSERT INTO `core_menu` VALUES ('17', '代码生成', '代码生成', null, '12', 'MENU_M', '19', '8', null);
+INSERT INTO `core_menu` VALUES ('17', '代码生成', '代码生成', null, '12', 'MENU_M', '24', '8', '');
 INSERT INTO `core_menu` VALUES ('18', '基础管理', '基础管理', null, null, 'MENU_N', '8', '1', null);
 INSERT INTO `core_menu` VALUES ('19', '监控管理', '监控管理', null, null, 'MENU_N', '8', '2', null);
 INSERT INTO `core_menu` VALUES ('20', '流程监控', '流程监控', null, '167', 'MENU_M', '19', '3', null);
 INSERT INTO `core_menu` VALUES ('21', '角色功能授权', '角色功能授权', null, '10', 'MENU_M', '18', '8', null);
 INSERT INTO `core_menu` VALUES ('22', '角色数据授权', '角色数据授权', null, '11', 'MENU_M', '18', '9', null);
 INSERT INTO `core_menu` VALUES ('23', '博客测试', '博客测试1', null, '182', 'MENU_M', '19', '9', '');
+INSERT INTO `core_menu` VALUES ('24', '代码生成导航', '代码生成', '2018-03-01 09:39:31.096000', null, 'MENU_N', '8', '1', '');
+INSERT INTO `core_menu` VALUES ('25', '子系统生成', '子系统生成', '2018-03-01 09:42:35.839000', '183', 'MENU_M', '24', '1', '');
 
 -- ----------------------------
 -- Table structure for core_org
@@ -324,7 +327,7 @@ INSERT INTO `core_role` VALUES ('15', 'admin', 'ivy', '2017-09-06 05:35:04.00000
 INSERT INTO `core_role` VALUES ('17', '123', '我', '2017-09-06 21:23:03.000000', 'R0');
 INSERT INTO `core_role` VALUES ('18', '23', '234', '2017-09-06 21:41:03.000000', 'R0');
 INSERT INTO `core_role` VALUES ('19', '132484', '1', '2017-09-06 21:42:02.000000', 'R0');
-INSERT INTO `core_role` VALUES ('173', 'dept.admin', '部门辅助管理员', '2017-10-25 10:29:03.000000', 'R0');
+INSERT INTO `core_role` VALUES ('173', 'dept.admin', '部门辅助管理员', null, 'R0');
 
 -- ----------------------------
 -- Table structure for core_role_function
@@ -343,7 +346,7 @@ CREATE TABLE `core_role_function` (
 -- Records of core_role_function
 -- ----------------------------
 INSERT INTO `core_role_function` VALUES ('1', '1', '1', '5', null);
-INSERT INTO `core_role_function` VALUES ('2', '1', '2', '1', null);
+INSERT INTO `core_role_function` VALUES ('2', '1', '2', '4', null);
 INSERT INTO `core_role_function` VALUES ('3', '1', '3', '5', null);
 INSERT INTO `core_role_function` VALUES ('4', '2', '2', '2', null);
 INSERT INTO `core_role_function` VALUES ('5', '3', '2', '5', null);

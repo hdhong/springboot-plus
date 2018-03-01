@@ -5,6 +5,8 @@
 
 基本技术栈来源于我为电子工业出版社编写的的[<<Spring Boot 2 精髓 >>](http://ibeetl.com/sb2/#more) (这本书每一章也有各种例子，但Springboot-plus 更偏向于应用而不是教学)
 
+当前版本:1.0.0.Snapshot
+
 技术交流群：219324263
 
 开源地址：https://gitee.com/xiandafu/springboot-plus
@@ -12,8 +14,12 @@
 
 
 ![doc/readme/user.png](doc/readme/user.png)
-
-![doc/readme/user.png](doc/readme/role.png)![doc/readme/user.png](doc/readme/data.png)![doc/readme/user.png](doc/readme/codegen.png)![doc/readme/user.png](doc/readme/codegen2.png)
+![doc/readme/user.png](doc/readme/role.png)
+![doc/readme/user.png](doc/readme/data.png)
+![doc/readme/user.png](doc/readme/codePorject.png)
+![doc/readme/user.png](doc/readme/codegen.png)
+![doc/readme/user.png](doc/readme/codegen2.png)
+![doc/readme/user.png](doc/readme/excelExport.png)
 
 # 1 使用说明
 
@@ -45,140 +51,16 @@ spring.datasource.password=123456
 
 SpringBoot-plus 是一个适合大系统拆分成小系统的架构，或者是一个微服务系统，因此，如果你需要创建自己的业务系统，比如，一个CMS子系统，建议你不要在SpringBoot-Plus 添加代码，应该是新建立一个maven工程，依赖admin-core，或者依赖admin-console（如果你有后台管理需求，通常都有，但不是必须的）
 
-创建一个业务子系统，需要如下方式
+创建子系统，可以进入代码生成>子系统生成， 输入maven项目路径，还有包名，就可以直接生成一个可运行的基于SpringBoot-Plus 的子系统
 
-* 在IDE里创建一个Maven工程
-* 将Maven工程改造为Spring Boot工程，如果你不熟悉Spring Boot，可以参考SpringBoot-plus 或者copy如下片段
+### 1.2.1 配置子系统
 
-~~~xml
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.sample</groupId>
-  <artifactId>cms</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <properties>
-    <java.version>1.8</java.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.0.0.RC1</version>
-  </parent>
-  <!-- plus依赖 -->
-  <dependency>
-    <groupId>com.ibeetl</groupId>
-    <artifactId>admin-core</artifactId>
-    <version>1.0</version>
-  </dependency>
-  <dependency>
-    <groupId>com.ibeetl</groupId>
-    <artifactId>admin-console</artifactId>
-    <version>1.0</version>
-  </dependency>
-  <!-- 其他Spring Boot依赖 -->
-  <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-web</artifactId>
-  </dependency>
-  <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-devtools</artifactId>
-    <optional>true</optional>
-  </dependency>
-
-  <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-jdbc</artifactId>
-  </dependency>
-  <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-aop</artifactId>
-  </dependency>
-
-  <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-cache</artifactId>
-  </dependency>
-  <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-data-redis</artifactId>
-  </dependency>
-  <dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-test</artifactId>
-  </dependency>
-  <!-- 其他你自己需要的类库 -->
-  <dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>6.0.5</version>
-  </dependency>
-  </dependencies>
-<repositories>
-  <repository>
-    <id>spring-snapshots</id>
-    <url>http://repo.spring.io/snapshot</url>
-    <snapshots>
-      <enabled>true</enabled>
-    </snapshots>
-  </repository>
-  <repository>
-    <id>spring-milestones</id>
-    <url>http://repo.spring.io/milestone</url>
-  </repository>
-</repositories>
-<pluginRepositories>
-  <pluginRepository>
-    <id>spring-snapshots</id>
-    <url>http://repo.spring.io/snapshot</url>
-  </pluginRepository>
-  <pluginRepository>
-    <id>spring-milestones</id>
-    <url>http://repo.spring.io/milestone</url>
-  </pluginRepository>
-</pluginRepositories>
-</project>
-
-~~~
-
-### 1.2.1  创建启动程序
-
-  新创建一个CMSApplication 入口
-
-~~~java
-package com.sample.cms;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.WebApplicationInitializer;
-@SpringBootApplication
-@EnableCaching
-@ComponentScan(basePackages= {"com.sample.cms","com.ibeetl.admin"})
-public class CMSApplication  extends SpringBootServletInitializer implements WebApplicationInitializer {
-  public static void main(String[] args) {
-    SpringApplication.run(CMSApplication.class, args);
-  }
-}	
-~~~
-
-运行此程序，然后再次访问http://127.0.0.1:8080/  你会发现你的的CMS子系统已经具备了所有基础功能，你只需要向此工程添加跟CMS相关功能即可
-
-> 如果你不理解Spring Boot，建议你购买我的书来学习Spring Boot
-
-### 1.2.2 创建Controller 
-
-### 1.2.3 创建Service
-
-### 1.2.4 创建Dao
+###  1.2.2 添加代码
 
 
 
-## 1.3 代码生成
+
+## 1.3 业务代码生成
 
 在介绍如何利用Plus开发系统之前，先介绍代码生成功能，此功能可以生成前后端代码总计14个文件，你可以通过预览功能了解如何开发这个系统
 
