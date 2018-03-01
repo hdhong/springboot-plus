@@ -11,6 +11,8 @@
 
 开源地址：https://gitee.com/xiandafu/springboot-plus
 
+视频介绍：https://pan.baidu.com/s/1dFPoaT7
+
 
 
 ![doc/readme/user.png](doc/readme/user.png)
