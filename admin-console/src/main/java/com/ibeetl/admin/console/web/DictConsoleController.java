@@ -3,28 +3,33 @@ package com.ibeetl.admin.console.web;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.beetl.sql.core.engine.PageQuery;
 import org.jxls.common.Context;
+import org.jxls.reader.ReaderBuilder;
+import org.jxls.reader.XLSReadStatus;
+import org.jxls.reader.XLSReader;
 import org.jxls.util.JxlsHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ibeetl.admin.console.service.DictConsoleService;
-import com.ibeetl.admin.console.web.dto.UserExcelData;
 import com.ibeetl.admin.console.web.query.CoreDictQuery;
 import com.ibeetl.admin.console.web.query.UserQuery;
 import com.ibeetl.admin.core.annotation.Function;
@@ -155,6 +160,28 @@ public class DictConsoleController{
         } catch (IOException e) {
             throw new PlatformException(e.getMessage());
         }
+        
+    }
+    
+    @PostMapping(MODEL + "/excel/import.do")
+    @Function("dict.import")
+    @ResponseBody
+    public JsonResult importExcel(@RequestParam("file") MultipartFile file) throws Exception {
+        if (file.isEmpty()) {
+           return JsonResult.fail();
+        }
+        String fileName = file.getOriginalFilename();
+        InputStream ins = file.getInputStream();
+        
+        InputStream inputXML = Thread.currentThread().getContextClassLoader().getResourceAsStream("excelTemplates/admin/dict/dict_mapping.xml");  
+        XLSReader mainReader = ReaderBuilder.buildFromXML( inputXML );  
+        InputStream inputXLS = ins;  
+    
+        List<CoreDict> dict = new ArrayList<CoreDict>();  
+        Map beans = new HashMap();  
+        beans.put("list", dict);
+        XLSReadStatus readStatus = mainReader.read( inputXLS, beans); 
+        return JsonResult.success();
         
     }
 

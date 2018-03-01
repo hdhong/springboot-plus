@@ -76,13 +76,18 @@ var Common = {
         });  
 		layer.full(index);  
     },
-    openConfirm:function(content,callback){
+    openConfirm:function(content,callback,callBackNo){
     		var index = layer.confirm(content, {
     		  btn: ['确认','取消'] //按钮
     		}, function(){
-    			callback();
+    		    if(callback!=null){
+    		        callback();
+    		    }
     			layer.close(index);
     		}, function(){
+    		    if(callBackNo!=null){
+    		        callBackNo()
+    		    }
     			layer.close(index);
     		});
 		

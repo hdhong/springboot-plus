@@ -114,6 +114,15 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 						})
 					});
 
+				},
+				importExcel:function(){
+				    //上传路径
+				    var uploadUrl = Common.ctxPath+"/admin/dict/excel/import.do";
+				    //模板
+				    var templatePath= "/admin/dict/dict_upload_template.xls";
+				    //公共的简单上传文件处理
+				    var url = "/core/file/simpleUpload.do?uploadUrl="+uploadUrl+"&templatePath="+templatePath;
+                    Common.openDlg(url, "字典数据管理>上传");
 				}
 
 			};

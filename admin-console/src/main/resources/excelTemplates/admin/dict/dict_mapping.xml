@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<workbook>
+	<worksheet name="Sheet1">
+		<section startRow="0" endRow="0">
+		</section>
+		<loop startRow="1" endRow="1" items="list" var="dict"
+			varType="com.ibeetl.admin.entity.CoreDict">
+			<section startRow="3" endRow="3">
+				<mapping row="3" col="0"></mapping>
+				<mapping row="1" col="1">dict.name</mapping>
+				<mapping row="1" col="2">dict.value</mapping>
+			</section>
+			<loopbreakcondition>
+				<rowcheck offset="0">
+					<cellcheck offset="0"></cellcheck>
+				</rowcheck>
+			</loopbreakcondition>
+		</loop>
+	</worksheet>
+</workbook>
