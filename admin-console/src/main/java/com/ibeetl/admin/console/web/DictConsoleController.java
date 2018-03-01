@@ -3,11 +3,8 @@ package com.ibeetl.admin.console.web;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,9 +12,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.beetl.sql.core.engine.PageQuery;
 import org.jxls.common.Context;
-//import org.jxls.reader.ReaderBuilder;
-//import org.jxls.reader.XLSReadStatus;
-//import org.jxls.reader.XLSReader;
 import org.jxls.util.JxlsHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -177,10 +171,11 @@ public class DictConsoleController{
 //        XLSReader mainReader = ReaderBuilder.buildFromXML( inputXML );  
 //        InputStream inputXLS = ins;  
 //    
-//        List<CoreDict> dict = new ArrayList<CoreDict>();  
+//        List<CoreDict> dicts = new ArrayList<CoreDict>();  
 //        Map beans = new HashMap();  
-//        beans.put("list", dict);
+//        beans.put("list", dicts);
 //        XLSReadStatus readStatus = mainReader.read( inputXLS, beans); 
+//        System.out.println(dicts);
         return JsonResult.success();
         
     }
