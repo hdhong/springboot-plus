@@ -28,8 +28,11 @@ layui.define([], function(exports) {
 				var form = $('#updateForm');
 				var formPara = form.serializeJson();
 				Common.post("/core/codeGen/sql.json", formPara, callback);
+			},
+			genProject:function(form,callback){
+			    var formPara = form.serializeJson();
+                Common.post("/core/codeGen/projectGen.json", formPara, callback);
 			}
-			
 		
 	};
 	

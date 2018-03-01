@@ -1,14 +1,24 @@
 package com.ibeetl.admin.core.web;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.beetl.core.Configuration;
+import org.beetl.core.GroupTemplate;
+import org.beetl.core.Template;
+import org.beetl.core.resource.ClasspathResourceLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,6 +62,114 @@ public class CoreCodeGenController {
 		return view;
 
 	}
+	
+	@GetMapping(MODEL + "/project.do")
+    public ModelAndView project() {
+        ModelAndView view = new ModelAndView("/core/codeGen/project.html");
+        File file = new  File(MavenProjectTarget.detectRootPath());
+        String root = file.getParent();
+        //设置生成项目为当前运行项目的上一级项目
+        view.addObject("path",root+File.separator+"sample");
+        view.addObject("basePackage","com.corp.xxx");
+        return view;
+      
+    }
+	
+    @PostMapping(MODEL + "/projectGen.json")
+    @ResponseBody
+    public JsonResult project(String path,String basePackage,String includeConsole) throws IOException {
+        //includeConsole 当前版本忽略，总是添加一个系统管理功能，可以在pom中移除console
+        
+        //生成maven项目结构
+        File maven = new  File(path);
+        maven.mkdirs();
+        File src = new File(maven,"src");
+        src.mkdirs();
+        File main = new File(src,"main");
+        main.mkdir();
+        File test = new File(src,"test");
+        test.mkdir();
+        File javsSource = new File(main,"java"); 
+        javsSource.mkdir();
+        File resource = new File(main,"resources"); 
+        resource.mkdir();
+        File sql = new File(resource,"sql"); 
+        sql.mkdir();
+        File staticFile = new File(resource,"static"); 
+        staticFile.mkdir();
+        File templatesFile = new File(resource,"templates"); 
+        templatesFile.mkdir();
+        
+        String codePath = basePackage.replace(".", "/");
+        File codeFile = new File(javsSource,codePath);
+        codeFile.mkdirs();
+        Configuration conf = Configuration.defaultConfiguration();
+        String tempalteRoot = "codeTemplate/maven/";
+        ClasspathResourceLoader loader = new ClasspathResourceLoader(Thread.currentThread().getContextClassLoader(),tempalteRoot);
+        GroupTemplate gt = new GroupTemplate(loader,conf);
+        FileWriter fw = null;
+        
+        //先生成入口程序
+        Template mainJavaTempalte = gt.getTemplate("/main.java");
+        mainJavaTempalte.binding("basePackage", basePackage);
+        fw = new FileWriter(new File(codeFile,"MainApplication.java"));
+        mainJavaTempalte.renderTo(fw);
+       
+        
+        //生成pom文件
+        Template pomTemplate = gt.getTemplate("/pomTemplate.xml");
+        int index = basePackage.lastIndexOf(".");
+        String projectGrop = basePackage.substring(0, index);
+        String projectName = basePackage.substring(index+1);
+        pomTemplate.binding("group", projectGrop);
+        pomTemplate.binding("project", projectName);
+        fw = new FileWriter(new File(maven,"pom.xml"));
+        pomTemplate.renderTo(fw);
+        
+        //复制当前项目的配置文件
+        File config = copy(resource,"application.properties");
+        copy(resource,"beetl.properties");
+        copy(resource,"btsql-ext.properties");
+        copy(resource,"banner.txt");
+        
+        //修改application.properties的配置,改成手工添加
+        
+//        Properties ps = new Properties();
+//        ps.load(new FileReader(config));
+////        String str = ps.getProperty("beetlsql.basePackag");
+//        ps.put("beetlsql.basePackag", "ibeetl.com,"+basePackage);
+//        ps.store(new FileWriter(config), "");
+//        
+        return JsonResult.success();
+    }
+    
+    
+    private File copy(File root,String fileName) throws IOException {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        InputStream input = loader.getResourceAsStream(fileName);
+        if(input==null) {
+            log.info("copy "+fileName+" error,不存在"); 
+            return null;
+        }
+        
+        File target = new File(root,fileName);
+        FileOutputStream output = new FileOutputStream(target);
+        try {
+                
+            byte[] buf = new byte[1024];        
+            int bytesRead;        
+            while ((bytesRead = input.read(buf)) > 0) {
+                output.write(buf, 0, bytesRead);
+            }
+         } finally {
+             input.close();
+             output.close();
+         }
+        return target;
+    }
+	
+	
+	
 
 	@PostMapping(MODEL + "/table.json")
 	@ResponseBody
@@ -219,6 +337,9 @@ public class CoreCodeGenController {
 		
 		return entity;
 	}
+	
+
+	
 
 	@GetMapping(MODEL + "/{table}/test.json")
 	@ResponseBody

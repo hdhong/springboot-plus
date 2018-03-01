@@ -1,32 +1,37 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.ibeetl</groupId>
-    <artifactId>admin-console</artifactId>
-    <version>1.0</version>
-   	<packaging>jar</packaging>
-    <parent>
-        <groupId>com.ibeetl</groupId>
-        <artifactId>admin</artifactId>
-        <version>1.0</version>
-    </parent>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ibeetl</groupId>
+	<artifactId>admin-console</artifactId>
+	<version>1.0</version>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>com.ibeetl</groupId>
+		<artifactId>admin</artifactId>
+		<version>1.0</version>
+	</parent>
 
-    <dependencies>
-	  	<dependency>
-		    <groupId>org.jxls</groupId>
-		    <artifactId>jxls</artifactId>
-		    <version>2.4.3</version>
+	<dependencies>
+		<dependency>
+			<groupId>org.jxls</groupId>
+			<artifactId>jxls</artifactId>
+			<version>2.4.3</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.jxls</groupId>
-		    <artifactId>jxls-poi</artifactId>
-		    <version>1.0.14</version>
+			<groupId>org.jxls</groupId>
+			<artifactId>jxls-reader</artifactId>
+			<version>2.0.3</version>
 		</dependency>
-        <dependency>
-            <groupId>com.ibeetl</groupId>
-            <artifactId>admin-core</artifactId>
-            <version>1.0</version>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.jxls</groupId>
+			<artifactId>jxls-poi</artifactId>
+			<version>1.0.14</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ibeetl</groupId>
+			<artifactId>admin-core</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
 
 </project>
