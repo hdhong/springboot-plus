@@ -9,6 +9,11 @@ layui.define([ 'form', 'laydate', 'table','menuApi'], function(exports) {
 			},
 			initSubmit:function(){
 				$("#saveMenu").click(function(){
+					//默认值
+					if(!$('#parentMenuId').val()){
+						$('#parentMenuId').val(0);
+					}
+					
 					menuApi.updateMenu(function(){
 						Common.info("更新成功");
 						Lib.closeFrame();

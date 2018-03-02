@@ -15,9 +15,6 @@ layui.define([ 'form', 'laydate', 'table','menuApi'], function(exports) {
 					if(!$('#parentMenuId').val()){
 						$('#parentMenuId').val(0);
 					}
-					if(!$('#seq').val()){
-						$('#seq').val(1);
-					}
 					
 					menuApi.addMenu(function(){
 						Common.info("添加成功");
