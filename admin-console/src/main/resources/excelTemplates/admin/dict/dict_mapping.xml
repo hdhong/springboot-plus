@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <workbook>
 	<worksheet name="Template">
-		<loop startRow="3" endRow="3" items="list" var="dict"
+		<loop startRow="3" endRow="10" items="list" var="dict"
 			varType="com.ibeetl.admin.core.entity.CoreDict">
 			<section startRow="3" endRow="3">
 				<mapping row="3" col="1">dict.name</mapping>

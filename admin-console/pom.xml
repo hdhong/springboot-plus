@@ -4,7 +4,7 @@
 	<groupId>com.ibeetl</groupId>
 	<artifactId>admin-console</artifactId>
 	<version>1.0</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<parent>
 		<groupId>com.ibeetl</groupId>
 		<artifactId>admin</artifactId>
@@ -12,13 +12,20 @@
 	</parent>
 
 	<dependencies>
-		<!--   会和jxls 冲突？还是需要配置一种具体实现
+		<!--   会和jxls 冲突？还是需要配置一种具体实现-->
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>3.17</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.jxls</groupId>
 			<artifactId>jxls-reader</artifactId>
 			<version>2.0.3</version>
 		</dependency>
-		-->
+		
 		<dependency>
 			<groupId>org.jxls</groupId>
 			<artifactId>jxls</artifactId>
@@ -35,5 +42,14 @@
 			<version>1.0</version>
 		</dependency>
 	</dependencies>
+	
+	 <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

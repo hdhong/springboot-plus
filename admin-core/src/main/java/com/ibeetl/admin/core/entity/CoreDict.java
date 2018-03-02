@@ -132,4 +132,15 @@ public class CoreDict extends BaseEntity {
     public interface TypeListView{
     }
 
+
+    @Override
+    public String toString() {
+        return "CoreDict [value=" + value + ", type=" + type + ", name=" + name + "]";
+    }
+
+
+    
+
+    
+    
 }

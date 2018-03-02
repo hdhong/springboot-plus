@@ -15,7 +15,7 @@ public class DataSourceConfig {
 		ds.setJdbcUrl(env.getProperty("spring.datasource.url"));
 		ds.setUsername(env.getProperty("spring.datasource.username"));
 		ds.setPassword(env.getProperty("spring.datasource.password"));
-//		ds.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
+		ds.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
 		return ds;
 	}
 }
