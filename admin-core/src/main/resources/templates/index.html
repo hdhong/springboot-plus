@@ -69,7 +69,7 @@
           <a href="javascript:;">${subSystem.data.name}</a>
           <dl class="layui-nav-child">
           	<!--#for(menu in subSystem.children){  -->
-          	<dd class="" ><a href="javascript:;" menuId="${menu.data.id}" dataUrl="${ctxPath}/${menu.data.accessUrl}"><i class="layui-icon">&#xe68e;</i> 
+          	<dd class="" ><a href="javascript:;" menuId="${menu.data.id}" dataUrl="${ctxPath=='/'?''}${menu.data.accessUrl}"><i class="layui-icon">&#xe68e;</i> 
           	${menu.data.name}
           	</a></dd>
             <!--#}  -->

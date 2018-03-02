@@ -28,9 +28,9 @@
 
 	Common.ctxPath= '${ctxPath}';
 	Common.version= '${jsVer}';
-	//设定layui模块的版本
+	//设定layui模块的版本,1234
 	layui.config({
-		base : "${ctxPath}/${jsBase!}",
+		base : Common.ctxPath+"${jsBase!}",
 		version : Common.version
 	});
 	$(document).ready(function () { }).keydown(

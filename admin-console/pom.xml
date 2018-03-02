@@ -4,7 +4,7 @@
 	<groupId>com.ibeetl</groupId>
 	<artifactId>admin-console</artifactId>
 	<version>1.0</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<parent>
 		<groupId>com.ibeetl</groupId>
 		<artifactId>admin</artifactId>
