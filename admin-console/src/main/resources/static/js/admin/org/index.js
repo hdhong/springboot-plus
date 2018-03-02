@@ -20,7 +20,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				elem : '#orgTable',
 				height : Lib.getTableHeight(2),
 				method : 'post',
-				url : Common.CTX + '/admin/org/list.json' //数据接口
+				url : Common.ctxPath + '/admin/org/list.json' //数据接口
 				,page : {"layout":['count','prev', 'page', 'next']} //开启分页
 				,limit : 10,
 				cols : [ [ //表头

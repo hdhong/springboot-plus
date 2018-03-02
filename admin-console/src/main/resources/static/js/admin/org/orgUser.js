@@ -21,7 +21,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				elem : '#userTable',
 				height : 'full-180',
 				method : 'post',
-				url : Common.CTX + '/admin/org/user/list.json?orgId='+orgId //数据接口
+				url : Common.ctxPath + '/admin/org/user/list.json?orgId='+orgId //数据接口
 				,page : Lib.tablePage //开启分页
 				,limit : 10,
 				cols : [ [ //表头

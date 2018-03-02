@@ -23,18 +23,19 @@
 	<script type="text/javascript" src="${ctxPath}/js/lib.js?v=${jsVer}"></script>
 	<!-- layUI -->
 	<script type="text/javascript" src="${ctxPath}/plugins/layui/layui.js?v=${jsVer}"></script>
+	<!-- 设置全局变量 -->
+	<script>
+	Common.ctxPath= '${ctxPath}';
+	Common.version= '${jsVer}';
+	</script>
 	<script>
 		//设定layui模块的版本
 		layui.config({
-			base : "/plugins/frame/js/",// 菜单切换等功能
+			base : "${ctxPath}/plugins/frame/js/",// 菜单切换等功能
 			version : Common.version
 		});
 	</script>
-	<!-- 设置全局变量 -->
-	<script>
-	Common.CTX= '${ctxPath}';
-	Common.version= '${jsVer}';
-	</script>
+	
 	
 	
 </head>

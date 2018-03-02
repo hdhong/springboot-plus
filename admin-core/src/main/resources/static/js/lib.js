@@ -202,7 +202,6 @@ var Lib = {
 		}
 		value = data.value;
 		if (value != "") {
-		    
 			Common.post("/core/dict/viewChildren.json", {
 				"value" : value,
 				"group":groupName

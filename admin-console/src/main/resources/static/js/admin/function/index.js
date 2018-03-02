@@ -20,7 +20,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				elem : '#functionTable',
 				height : 'full-280',
 				method : 'post',
-				url : Common.CTX + '/admin/function/list.json' //数据接口
+				url : Common.ctxPath + '/admin/function/list.json' //数据接口
 				,page : {"layout":['count','prev', 'page', 'next']} //开启分页
 				,limit : 10,
 				cols : [ [ //表头

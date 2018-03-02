@@ -70,7 +70,7 @@ var Common = {
     openDlg:function(url,title){
     		var index = layer.open({  
             type: 2,  
-            content: Common.CTX+url,  
+            content: Common.ctxPath+url,  
             title: title,  
             maxmin: false
         });  

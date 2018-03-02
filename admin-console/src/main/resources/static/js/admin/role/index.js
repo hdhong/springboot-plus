@@ -20,7 +20,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				elem : '#roleTable',
 				height : Lib.getTableHeight(2),
 				method : 'post',
-				url : Common.CTX + '/admin/role/list.json' //数据接口
+				url : Common.ctxPath + '/admin/role/list.json' //数据接口
 				,page : Lib.tablePage //开启分页
 				,limit : 10,
 				cols : [ [ //表头

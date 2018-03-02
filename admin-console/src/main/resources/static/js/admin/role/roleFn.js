@@ -14,7 +14,7 @@ layui.define([ 'form', 'laydate', 'table','roleApi'], function(exports) {
 		},
 		initFunctionTree:function(){
 			var that = this;
-			$.post(Common.CTX + "/admin/function/tree.json", {}, function(response) {
+			$.post(Common.ctxPath + "/admin/function/tree.json", {}, function(response) {
 				var zNodes = response.data;
 				var setting  = {"check":{"radioType":true,"enable":true}};
 				zTreeObj = $.fn.zTree.init($("#functionTree"), setting, zNodes);

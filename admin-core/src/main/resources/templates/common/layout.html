@@ -25,11 +25,12 @@
 	<script type="text/javascript" src="${ctxPath}/js/common.js?v=${jsVer}"></script>
 	<script type="text/javascript" src="${ctxPath}/js/lib.js?v=${jsVer}"></script>
 	<script>
-	Common.CTX= '${ctxPath}';
+
+	Common.ctxPath= '${ctxPath}';
 	Common.version= '${jsVer}';
 	//设定layui模块的版本
 	layui.config({
-		base : "${jsBase!}",
+		base : "${ctxPath}/${jsBase!}",
 		version : Common.version
 	});
 	$(document).ready(function () { }).keydown(

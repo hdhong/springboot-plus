@@ -19,7 +19,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				elem : '#auditTable',
 				height : 'full-180',
 				method : 'post',
-				url : Common.CTX + '/admin/audit/list.json' //数据接口
+				url : Common.ctxPath+ '/admin/audit/list.json' //数据接口
 				,page : {"layout":['count','prev', 'page', 'next']} //开启分页
 				,limit : 10,
 				cols : [ [ //表头

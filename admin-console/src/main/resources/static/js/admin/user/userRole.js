@@ -25,7 +25,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				elem : '#userRoleTable',
 				height : Lib.getTableHeight(1),
 				method : 'post',
-				url : Common.CTX + '/admin/user/role/list.json?userId='+userId //数据接口
+				url : Common.ctxPath + '/admin/user/role/list.json?userId='+userId //数据接口
 				,page : false
 				,limit : 10000,
 				cols : [ [ //表头

@@ -17,7 +17,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                 elem : '#${entity.code}Table',
                 height : Lib.getTableHeight(1),
                 method : 'post',
-                url : Common.CTX + '/${target.urlBase}/${entity.code}/list.json' // 数据接口
+                url : Common.ctxPath + '/${target.urlBase}/${entity.code}/list.json' // 数据接口
                 ,page : Lib.tablePage // 开启分页
                 ,limit : 10,
                 cols : [ [ // 表头
