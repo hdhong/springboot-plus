@@ -1,6 +1,8 @@
 package com.ibeetl.admin.core.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.ibeetl.admin.core.entity.CoreMenu;
@@ -42,9 +44,25 @@ public class MenuBuildUtil {
         if (list.isEmpty()) {
             return;
         }
+        
+        sortMenu(parent.getChildren());
+        
         for (MenuItem child : parent.getChildren()) {
             buildTreeNode(child, list);
         }
 
     }
+
+	private static void sortMenu(List<MenuItem> children) {
+		Collections.sort(children, new Comparator<MenuItem>() {
+
+			@Override
+			public int compare(MenuItem o1, MenuItem o2) {
+				return o1.getSeq().compareTo(o2.getSeq());
+			}
+			
+		});
+		
+	}
+
 }

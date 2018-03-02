@@ -15,9 +15,11 @@ public class MenuItem  implements TreeItem{
 	@JsonIgnore
 	MenuItem parent = null;
 	String name;
+	private Integer seq;
 	public MenuItem(CoreMenu sysMenu){
 		this.sysMenu = sysMenu;
 		this.name = sysMenu!=null?sysMenu.getName():null;
+		this.seq = sysMenu.getSeq();
 	}
 	
 	
@@ -143,6 +145,19 @@ public class MenuItem  implements TreeItem{
 	public String getName() {
 		return this.name;
 	}
+
+
+	public Integer getSeq() {
+		return seq;
+	}
+
+
+	public void setSeq(Integer seq) {
+		this.seq = seq;
+	}
+
+
+
 	
 	
 	

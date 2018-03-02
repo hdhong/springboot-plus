@@ -11,6 +11,7 @@ import com.ibeetl.admin.core.util.PlatformException;
 
 import org.beetl.sql.core.engine.PageQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,7 +57,7 @@ public class MenuConsoleService extends BaseService<CoreMenu> {
         }
         platformService.clearMenuCache();
     }
-
+    
     public void updateMenu(CoreMenu menu) {
         menuDao.updateById(menu);
         platformService.clearMenuCache();
