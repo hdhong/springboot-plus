@@ -25,7 +25,10 @@ queryByCondtion
 	@if(!isEmpty(parentMenuId)){
 	    and  m.parent_menu_id = #parentMenuId#
 	@}
-
+	
+	@pageIgnoreTag(){
+	   order by seq asc , id desc
+	@}
 	
 
 

@@ -21,5 +21,7 @@ queryByCondtion
     @if(!isEmpty(parentFunctionId)){
         and  f.parent_id = #parentFunctionId#
     @}
-    
+    @pageIgnoreTag(){
+		   order by id desc
+		@}
 	
