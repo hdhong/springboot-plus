@@ -49,6 +49,10 @@ spring.datasource.password=123456
 
 运行CosonleApplication，然后访问http://127.0.0.1:8080/  输入admin/123456 则可以直接登录进入管理系统
 
+如果成功启动后运行报错：变量userId未定义，位于第6行，那是因为你没有启用[parameters](http://www.mamicode.com/info-detail-2162647.html)
+
+
+
 ## 1.2 创建子系统
 
 SpringBoot-plus 是一个适合大系统拆分成小系统的架构，或者是一个微服务系统，因此，如果你需要创建自己的业务系统，比如，一个CMS子系统，建议你不要在SpringBoot-Plus 添加代码，应该是新建立一个maven工程，依赖admin-core，或者依赖admin-console（如果你有后台管理需求，通常都有，但不是必须的）
