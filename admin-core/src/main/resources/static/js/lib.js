@@ -3,7 +3,7 @@ var Lib = {
 		"layout" : [ 'count', 'prev', 'page', 'next' ]
 	},
 	loadOrgPanel : function(container, textInput, valueInput) {
-		$.post(Common.CTX + "/core/user/org.json", {}, function(response) {
+		$.post(Common.ctxPath + "/core/user/org.json", {}, function(response) {
 			var zNodes = response.data;
 			var zTreeObj = null;
 			var index = layer.open({
@@ -43,7 +43,7 @@ var Lib = {
 		})
 	},
 	loadFunPanel : function(container, textInput, valueInput) {
-		$.post(Common.CTX + "/core/user/function/tree.json", {}, function(response) {
+		$.post(Common.ctxPath + "/core/user/function/tree.json", {}, function(response) {
 			var zNodes = response.data;
 			var zTreeObj = null;
 			var index = layer.open({
@@ -82,7 +82,7 @@ var Lib = {
 		})
 	},
 	loadMenuPanel : function(container, textInput, valueInput) {
-		$.post(Common.CTX + "/core/user/menu/tree.json", {}, function(response) {
+		$.post(Common.ctxPath + "/core/user/menu/tree.json", {}, function(response) {
 			var zNodes = response.data;
 			var zTreeObj = null;
 			var index = layer.open({
@@ -121,7 +121,7 @@ var Lib = {
 		})
 	},
 	loadMenuFunPanel : function(container, textInput, valueInput) {
-		$.post(Common.CTX + "/core/user/function/tree.json", {}, function(response) {
+		$.post(Common.ctxPath + "/core/user/function/tree.json", {}, function(response) {
 			var zNodes = response.data;
 			var zTreeObj = null;
 			var index = layer.open({

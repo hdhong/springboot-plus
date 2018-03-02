@@ -14,7 +14,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 				elem : '#codeTable',
 				height : Lib.getTableHeight(1),
 				method : 'post',
-				url : Common.CTX + '/core/codeGen/table.json' //数据接口
+				url : Common.ctxPath + '/core/codeGen/table.json' //数据接口
 				,page : false
 				,limit : 10000,
 				cols : [ [
