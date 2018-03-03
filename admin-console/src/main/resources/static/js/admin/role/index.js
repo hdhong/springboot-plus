@@ -44,7 +44,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 					sort : true
 				}, {
 					field : 'typeText',
-					title : '角儿类型',
+					title : '角色类型',
 					width : 300,
 					sort : true
 				},
