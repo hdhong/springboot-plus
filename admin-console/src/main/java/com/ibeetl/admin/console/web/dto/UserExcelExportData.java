@@ -7,10 +7,10 @@ import com.ibeetl.admin.core.annotation.Dict;
 
 /**
  * excel导出需要的模板数据
- * @author Administrator
+ * @author xiandafu
  *
  */
-public class UserExcelData {
+public class UserExcelExportData  {
 	protected Long id;
 	private String code;
 	private String name;

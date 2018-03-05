@@ -27,16 +27,17 @@ layui.use('upload', function(){
     ,accept: '${fileType!"file"}' //默认所有文件都允许
     ,url: '${uploadUrl}'
     ,done: function(res){
+    debugger;
       if(res.code==0){
       	Common.openConfirm("上传成功,是否继续上传?",null,function(){
 			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 			parent.layer.close(index); //再执行关闭  
 		})
+      }else{
+      	Common.alert(res.msg)
       }
     }
-    ,error: function(){
-      Common.error("系统错误,无法访问服务器")
-    }
+   
   });
   
  });

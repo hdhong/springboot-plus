@@ -26,7 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ibeetl.admin.console.service.OrgConsoleService;
 import com.ibeetl.admin.console.service.RoleConsoleService;
 import com.ibeetl.admin.console.service.UserConsoleService;
-import com.ibeetl.admin.console.web.dto.UserExcelData;
+import com.ibeetl.admin.console.web.dto.UserExcelExportData;
 import com.ibeetl.admin.console.web.query.UserQuery;
 import com.ibeetl.admin.console.web.query.UserRoleQuery;
 import com.ibeetl.admin.core.annotation.Function;
@@ -288,7 +288,7 @@ public class UserConsoleController {
 		page.setPageSize(Integer.MAX_VALUE);
 		page.setPageNumber(1);
 		page.setTotalRow(Integer.MAX_VALUE);
-		List<UserExcelData> users =userConsoleService.queryExcel(page);
+		List<UserExcelExportData> users =userConsoleService.queryExcel(page);
 		try(InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(excelTemplate)) {
 	        if(is==null) {
 	        	throw new PlatformException("模板资源不存在："+excelTemplate);

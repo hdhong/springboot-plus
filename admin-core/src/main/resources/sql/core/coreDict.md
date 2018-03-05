@@ -1,6 +1,6 @@
 findAllList
 ===
-	select * from core_DICT where del_flag = 0
+	select * from core_dict where del_flag = 0
 	@if(!isEmpty(type)){
 	    and  type = #type#
 	@}

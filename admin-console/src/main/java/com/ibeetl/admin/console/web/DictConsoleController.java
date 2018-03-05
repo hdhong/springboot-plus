@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ibeetl.admin.console.service.DictConsoleService;
+import com.ibeetl.admin.console.web.dto.DictExcelImportData;
 import com.ibeetl.admin.console.web.query.CoreDictQuery;
 import com.ibeetl.admin.console.web.query.UserQuery;
 import com.ibeetl.admin.core.annotation.Function;
@@ -177,12 +178,18 @@ public class DictConsoleController{
         XLSReader mainReader = ReaderBuilder.buildFromXML( inputXML );  
         InputStream inputXLS = ins;  
     
-        List<CoreDict> dicts = new ArrayList<CoreDict>();  
+        List<DictExcelImportData> dicts = new ArrayList<DictExcelImportData>();  
         Map beans = new HashMap();  
         beans.put("list", dicts);
         XLSReadStatus readStatus = mainReader.read( inputXLS, beans); 
-        System.out.println(dicts);
-        return JsonResult.success();
+//        this.dictService.batchInsert(dicts);//TODO,为啥这里抛的错误，layui对话框不能正确处理http 500错误，改成下面方式
+//        return JsonResult.success();
+        try {
+            this.dictService.batchInsert(dicts);
+            return JsonResult.success();
+        }catch(Exception ex) {
+            return JsonResult.failMessage(ex.getMessage());
+        }
         
     }
 
