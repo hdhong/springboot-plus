@@ -16,6 +16,8 @@ import org.apache.commons.logging.LogFactory;
 import org.beetl.sql.core.engine.PageQuery;
 import org.jxls.common.Context;
 import org.jxls.reader.ReaderBuilder;
+import org.jxls.reader.ReaderConfig;
+import org.jxls.reader.XLSReadMessage;
 import org.jxls.reader.XLSReadStatus;
 import org.jxls.reader.XLSReader;
 import org.jxls.util.JxlsHelper;
@@ -171,18 +173,27 @@ public class DictConsoleController{
         if (file.isEmpty()) {
            return JsonResult.fail();
         }
-        String fileName = file.getOriginalFilename();
         InputStream ins = file.getInputStream();
         
         InputStream inputXML = Thread.currentThread().getContextClassLoader().getResourceAsStream("excelTemplates/admin/dict/dict_mapping.xml");  
         XLSReader mainReader = ReaderBuilder.buildFromXML( inputXML );  
         InputStream inputXLS = ins;  
-    
         List<DictExcelImportData> dicts = new ArrayList<DictExcelImportData>();  
         Map beans = new HashMap();  
         beans.put("list", dicts);
+        ReaderConfig.getInstance().setSkipErrors( true );
         XLSReadStatus readStatus = mainReader.read( inputXLS, beans); 
-//        this.dictService.batchInsert(dicts);//TODO,为啥这里抛的错误，layui对话框不能正确处理http 500错误，改成下面方式
+        List<XLSReadMessage>  errors = readStatus.getReadMessages();
+        if(!errors.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for(XLSReadMessage msg:errors) {
+                sb.append(parseXLSReadMessage(msg));
+                sb.append(",");
+            }
+            sb.setLength(sb.length()-1);
+            return JsonResult.failMessage("解析excel出错:"+sb.toString());
+        }
+//        this.dictService.batchInsert(dicts);//layui对话框不能正确处理http 500错误，改成下面方式
 //        return JsonResult.success();
         try {
             this.dictService.batchInsert(dicts);
@@ -191,6 +202,15 @@ public class DictConsoleController{
             return JsonResult.failMessage(ex.getMessage());
         }
         
+    }
+    
+    /*xlsReader 设计有问题，还需要通过解析msg知道错误位置在哪里*/
+    private String parseXLSReadMessage(XLSReadMessage msg) {
+//        String message = "Can't read cell " + getCellName(mapping, rowShift) + " on " + cursor.getSheetName() + " spreadsheet";
+        String str = msg.getMessage();
+        int start = "Can't read cell ".length();
+        int end = str.indexOf("on");
+        return str.substring(start,end);
     }
 
 }

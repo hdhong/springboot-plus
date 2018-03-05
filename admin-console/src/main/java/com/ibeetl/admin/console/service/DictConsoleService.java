@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.ss.util.CellReference;
 import org.beetl.sql.core.engine.PageQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,7 +56,7 @@ public class DictConsoleService extends BaseService<CoreDict>{
      * @return
      */
     public void batchInsert(List<DictExcelImportData> list) {
-       int dataStartRow = 3;
+       int dataStartRow = 2;
        final Map<Integer,DictExcelImportData> map = new HashMap<>();
        list.forEach((item)->map.put(item.getExcelId(), item));
        //逐个按照顺序导入
@@ -66,6 +67,22 @@ public class DictConsoleService extends BaseService<CoreDict>{
            dict.setType(item.getType());
            dict.setTypeName(item.getTypeName());
            dict.setValue(item.getValue());
+           
+           //设置父字典
+           if(item.getParentExcelId()!=0) {
+               DictExcelImportData parentItem =  map.get(item.getParentExcelId());
+               if(parentItem==null) {
+                   //硬编码，TODO,用reader缺少校验，替换手写导入
+                   int row = item.getExcelId()+dataStartRow;
+                   throwImporError(row,5,"未找到父字典");
+               }
+               if(parentItem.getId()==null) {
+                   int row = item.getExcelId()+dataStartRow;
+                   throwImporError(row,5,"父字典未被导入，请先导入父字典");
+               }
+               dict.setParent(parentItem.getId());
+           }
+           dict.setCreateTime(new Date());
            //导入前先查找是否有此值
            CoreDict template = new CoreDict();
            template.setType(dict.getType());
@@ -75,24 +92,10 @@ public class DictConsoleService extends BaseService<CoreDict>{
                int row = item.getExcelId()+dataStartRow;
                throwImporError(row,0,"字典数据已经存在");
            }
-           //设置父字典
-           if(item.getParentExcelId()!=0) {
-               DictExcelImportData parentItem =  map.get(item.getParentExcelId());
-               if(parentItem==null) {
-                   //硬编码，TODO,用reader缺少校验，替换手写导入
-                   int row = item.getExcelId()+dataStartRow;
-                   throwImporError(row,6,"未找到父字典");
-               }
-               if(parentItem.getId()==null) {
-                   int row = item.getExcelId()+dataStartRow;
-                   throwImporError(row,6,"父字典未被导入，请先导入父字典");
-               }
-               dict.setParent(parentItem.getId());
-           }
-           dict.setCreateTime(new Date());
            dictDao.insert(dict);
            
            item.setId(dict.getId());
+           dataStartRow++;
        }
        
        
@@ -100,10 +103,10 @@ public class DictConsoleService extends BaseService<CoreDict>{
     
     private void throwImporError(int row,int col,String msg) {
         ExcelError error = new ExcelError();
-        error.setRow(row);
-        error.setCol(col);
+        CellReference cr = new CellReference(row,col,false,false);
+        error.setCell(cr.formatAsString());
         error.setMsg(msg);
-        throw new PlatformException(error.toString());
+        throw new PlatformException("导入错误在:"+error.getCell()+","+msg);
     }
     
     

@@ -1,27 +1,16 @@
 package com.ibeetl.admin.core.util;
 
 public class ExcelError {
-    Integer row;
-    Integer col;
-    String cel;
+   
+    String cell;
     String msg;
-    public Integer getRow() {
-        return row;
+  
+  
+    public String getCell() {
+        return cell;
     }
-    public void setRow(Integer row) {
-        this.row = row;
-    }
-    public Integer getCol() {
-        return col;
-    }
-    public void setCol(Integer col) {
-        this.col = col;
-    }
-    public String getCel() {
-        return cel;
-    }
-    public void setCel(String cel) {
-        this.cel = cel;
+    public void setCell(String cell) {
+        this.cell = cell;
     }
     public String getMsg() {
         return msg;
@@ -29,10 +18,7 @@ public class ExcelError {
     public void setMsg(String msg) {
         this.msg = msg;
     }
-    @Override
-    public String toString() {
-        return "ExcelError [row=" + row + ", col=" + col + ", cel=" + cel + ", msg=" + msg + "]";
-    }
+   
     
     
 }
