@@ -23,7 +23,7 @@ public class ${className} extends BaseEntity{
 
     @for(attr in attrs){
 	@if(!isEmpty(attr.comment)){
-	//${attr.comment}
+    //${attr.comment}
 	@}
 	@if(attr.isId) {
     \@NotNull(message = "ID不能为空", groups =ValidateConfig.UPDATE.class)
@@ -39,17 +39,17 @@ public class ${className} extends BaseEntity{
 
     @for(attr in attrs){
 	@if(!isEmpty(attr.comment)){
-	/**${attr.comment}
-	*\@return 
-	*/
+    /**${attr.comment}
+    *\@return 
+    */
 	@}
     public ${attr.type} get${attr.methodName}(){
 	    return  ${attr.name};
     }
 	@if(!isEmpty(attr.comment)){
-	/**${attr.comment}
-	*\@param  ${attr.name}
-	*/
+    /**${attr.comment}
+    *\@param  ${attr.name}
+    */
 	@}
     public void set${attr.methodName}(${attr.type} ${attr.name}){
         this.${attr.name} = ${attr.name};

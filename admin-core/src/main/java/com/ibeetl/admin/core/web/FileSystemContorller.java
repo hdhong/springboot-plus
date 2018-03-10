@@ -27,10 +27,14 @@ public class FileSystemContorller {
 	FileService fileService;
 	@GetMapping(MODEL + "/get.do")
 	public ModelAndView index(HttpServletResponse response,String id) throws IOException {
+	     String path = id;
 		 response.setContentType("text/html; charset = UTF-8");  
-		 FileItem fileItem = fileService.getFileItem(id);
+		 FileItem fileItem = fileService.loadFileItemByPath(path);
 		 response.setHeader("Content-Disposition", "attachment; filename="+fileItem.getName());  
-		 fileService.copyTemp(id, response.getOutputStream());
+		 fileItem.copy(response.getOutputStream());
+		 if(fileItem.isTemp()) {
+		     fileItem.delete();
+		 }
 		 return null;
 	}
 	

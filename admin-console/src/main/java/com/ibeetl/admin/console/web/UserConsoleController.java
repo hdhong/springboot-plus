@@ -299,7 +299,7 @@ public class UserConsoleController {
             context.putVar("users", users);
             JxlsHelper.getInstance().processTemplate(is, os, context);
             //下载参考FileSystemContorller
-            return  JsonResult.success(item.getId());
+            return  JsonResult.success(item.getPath());
 	    } catch (IOException e) {
 			throw new PlatformException(e.getMessage());
 		}
