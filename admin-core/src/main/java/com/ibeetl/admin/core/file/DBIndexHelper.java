@@ -37,8 +37,8 @@ public  class DBIndexHelper {
     
     
     public void createFileItem(CoreFile file,List<FileTag> tags) {
-         fileDao.insert(file);
-         if(tags.isEmpty()) {
+         fileDao.insert(file,true);
+         if(tags==null||tags.isEmpty()) {
              return ;
          }
          Long fileId = file.getId();
@@ -58,6 +58,13 @@ public  class DBIndexHelper {
         CoreFile template=new CoreFile();
         template.setBizType(bizType);
         template.setBizId(bizId);
+        List<CoreFile> dbDatas = fileDao.template(template);
+        return  dbDatas;
+    }
+    
+    public List<CoreFile> queryByBatchId(String batchId){
+        CoreFile template=new CoreFile();
+        template.setFileBatchId(batchId);
         List<CoreFile> dbDatas = fileDao.template(template);
         return  dbDatas;
     }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.catalina.User;
 import org.apache.commons.lang3.StringUtils;
 import org.beetl.sql.core.engine.PageQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.ibeetl.admin.core.conf.PasswordConfig.PasswordEncryptService;
 import com.ibeetl.admin.core.entity.CoreDict;
 import com.ibeetl.admin.core.entity.CoreUser;
 import com.ibeetl.admin.core.entity.CoreUserRole;
+import com.ibeetl.admin.core.file.FileService;
 import com.ibeetl.admin.core.rbac.tree.OrgItem;
 import com.ibeetl.admin.core.service.BaseService;
 import com.ibeetl.admin.core.service.CoreDictService;
@@ -34,6 +36,10 @@ public class UserConsoleService extends BaseService<CoreUser> {
 
 	@Autowired
 	UserConsoleDao userDao;
+	
+	
+	@Autowired
+    FileService fileService;
 
 	@Autowired
 	PasswordEncryptService passwordEncryptService;
@@ -70,6 +76,11 @@ public class UserConsoleService extends BaseService<CoreUser> {
 		user.setPassword(passwordEncryptService.password(user.getPassword()));
 		user.setDelFlag(DelFlagEnum.NORMAL.getValue());
 		userDao.insert(user, true);
+		if(StringUtils.isNotEmpty(user.getAttachmentId())){
+		    //更新附件详细信息,关联到这个用户
+		    fileService.updateFile(user.getAttachmentId(), User.class.getSimpleName(), String.valueOf(user.getId()));
+		}
+		
 
 	}
 

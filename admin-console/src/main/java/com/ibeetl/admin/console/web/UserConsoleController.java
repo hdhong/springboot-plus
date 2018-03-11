@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -66,7 +67,8 @@ public class UserConsoleController {
 	@Autowired
 	FileService fileService;
 	
-	
+
+   
 
 	/* 页面 */
 

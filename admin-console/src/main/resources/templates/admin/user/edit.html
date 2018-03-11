@@ -63,7 +63,9 @@
 
 	</div>
 	
-	
+	<div class="layui-row">
+		<layui:attachment name="attachmentId" batchFileUUID="${user.attachmentId}" isNew="false" bizId="${user.id}" bizType="User"/>
+	</div>
 	
 	<layui:submitButtons id="saveUser" />
 	<input type="hidden" name="id" value=${user.id} />

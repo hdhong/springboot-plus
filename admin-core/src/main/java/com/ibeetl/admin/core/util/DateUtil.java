@@ -8,4 +8,9 @@ public class DateUtil {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(new Date());
     }
+    
+    public static String now(String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        return sdf.format(new Date());
+    }
 }

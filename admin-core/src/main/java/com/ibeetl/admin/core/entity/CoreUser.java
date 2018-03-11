@@ -65,6 +65,8 @@ public class CoreUser extends BaseEntity  {
 	
 	private Date updateTime;
 	
+	/*用户的个人资料附件，保存到Core_File 表里*/
+	private String attachmentId;
 
 	public String getCode() {
 		return code;
@@ -156,6 +158,14 @@ public class CoreUser extends BaseEntity  {
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
+
+    public String getAttachmentId() {
+        return attachmentId;
+    }
+
+    public void setAttachmentId(String attachmentId) {
+        this.attachmentId = attachmentId;
+    }
 
 
 

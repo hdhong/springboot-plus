@@ -16,7 +16,7 @@ public class BaseEntity extends TailBean implements java.io.Serializable {
 
 	protected final static String ORACLE_CORE_SEQ_NAME="core_seq";
 	protected final static String ORACLE_AUDIT_SEQ_NAME="audit_seq";
-	protected final static String ORACLE_FILE_SEQ_NAME="file_seq";
+	protected final static String ORACLE_FILE_SEQ_NAME="core_seq";
 	@JsonAnyGetter
     public Map<String, Object> getTails(){
     	return super.getTails();

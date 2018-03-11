@@ -25,13 +25,28 @@ public interface FileService {
 	 * @param tags
 	 * @return
 	 */
-	 public FileItem createFileItem(String name,String bizType,String bizId,Long userId,Long orgId,List<FileTag> tags);
+	 public FileItem createFileItem(String name,String bizType,String bizId,Long userId,Long orgId,String fileBatchId,List<FileTag> tags);
 
 	
 	public FileItem loadFileItemByPath(String path);
 	public FileItem getFileItemById(Long id);
 	public List<FileItem> queryByUserId(Long userId,List<FileTag> tags);
 	public List<FileItem> queryByBiz(String bizType,String bizId); 
+	public List<FileItem> queryByBatchId(String fileBatchId); 
+	/**
+	 * 删除某个文件
+	 * @param id
+	 * @param fileBatchId，用于验证
+	 */
+	public void removeFile(Long id,String fileBatchId);
+	
+	/**
+	 * 完善附件信息
+	 * @param fileBatchId
+	 * @param bizType
+	 * @param bizId
+	 */
+	public void updateFile(String fileBatchId,String bizType,String bizId);
 	
 	
 

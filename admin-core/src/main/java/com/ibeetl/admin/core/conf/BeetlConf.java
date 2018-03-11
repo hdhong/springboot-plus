@@ -22,6 +22,7 @@ import com.ibeetl.admin.core.rbac.DataAccess;
 import com.ibeetl.admin.core.rbac.DataAccessFactory;
 import com.ibeetl.admin.core.service.CorePlatformService;
 import com.ibeetl.admin.core.util.beetl.DictQueryFunction;
+import com.ibeetl.admin.core.util.beetl.FileFunction;
 import com.ibeetl.admin.core.util.beetl.FunAccessUrlFunction;
 import com.ibeetl.admin.core.util.beetl.FunFunction;
 import com.ibeetl.admin.core.util.beetl.MenuFunction;
@@ -29,6 +30,7 @@ import com.ibeetl.admin.core.util.beetl.OrgFunction;
 import com.ibeetl.admin.core.util.beetl.RoleFunction;
 import com.ibeetl.admin.core.util.beetl.SearchCondtionFunction;
 import com.ibeetl.admin.core.util.beetl.SysFunctionTreeFunction;
+import com.ibeetl.admin.core.util.beetl.UUIDFunction;
 import com.ibeetl.admin.core.util.beetl.XXSDefenderFormat;
 import com.ibeetl.admin.core.web.query.QueryParser;
 import com.ibeetl.starter.BeetlTemplateCustomize;
@@ -55,6 +57,8 @@ public class BeetlConf {
 
     @Autowired
     RoleFunction roleFunction;
+    @Autowired
+    FileFunction fileFunction;
 
     @Autowired
     SearchCondtionFunction searchCondtionFunction;
@@ -96,10 +100,10 @@ public class BeetlConf {
                 groupTemplate.registerFunction("core.menuName", menuFunction);
                 groupTemplate.registerFunction("core.searchCondtion", searchCondtionFunction);
                 groupTemplate.registerFunction("core.roles", roleFunction);
+                groupTemplate.registerFunction("core.file", fileFunction);
                 groupTemplate.registerFormat("xss", new XXSDefenderFormat());
-                
+                groupTemplate.registerFunction("uuid", new UUIDFunction());
                 groupTemplate.registerFunctionPackage("dict", dictDownQueryFunction);
-
                 // 模板页面判断是否有按钮权限,比如canAccess
                 groupTemplate.registerFunction("canAccess", new Function() {
 

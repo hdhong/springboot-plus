@@ -2,21 +2,25 @@ package com.ibeetl.admin.core.file;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.ibeetl.admin.core.dao.CoreFileDao;
 import com.ibeetl.admin.core.entity.CoreFile;
 import com.ibeetl.admin.core.util.DateUtil;
+import com.ibeetl.admin.core.util.PlatformException;
+import com.ibeetl.admin.core.util.UUIDUtil;
 /**
  * 一个本地文件系统，管理临时文件和用户文件
  * @author xiandafu
  *
  */
 public class LocalFileService   implements FileService {
-
+    Log log = LogFactory.getLog(this.getClass());
     DBIndexHelper dbHelper =  null;
 	String root = null;
 
@@ -34,7 +38,7 @@ public class LocalFileService   implements FileService {
 	    }
 	    LocalFileItem item = new LocalFileItem(root);
 		item.setPath(path);
-		item.setName(parseName(path));
+		item.setName(parseTempFileName(path));
 		item.setTemp(true);
 		return item;
 	}
@@ -50,20 +54,22 @@ public class LocalFileService   implements FileService {
 	}
 
 	@Override
-    public FileItem createFileItem(String name, String bizType, String bizId, Long userId, Long orgId, List<FileTag> tags) {
+    public FileItem createFileItem(String name, String bizType, String bizId, Long userId, Long orgId, String fileBatchId,List<FileTag> tags) {
 	    CoreFile coreFile = new CoreFile();
 	    coreFile.setBizId(bizId);
 	    coreFile.setBizType(bizType);
 	    coreFile.setUserId(userId);
 	    coreFile.setOrgId(orgId);
 	    coreFile.setName(name);
-	    String dir = DateUtil.now();
-	    File file = new File(root + File.separator + dir);
-	    if(!file.exists()) {
-	        file.mkdirs();
+	    coreFile.setCreateTime(new Date());
+	    coreFile.setFileBatchId(fileBatchId);
+	    String dir = DateUtil.now("yyyyMMdd");
+	    File dirFile = new File(root + File.separator + dir);
+	    if(!dirFile.exists()) {
+	        dirFile.mkdirs();
 	    }
-	    String fileName = name+"."+suffix();
-	    String path = root + File.separator + dir+File.separator+fileName;
+	    String fileName = name+"."+UUIDUtil.uuid();
+	    String path =  dir+File.separator+fileName;
 	    coreFile.setPath(path);
 	    //目前忽略tags
 	    dbHelper.createFileItem(coreFile,tags);
@@ -75,12 +81,15 @@ public class LocalFileService   implements FileService {
 
 	private String suffix() {
 		// TODO,改成唯一算法
-		return System.currentTimeMillis() + "" + new Random().nextInt(10000);
+		return DateUtil.now("yyyyMMddhhmm")+ "-" + UUIDUtil.uuid();
 	}
 	
-	private String parseName(String path) {
+	private String parseTempFileName(String path) {
 		File file = new File(path);
-		return file.getName();
+		String name =  file.getName();
+		//去掉最后的临时标记
+		int index = name.lastIndexOf(".");
+		return name.substring(0, index);
 	}
 	
 	protected  FileItem getFileItem(CoreFile file) {
@@ -91,6 +100,7 @@ public class LocalFileService   implements FileService {
 	    item.setBizType(file.getBizType());
 	    item.setId(file.getId());
 	    item.setOrgId(file.getOrgId());
+	    item.setId(file.getId());
 	    return item;
 	 }
 	
@@ -118,6 +128,35 @@ public class LocalFileService   implements FileService {
     @Override
     public List<FileItem> queryByBiz(String bizType, String bizId) {
         return this.getFileItem(dbHelper.queryByBiz(bizType, bizId));
+    }
+
+    @Override
+    public List<FileItem> queryByBatchId(String fileBatchId) {
+        return this.getFileItem(dbHelper.queryByBatchId(fileBatchId));
+    }
+
+    @Override
+    public void removeFile(Long id, String fileBatchId) {
+        CoreFile file = dbHelper.getFileItemById(id);
+        if(!file.getFileBatchId().equals(fileBatchId)){
+            return ;
+        }
+        
+        FileItem item = this.getFileItem(file);
+        boolean success = item.delete();
+        if(!success) {
+            log.warn("删除文件失败 "+file.getName()+ ",id="+file.getId()+" path="+file.getPath());
+            throw new PlatformException("删除文件失败 "+file.getName());
+        }
+        dbHelper.fileDao.deleteById(id);
+        return ;
+      
+        
+    }
+
+    @Override
+    public void updateFile(String fileBatchId, String bizType, String bizId) {
+       dbHelper.fileDao.updateBatchIdInfo(bizType, bizId, fileBatchId);
     }
 	
 	

@@ -17,7 +17,7 @@ import com.ibeetl.admin.core.entity.BaseEntity;
 */
 public class CoreFile extends BaseEntity {
     @NotNull(message = "ID不能为空", groups = ValidateConfig.UPDATE.class)
-    @SeqID(name = ORACLE_CORE_SEQ_NAME)
+    @SeqID(name = ORACLE_FILE_SEQ_NAME)
     @AutoID
     private Long id;
     // 文件名称
@@ -32,6 +32,8 @@ public class CoreFile extends BaseEntity {
     private Date createTime;
     private Long orgId;
     private String bizType;
+    
+    private String fileBatchId;
 
     public CoreFile() {
     }
@@ -149,4 +151,14 @@ public class CoreFile extends BaseEntity {
     public void setBizType(String bizType) {
         this.bizType = bizType;
     }
+
+    public String getFileBatchId() {
+        return fileBatchId;
+    }
+
+    public void setFileBatchId(String fileBatchId) {
+        this.fileBatchId = fileBatchId;
+    }
+    
+    
 }

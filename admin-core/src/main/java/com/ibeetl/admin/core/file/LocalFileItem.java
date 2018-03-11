@@ -7,7 +7,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import com.ibeetl.admin.core.util.PlatformException;
-
+/**
+ * 本地文件系统
+ * @author xiandafu
+ *
+ */
 class LocalFileItem extends PersistFileItem{
     String root = null;
     public LocalFileItem(String root) {
@@ -60,11 +64,12 @@ class LocalFileItem extends PersistFileItem{
     }
 
     @Override
-    public void delete() {
+    public boolean delete() {
         File file = new File(root + File.separator + path);
-        file.delete();
+        return file.delete();
         
     }
+   
     
 }
 
