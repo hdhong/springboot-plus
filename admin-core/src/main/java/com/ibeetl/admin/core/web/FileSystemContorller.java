@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,6 +33,40 @@ public class FileSystemContorller {
 	CorePlatformService platformService ;
 	
 	private static final String MODEL = "/core/file";
+	
+	/*附件类操作*/
+	@PostMapping(MODEL + "/uploadAttachment.json")
+    @ResponseBody
+    public JsonResult uploadFile(@RequestParam("file") MultipartFile file,String batchFileUUID,String bizType,String bizId) throws IOException {
+        if(file.isEmpty()) {
+            return JsonResult.fail();
+        }
+        CoreUser user = platformService.getCurrentUser();
+        CoreOrg  org = platformService.getCurrentOrg();
+        FileItem fileItem = fileService.createFileItem(file.getOriginalFilename(), bizType, bizId, user.getId(), org.getId(), batchFileUUID,null);
+        OutputStream os = fileItem.openOutpuStream();
+        FileUtil.copy(file.getInputStream(), os);
+        return JsonResult.success(fileItem);
+    }
+    
+    @PostMapping(MODEL + "/deleteAttachment.json")
+    @ResponseBody
+    public JsonResult deleteFile(Long fileId,String batchFileUUID ) throws IOException {
+        fileService.removeFile(fileId, batchFileUUID);
+        return JsonResult.success();
+    }
+    
+    @GetMapping(MODEL + "/download/{fileId}/{batchFileUUID}/{name}")
+    public ModelAndView download(HttpServletResponse response,@PathVariable Long fileId,@PathVariable  String batchFileUUID ) throws IOException {
+        FileItem item = fileService.getFileItemById(fileId,batchFileUUID);
+        response.setHeader("Content-Disposition", "attachment; filename="+item.getName());  
+        item.copy(response.getOutputStream());
+        return null;
+    }
+    
+	
+	/*execl 导入导出*/
+	
 	@Autowired
 	FileService fileService;
 	@GetMapping(MODEL + "/get.do")
@@ -46,26 +81,6 @@ public class FileSystemContorller {
 		 }
 		 return null;
 	}
-	@PostMapping(MODEL + "/upload.json")
-	@ResponseBody
-	public JsonResult upload(@RequestParam("file") MultipartFile file,String batchFileUUID,String bizType,String bizId) throws IOException {
-	    if(file.isEmpty()) {
-	        return JsonResult.fail();
-	    }
-	    CoreUser user = platformService.getCurrentUser();
-	    CoreOrg  org = platformService.getCurrentOrg();
-	    FileItem fileItem = fileService.createFileItem(file.getOriginalFilename(), bizType, bizId, user.getId(), org.getId(), batchFileUUID,null);
-	    OutputStream os = fileItem.openOutpuStream();
-	    FileUtil.copy(file.getInputStream(), os);
-	    return JsonResult.success(fileItem);
-	}
-	
-	@PostMapping(MODEL + "/deleteFile.json")
-    @ResponseBody
-    public JsonResult deleteFile(Long fileId,String batchFileUUID ) throws IOException {
-	    fileService.removeFile(fileId, batchFileUUID);
-        return JsonResult.success();
-    }
 	
 	@GetMapping(MODEL + "/downloadTemplate.do")
     public ModelAndView dowloadTemplate(HttpServletResponse response,String path) throws IOException {

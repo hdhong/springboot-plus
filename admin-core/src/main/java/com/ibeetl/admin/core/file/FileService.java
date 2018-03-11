@@ -30,6 +30,8 @@ public interface FileService {
 	
 	public FileItem loadFileItemByPath(String path);
 	public FileItem getFileItemById(Long id);
+	public FileItem getFileItemById(Long id,String batchFileId);
+	
 	public List<FileItem> queryByUserId(Long userId,List<FileTag> tags);
 	public List<FileItem> queryByBiz(String bizType,String bizId); 
 	public List<FileItem> queryByBatchId(String fileBatchId); 

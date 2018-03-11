@@ -40,7 +40,7 @@ import com.ibeetl.starter.ObjectMapperJsonUtil;
 @AutoConfigureAfter(JasonConfig.class)
 public class BeetlConf {
     @Autowired
-    Environment env;
+     Environment env;
     @Autowired
     CorePlatformService platFormService;
 
@@ -113,6 +113,16 @@ public class BeetlConf {
                         Long orgId = platFormService.getCurrentOrgId();
                         String functionCode = (String) paras[0];
                         return platFormService.canAcessFunction(userId, orgId, functionCode);
+                    }
+
+                });
+                
+                groupTemplate.registerFunction("env", new Function() {
+
+                    @Override
+                    public String call(Object[] paras, Context ctx) {
+                      String key = (String)paras[0];
+                      return env.getProperty(key); 
                     }
 
                 });

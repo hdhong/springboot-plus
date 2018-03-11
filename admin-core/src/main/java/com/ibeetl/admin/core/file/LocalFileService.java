@@ -158,6 +158,15 @@ public class LocalFileService   implements FileService {
     public void updateFile(String fileBatchId, String bizType, String bizId) {
        dbHelper.fileDao.updateBatchIdInfo(bizType, bizId, fileBatchId);
     }
+
+    @Override
+    public FileItem getFileItemById(Long id, String fileBatchId) {
+        CoreFile file = dbHelper.getFileItemById(id);
+        if(!file.getFileBatchId().equals(fileBatchId)){
+            return  null;
+        }
+        return this.getFileItem(file);
+    }
 	
 	
 	
