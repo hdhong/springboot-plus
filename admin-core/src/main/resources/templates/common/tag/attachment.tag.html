@@ -31,8 +31,10 @@ var files = (isNew=="true")?[]:core.file(batchFileUUID);
 		      	<td>${file.name}</td>
 		        <td>成功</td>
 		        <td>
-			        <button class="layui-btn layui-btn-mini  demo-preview">预览</button>
+			        
 			        <button class="layui-btn layui-btn-mini  layui-btn-danger demo-delete">删除</button>
+			        <button class="layui-btn layui-btn-mini  demo-preview">预览</button>
+			        <button class="layui-btn layui-btn-mini  demo-download">下载</button>
 		        </td>
 		      </tr>
       			<!--# }  -->
@@ -45,6 +47,7 @@ var files = (isNew=="true")?[]:core.file(batchFileUUID);
 <script>
 var previewStr = '<button class="layui-btn layui-btn-mini demo-preview">预览</button>';
 var deleteStr = '<button class="layui-btn layui-btn-mini  demo-delete layui-btn-danger">删除</button>';
+var downloadStr ='<button class="layui-btn layui-btn-mini demo-download">下载</button>'
 layui.use('upload',
 function() {
     var $ = layui.jquery,
@@ -93,7 +96,7 @@ function() {
             tds = tr.children();
             tds.eq(0).html(  res.data.id);
             tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
-            tds.eq(3).html(previewStr + deleteStr); //清空操作
+            tds.eq(3).html(deleteStr+previewStr +downloadStr); //清空操作
             initTr(tr);
             return delete this.files[index]; //删除文件队列已经上传成功的文件
         },
@@ -132,11 +135,21 @@ function() {
         tr.find('.demo-preview').on('click',
         function() {
             //文件下载地址
-            var file = encodeURIComponent("http://localhost:8080/core/file/"+fileId+"/${batchFileUUID}/"+fileName);
-           	console.log(file);
+            var file = encodeURIComponent("http://localhost:8080/core/file/download/"+fileId+"/${batchFileUUID}/"+fileName);
+           
             //8012为预览服务器地址，参考 https://gitee.com/kekingcn/file-online-preview 安装
-            Common.openDlg("http://localhost:8012/onlinePreview?url="+file,fileName+"预览")
+            Common.openDlg("${env('file.previewURL')}?url="+file,fileName+"预览")
             //window.open("http://localhost:8012/onlinePreview?url="+file);
+           	return false;
+        });
+        
+        //下载服务器文件
+        tr.find('.demo-download').on('click',
+        function() {
+            //文件下载地址
+            var address = "${ctxPath}/core/file/download/"+fileId+"/${batchFileUUID}/"+fileName;
+            console.log(address);
+           	window.location.href=address;
            	return false;
         });
     }
