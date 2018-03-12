@@ -18,7 +18,7 @@ public class CosonleApplication  extends SpringBootServletInitializer  {
     
     public static void main(String[] args) {
     	
-    	SpringApplication.run(CosonleApplication.class, args);
+        SpringApplication.run(CosonleApplication.class, args);
     }
 
 
