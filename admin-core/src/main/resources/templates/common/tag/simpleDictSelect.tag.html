@@ -1,7 +1,30 @@
 <!--# /*简单一级字典下拉列表控件*/  -->
 <div class="${style!'layui-input-inline'}">
-	<select data-group="${group!}" name="${name}" ${has(id)?("id="+id):''}>
-	<option value="">请选择</option>
+<!--#  
+if(has(readonly)){
+	var dicts = [];
+	var selectedDict = null;
+	if(isNotEmpty(type)){
+		dicts = dict.dictDownQuery(type);
+	}else if(isNotEmpty(group)&&isNotEmpty(value)){
+		//级联选择
+		dicts = dict.dictListByValue(group,value);
+	}
+	var expected = value!"";
+	for(dict in dicts){
+		if(dict.value==(expected+"")){
+			selectedDict = dict;
+			break;
+		}
+	}
+-->
+<input type="text" class="layui-input" value="${selectedDict.name}"></input>
+<input type="hidden"  name="${name}"  
+					 class="layui-input" value="${expected}"></input>
+<!--#}else{  -->
+
+	<select  data-group="${group!}" name="${name}" ${has(id)?("id="+id):''}>
+	<option  value="">请选择</option>
 	<!--# 
 		var dicts = [];
 		if(isNotEmpty(type)){
@@ -18,4 +41,5 @@
       
    <!--#}-->
     </select>
+ <!--#}  -->
 </div>
