@@ -1,5 +1,6 @@
 package com.ibeetl.admin.core.conf;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -122,7 +123,22 @@ public class BeetlConf {
                     @Override
                     public String call(Object[] paras, Context ctx) {
                       String key = (String)paras[0];
-                      return env.getProperty(key); 
+                      String value =  env.getProperty(key); 
+                      if(value!=null) {
+                          return getStr(value);
+                      }
+                      if(paras.length==2) {
+                          return (String)paras[1];
+                      }
+                      return null;
+                    }
+                    
+                    protected String getStr(String str) {
+                        try {
+                            return new String(str.getBytes("iso8859-1"),"UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
 
                 });

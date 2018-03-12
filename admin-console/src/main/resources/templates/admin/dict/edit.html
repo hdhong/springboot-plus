@@ -5,15 +5,20 @@
 		<div class="layui-form-item">
 
 			<div class="layui-inline">
+				<label class="layui-form-label">字典值</label>
+				<div class="layui-input-block">
+					<input type="text" name="value" value="${dict.value}"
+						class="layui-input">
+				</div>
+			</div>
+			
+			<div class="layui-inline">
 				<label class="layui-form-label">字典名称</label>
 				<div class="layui-input-block">
 					<input type="text" name="name" value="${dict.name}"
 						class="layui-input">
 				</div>
 			</div>
-
-
-
 
 		</div>
 
@@ -70,7 +75,7 @@
 			</div>
 		</div>
 	</div>
-	<input type="hidden" name="value" value=${dict.value} />
+	<input type="hidden" name="id" value=${dict.id} />
 
 	<layui:submitButtons id="updateButton" />
 </form>

@@ -14,7 +14,7 @@
 		for(dict in dicts){
 	 -->
 	 
-    <option value="${dict.value}" ${dict.value==expected?'selected'}>${dict.name}</option>
+    <option value="${dict.value}" ${dict.value==(expected+"")?'selected'}>${dict.name}</option>
       
    <!--#}-->
     </select>
