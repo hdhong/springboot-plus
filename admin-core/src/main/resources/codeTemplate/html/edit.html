@@ -8,29 +8,39 @@
 	@ var item1=(size-i==1)?null:list[i+1];
 	@ i=i+1;
 	@ var array = [item0,item1];
-	<div class="layui-row">
-		<div class="layui-form-item">
+    <div class="layui-row">
+        <div class="layui-form-item">
 		@for(item in array){
 		@if(item==null){continue;}
-			<div class="layui-inline">
-			<label class="layui-form-label">${item.displayName}</label>
-			<div class="layui-input-inline">
-				<input type="text" name="${item.name}"  value="\${${entity.code}.${item.name}}"
+            <div class="layui-inline">
+            <label class="layui-form-label">${item.displayName}</label>
+            <div class="layui-input-inline">
+				@if(isEmpty(item.dictType)){
+                <input type="text" id="${item.name}" name="${item.name}"  value="\${${entity.code}.${item.name}}"
 					 class="layui-input" >
-			</div>
-			</div>
+				@}else{
+                <layui:simpleDictSelect style='layui-input-inline' type="${item.dictType}" 
+					id="${item.name}" name="${item.name}" value="\${${entity.code}.${item.name}}" />
+				@}
+            </div>
+            </div>
 		@}
-		</div>
-	</div>
+        </div>
+    </div>
 	@}
-	<input type="hidden" name="${entity.idAttribute.name}" value=\${${entity.code}.${entity.idAttribute.name}} />
 	
-	<layui:submitButtons id="updateButton" />
+	@if(entity.attachment){
+    <div class="layui-row">
+        <layui:attachment name="attachmentId" batchFileUUID="\${${entity.code}.attachmentId}" isNew="false" bizId="\${${entity.code}.${entity.idAttribute.name}}" bizType="${entity.name}"/>
+    </div>
+	@}
+    <input type="hidden" name="${entity.idAttribute.name}" value=\${${entity.code}.${entity.idAttribute.name}} />
+    <layui:submitButtons id="updateButton" />
 </form>
 <!--#} -->
 <script>
 layui.use(['edit'], function(){
-	var ${entity.code}Edit = layui.edit
-	${entity.code}Edit.init();
+    var ${entity.code}Edit = layui.edit
+    ${entity.code}Edit.init();
 });
 </script>

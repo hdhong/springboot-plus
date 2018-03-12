@@ -27,7 +27,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                 }, 
                 @for(attr in entity.list){
                 {
-                field : '${attr.name}',
+                field : '${isEmpty(attr.dictType)?attr.name:(attr.name+"Text")}', ${isNotEmpty(attr.dictType)?"//数据字典类型为 "+attr.dictType}
                 title : '${attr.displayName}',
                 @if(attrLP.first){
                 fixed:'left',
@@ -69,6 +69,17 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                         delView.delBatch();
                     });
                 }
+                @if(entity.includeExcel){
+                ,
+                exportExcel : function() {
+                    Common.alert("未完成的导出功能，参考数据字典到处")
+
+                },
+                importExcel:function(){
+                    //参考数据字典导入导出
+                    Common.alert("未完成的导入功能能，参考数据字段导入")
+                }
+                @}
             };
             $('.ext-toolbar').on('click', function() {
                 var type = $(this).data('type');

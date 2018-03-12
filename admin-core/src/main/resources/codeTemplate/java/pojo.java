@@ -13,6 +13,8 @@ import com.ibeetl.admin.core.util.ValidateConfig;
 
 import org.beetl.sql.core.TailBean;
 import java.math.*;
+
+import com.ibeetl.admin.core.annotation.Dict;
 import com.ibeetl.admin.core.entity.BaseEntity;
 
 /* 
@@ -29,6 +31,10 @@ public class ${className} extends BaseEntity{
     \@NotNull(message = "ID不能为空", groups =ValidateConfig.UPDATE.class)
     \@SeqID(name = ORACLE_CORE_SEQ_NAME)
     \@AutoID	
+	@}
+	
+	@if(isNotEmpty(attr.dictType)) {
+    \@Dict(type="${attr.dictType}")
 	@}
     private ${attr.type} ${attr.name} ;
 	

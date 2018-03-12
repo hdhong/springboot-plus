@@ -7,6 +7,8 @@ public class Attribute {
 	private String displayName;
 	private boolean isId;
 	private boolean showInQuery =false;
+	//数据字典
+	private String dictType;
 	private String comment;
 	
 	
@@ -58,5 +60,11 @@ public class Attribute {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+    public String getDictType() {
+        return dictType;
+    }
+    public void setDictType(String dictType) {
+        this.dictType = dictType;
+    }
 	
 }

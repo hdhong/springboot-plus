@@ -14,6 +14,9 @@ public class Entity {
 	Attribute nameAttribute;
 	String comment;
 	String system;
+	boolean includeExcel =false;
+	boolean attachment=false;
+	
 	public String getName() {
 		return name;
 	}
@@ -90,5 +93,17 @@ public class Entity {
 		}
 		return newList;
 	}
+    public boolean isIncludeExcel() {
+        return includeExcel;
+    }
+    public void setIncludeExcel(boolean includeExcel) {
+        this.includeExcel = includeExcel;
+    }
+    public boolean isAttachment() {
+        return attachment;
+    }
+    public void setAttachment(boolean attachment) {
+        this.attachment = attachment;
+    }
 	
 }

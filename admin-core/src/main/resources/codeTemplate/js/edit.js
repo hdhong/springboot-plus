@@ -4,8 +4,8 @@ layui.define([ 'form', 'laydate', 'table','${entity.code}Api'], function(exports
     var index = layui.index;
     var view = {
         init:function(){
-        Lib.initGenrealForm($("#updateForm"),form);
-        this.initSubmit();
+	        Lib.initGenrealForm($("#updateForm"),form);
+	        this.initSubmit();
         },
         initSubmit:function(){
             $("#updateButton").click(function(){
