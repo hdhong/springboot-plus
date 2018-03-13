@@ -7,8 +7,8 @@
     <layui:accessButton function="${entity.code}.edit"  action="edit">编辑</layui:accessButton>
     <layui:accessButton function="${entity.code}.del"  action="del">删除</layui:accessButton>
     @if(entity.includeExcel){
-     <layui:accessButton function="${entity.code}.exportExcel"  action="exportExcel">导出excel</layui:accessButton>
-     <layui:accessButton function="${entity.code}.importExcel"  action="importExcel">导入excel</layui:accessButton>
+     <layui:accessButton function="${entity.code}.exportDocument"  action="exportDocument">导出</layui:accessButton>
+     <layui:accessButton function="${entity.code}.importDocument"  action="importDocument">导入</layui:accessButton>
     @}
 </div>
 

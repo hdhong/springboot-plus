@@ -32,7 +32,7 @@
 	@if(entity.attachment){
     <div class="layui-row">
         <!-- 业务对象得有一个字段保存附件id，假设是attachmentId  -->
-        <layui:attachment name="attachmentId" batchFileUUID="\${uuid()}" isNew="true"/>
+        <layui:attachment name="attachmentId" batchFileUUID="\${uuid()}"  bizType="entity.name" isNew="true"/>
     </div>
 	@}
     <layui:submitButtons id="addButton" />

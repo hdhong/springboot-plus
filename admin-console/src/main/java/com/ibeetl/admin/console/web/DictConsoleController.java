@@ -158,6 +158,7 @@ public class DictConsoleController{
             Context context = new Context();
             context.putVar("dicts", dicts);
             JxlsHelper.getInstance().processTemplate(is, os, context);
+            os.close();
             //下载参考FileSystemContorller
             return  JsonResult.success(item.getPath());
         } catch (IOException e) {

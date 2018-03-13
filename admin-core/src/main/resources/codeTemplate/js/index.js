@@ -37,7 +37,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                 	return Common.getDate(d.${attr.name});
                 },
                 @}
-                width : 100,
+                width : 100
                 }${!attrLP.last?","} 
                 @}
         
@@ -71,13 +71,23 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                 }
                 @if(entity.includeExcel){
                 ,
-                exportExcel : function() {
-                    Common.alert("未完成的导出功能，参考数据字典到处")
-
+                exportDocument : function() {
+                    layui.use([ '${entity.code}Api' ], function() {
+                        var ${entity.code}Api = layui.${entity.code}Api
+                        Common.openConfirm("确认要导出这些${entity.displayName}数据?", function() {
+                            ${entity.code}Api.exportExcel($("#searchForm"), function(fileId) {
+                                Lib.download(fileId);
+                            })
+                        })
+                    });
                 },
-                importExcel:function(){
-                    //参考数据字典导入导出
-                    Common.alert("未完成的导入功能能，参考数据字段导入")
+                importDocument:function(){
+                    var uploadUrl = Common.ctxPath+"/${target.urlBase}/${entity.code}/excel/import.do";
+                    //模板,
+                    var templatePath= "/${target.urlBase}/${entity.code}/${entity.code}_upload_template.xls";
+                    //公共的简单上传文件处理
+                    var url = "/core/file/simpleUpload.do?uploadUrl="+uploadUrl+"&templatePath="+templatePath;
+                    Common.openDlg(url, "${entity.displayName}管理>上传");
                 }
                 @}
             };
