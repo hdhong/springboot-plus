@@ -8,31 +8,39 @@
 	@ var item1=(size-i==1)?null:list[i+1];
 	@ i=i+1;
 	@ var array = [item0,item1];
-	<div class="layui-row">
-	   <div class="layui-form-item">
+    <div class="layui-row">
+        <div class="layui-form-item">
 		@for(item in array){
 		@if(item==null){continue;}
 		
-			<div class="layui-inline">
-			<label class="layui-form-label">${item.displayName}</label>
-			<div class="layui-input-inline">
-				<input type="text" name="${item.name}" 
-					 class="layui-input" >
-			</div>
-			</div>
+            <div class="layui-inline">
+            <label class="layui-form-label">${item.displayName}</label>
+            <div class="layui-input-inline">
+				@if(isEmpty(item.dictType)){
+                <input type="text" name="${item.name}" class="layui-input" >
+				@}else{
+                <layui:simpleDictSelect style='layui-input-inline' type="${item.dictType}" 
+					id="${item.name}" name="${item.name}" value="" />
+				@}
+            </div>
+            </div>
 		
 		@}
-		</div>
-		
-	</div>
+        </div>
+    </div>
 	@}
-	
-	<layui:submitButtons id="addButton" />
+	@if(entity.attachment){
+    <div class="layui-row">
+        <!-- 业务对象得有一个字段保存附件id，假设是attachmentId  -->
+        <layui:attachment name="attachmentId" batchFileUUID="\${uuid()}"  bizType="entity.name" isNew="true"/>
+    </div>
+	@}
+    <layui:submitButtons id="addButton" />
 </form>
 <!--#} -->
 <script>
 layui.use(['add'], function(){
-  var ${entity.code}Add = layui.add
-  ${entity.code}Add.init();
+    var ${entity.code}Add = layui.add
+    ${entity.code}Add.init();
 });
 </script>

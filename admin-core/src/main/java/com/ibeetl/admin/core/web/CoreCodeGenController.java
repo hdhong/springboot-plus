@@ -131,15 +131,7 @@ public class CoreCodeGenController {
         copy(resource,"beetl.properties");
         copy(resource,"btsql-ext.properties");
         copy(resource,"banner.txt");
-        
-        //修改application.properties的配置,改成手工添加
-        
-//        Properties ps = new Properties();
-//        ps.load(new FileReader(config));
-////        String str = ps.getProperty("beetlsql.basePackag");
-//        ps.put("beetlsql.basePackag", "ibeetl.com,"+basePackage);
-//        ps.store(new FileWriter(config), "");
-//        
+   
         return JsonResult.success();
     }
     
@@ -319,20 +311,20 @@ public class CoreCodeGenController {
 		entity.setCode(info.getCode());
 		entity.setDisplayName(info.getDisplayName());
 		entity.setSystem(info.getSystem());
+		entity.setAttachment(data.entity.isAttachment());
+		entity.setIncludeExcel(data.entity.isIncludeExcel());
 		for (int i = 0; i < entity.getList().size(); i++) {
 		    Attribute attr = entity.getList().get(i);
 		    attr.setDisplayName(info.getList().get(i).getDisplayName());
 		    attr.setShowInQuery(info.getList().get(i).isShowInQuery());
+		    attr.setDictType(info.getList().get(i).getDictType());
 		    if(attr.getName().equals(data.getNameAttr())) {
 		        entity.setNameAttribute(attr);
 		    }
-			
 		}
-
 		if (StringUtils.isEmpty(entity.getCode()) || StringUtils.isEmpty(entity.getSystem())) {
 			throw new PlatformException("code,system不能为空");
 		}
-		
 		
 		
 		return entity;
@@ -432,6 +424,7 @@ class EntityInfo {
 	String basePackage;
 	String nameAttr;
 
+
 	public Entity getEntity() {
 		return entity;
 	}
@@ -463,5 +456,7 @@ class EntityInfo {
     public void setNameAttr(String nameAttr) {
         this.nameAttr = nameAttr;
     }
+
+   
 
 }

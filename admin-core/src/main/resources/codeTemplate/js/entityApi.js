@@ -12,6 +12,15 @@ layui.define([], function(exports) {
                     callback();
                 })
             }
+            @if(entity.includeExcel){
+            ,
+            exportExcel:function(form,callback){
+                var formPara = form.serializeJson();
+                Common.post("/${target.urlBase}/${entity.code}/excel/export.json", formPara, function(fileId) {
+                    callback(fileId);
+                })
+            }
+            @}
 		
     };
     exports('${entity.code}Api',api);

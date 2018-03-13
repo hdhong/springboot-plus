@@ -26,12 +26,15 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
 					{
 						field : 'tableName',
 						title : '表名称',
-						width : 200,
+						width : 400,
+						sort : true
+						
 					}, 
 					{
 						field : 'name',
 						title : '类名',
-						width : 300,
+						width : 400,
+						sort : true
 					}
 					]  ]
 

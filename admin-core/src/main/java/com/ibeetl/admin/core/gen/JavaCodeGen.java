@@ -72,6 +72,7 @@ class JavaEntityGen  implements AutoGen{
 			map.put("name", attr.getName());
 			map.put("methodName", BaseTarget.upperFirst(attr.getName()));
 			map.put("isId", attr.isId());
+			map.put("dictType", attr.getDictType());
 			attrs.add(map);
 			
 		}

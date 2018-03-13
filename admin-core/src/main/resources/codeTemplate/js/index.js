@@ -27,7 +27,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                 }, 
                 @for(attr in entity.list){
                 {
-                field : '${attr.name}',
+                field : '${isEmpty(attr.dictType)?attr.name:(attr.name+"Text")}', ${isNotEmpty(attr.dictType)?"//数据字典类型为 "+attr.dictType}
                 title : '${attr.displayName}',
                 @if(attrLP.first){
                 fixed:'left',
@@ -37,7 +37,7 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                 	return Common.getDate(d.${attr.name});
                 },
                 @}
-                width : 100,
+                width : 100
                 }${!attrLP.last?","} 
                 @}
         
@@ -69,6 +69,27 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                         delView.delBatch();
                     });
                 }
+                @if(entity.includeExcel){
+                ,
+                exportDocument : function() {
+                    layui.use([ '${entity.code}Api' ], function() {
+                        var ${entity.code}Api = layui.${entity.code}Api
+                        Common.openConfirm("确认要导出这些${entity.displayName}数据?", function() {
+                            ${entity.code}Api.exportExcel($("#searchForm"), function(fileId) {
+                                Lib.download(fileId);
+                            })
+                        })
+                    });
+                },
+                importDocument:function(){
+                    var uploadUrl = Common.ctxPath+"/${target.urlBase}/${entity.code}/excel/import.do";
+                    //模板,
+                    var templatePath= "/${target.urlBase}/${entity.code}/${entity.code}_upload_template.xls";
+                    //公共的简单上传文件处理
+                    var url = "/core/file/simpleUpload.do?uploadUrl="+uploadUrl+"&templatePath="+templatePath;
+                    Common.openDlg(url, "${entity.displayName}管理>上传");
+                }
+                @}
             };
             $('.ext-toolbar').on('click', function() {
                 var type = $(this).data('type');
