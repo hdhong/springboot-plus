@@ -60,7 +60,7 @@ public class ${entity.name}Controller{
 
     \@Autowired private ${entity.name}Service ${service};
     
-    @Autowired
+    \@Autowired
     FileService fileService;
     /* 页面 */
 
@@ -169,7 +169,7 @@ public class ${entity.name}Controller{
             if(is==null) {
                 throw new PlatformException("模板资源不存在："+excelTemplate);
             }
-            FileItem item = fileService.createFileTemp("${entity.displayName}_"+DateUtil.now("yyyyMMddHHmmss")".xls");
+            FileItem item = fileService.createFileTemp("${entity.displayName}_"+DateUtil.now("yyyyMMddHHmmss")+".xls");
             OutputStream os = item.openOutpuStream();
             Context context = new Context();
             context.putVar("list", list);
