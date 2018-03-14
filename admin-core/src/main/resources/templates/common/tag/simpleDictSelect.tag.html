@@ -18,9 +18,9 @@ if(has(readonly)){
 		}
 	}
 -->
-<input type="text" class="layui-input"  readonly value="${selectedDict.name}"></input>
+<input type="text"  class="layui-input input-readonly" value="${selectedDict.name}"></input>
 <input type="hidden"  name="${name}"  
-					 class="layui-input" value="${expected}"></input>
+					  value="${expected}"></input>
 <!--#}else{  -->
 
 	<select  data-group="${group!}" name="${name}" ${has(id)?("id="+id):''}>

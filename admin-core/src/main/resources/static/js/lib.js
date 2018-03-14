@@ -231,6 +231,7 @@ var Lib = {
 	},
 	
 	download:function(fileId){
+	  fileId=encodeURIComponent(fileId);
 	  window.location.href =   Common.ctxPath+"/core/file/get.do?id="+fileId
 	},
 

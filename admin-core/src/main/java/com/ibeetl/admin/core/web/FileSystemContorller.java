@@ -74,7 +74,7 @@ public class FileSystemContorller {
 	     String path = id;
 		 response.setContentType("text/html; charset = UTF-8");  
 		 FileItem fileItem = fileService.loadFileItemByPath(path);
-		 response.setHeader("Content-Disposition", "attachment; filename="+fileItem.getName());  
+		 response.setHeader("Content-Disposition", "attachment; filename="+java.net.URLEncoder.encode(fileItem.getName(), "UTF-8"));  
 		 fileItem.copy(response.getOutputStream());
 		 if(fileItem.isTemp()) {
 		     fileItem.delete();
@@ -91,7 +91,7 @@ public class FileSystemContorller {
              start1 = start2;
          }
          String file = path.substring(start1+1);
-         response.setHeader("Content-Disposition", "attachment; filename="+file);  
+         response.setHeader("Content-Disposition", "attachment; filename="+java.net.URLEncoder.encode(file,"UTF-8"));  
          InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("excelTemplates/"+path);
          FileUtil.copy(input, response.getOutputStream());
          return null;
