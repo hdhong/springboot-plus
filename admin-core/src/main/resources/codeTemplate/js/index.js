@@ -44,6 +44,15 @@ layui.define([ 'form', 'laydate', 'table' ], function(exports) {
                 ] ]
         
             });
+            
+            table.on('checkbox(${entity.code}Table)', function(obj){
+                var ${entity.code} = obj.data;
+                if(obj.checked){
+                   //按钮逻辑Lib.buttonEnable()
+                }else{
+                    
+                }
+             })
         },
         	
         initSearchForm:function(){

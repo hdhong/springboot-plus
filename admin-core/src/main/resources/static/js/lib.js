@@ -265,6 +265,18 @@ var Lib = {
         }
 		Common.post(url, formPara, callBack);
 	},
+	buttonEnable:function(buttonCode,enable){
+	    var btn = $("#table-button-"+buttonCode);
+	    debugger;
+	    if(enable){
+	        btn.attr('disabled',"false");
+	        btn.removeClass("button-disabled")
+	    }else{
+	        btn.attr('disabled',"true");
+	        btn.addClass('button-disabled');
+	    }
+	    
+	},
 	getTableHeight : function(queryLine) {
 		// 表格相对高度
 		if (queryLine == 1) {
