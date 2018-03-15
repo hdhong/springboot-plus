@@ -17,8 +17,9 @@ layui.define([ 'form', 'laydate', 'table','menuApi'], function(exports) {
 					menuApi.updateMenu(function(){
 						Common.info("更新成功");
 						Lib.closeFrame();
+						parent.window.dataReload();
 					});
-					parent.window.dataReload();
+					
 					
 				});
 				

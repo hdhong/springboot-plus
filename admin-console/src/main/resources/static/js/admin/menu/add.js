@@ -18,9 +18,10 @@ layui.define([ 'form', 'laydate', 'table','menuApi'], function(exports) {
 					
 					menuApi.addMenu(function(){
 						Common.info("添加成功");
+						parent.window.dataReload();
 						Lib.closeFrame();
 					});
-					parent.window.dataReload();
+					
 					
 				});
 				
