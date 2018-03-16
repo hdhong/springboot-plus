@@ -9,7 +9,7 @@ var files = (isNew=="true")?[]:core.file(batchFileUUID);
 
 -->
 <div class="layui-upload">
-	<input type="hidden" name="${name}" value="${batchFileUUID}"/>
+	<input type="hidden" name="${name}" value="${batchFileUUID}" ${isNotEmpty(layVerify)?('lay-verify="'+layVerify+'"'):''} />
 	<button type="button" class="layui-btn layui-btn-normal"
 		id="${chooseId}">选择多文件</button>
 	

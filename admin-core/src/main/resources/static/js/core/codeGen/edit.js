@@ -49,6 +49,57 @@ layui.define([ 'form', 'laydate', 'table','codeApi'], function(exports) {
 					toolbar[type] ? toolbar[type].call(this) : '';
 				});
 				
+				$(".addVerify").click(function(){
+						var _this = $(this),verifyGroup = _this.parent('.verifyGroup');
+		            	layer.open({
+		            		  title: '添加校验类型',
+		            		  content: '<div class="layui-form">'+
+		            		  						'<div class="layui-form-item">'+
+												            	'<input type="checkbox" class="verify" title="必填" value="required"/>'+
+											            		'<input type="checkbox" class="verify" title="邮箱"value="email" />'+
+											            		'<input type="checkbox" class="verify" title="手机" value="phone"/>'+
+				            						'</div>'+
+				            						'<div class="layui-form-item">'+
+									            		'<input type="checkbox" class="verify" title="数字"value="number" />'+
+									            		'<input type="checkbox" class="verify" title="日期" value="date"/>'+
+									            		'<input type="checkbox" class="verify" title="网址" value="url"/>'+
+									            	'</div>'+
+									            	'<div class="layui-form-item">'+
+									            		'<input type="checkbox" class="verify" title="身份证"value="identity" />'+
+									            	'</div>'+
+		            						'</div>',
+	            			  success: function(layero, index){
+	            				   
+	            				  //初始化赋值
+	            				   var inputs = verifyGroup.find('input');
+	            				   var verifys = $('.verify');
+	            				   for (var i = 0; i < inputs.length; i++) {
+	            				    	for (var j = 0;j< verifys.length;j++) {
+											if(inputs[i].value == verifys[j].value){
+												$(verifys[j]).attr("checked",true);
+											}
+										}
+									}
+	            				   form.render();
+	            			  },
+	            			  yes: function(index, layero){
+	            				    var verifys = $('.verify:checked');
+	            				    
+	            				    //清空并重新赋值
+	            				    verifyGroup.find('.verifybtn').remove();
+	            				    for (var i = 0; i < verifys.length; i++) {
+	            				    	
+	            				    	var name = 'entity.list[' + verifyGroup.data('index')+'].verifyList'+'['+i+'].name';
+	            				    	var btn =  '<button class="layui-btn layui-btn-xs verifybtn" type="button" >'+$(verifys[i]).attr('title')+
+	            				    							'<input type="text" name="'+name +'"  value="'+$(verifys[i]).val()+'" hidden>'+
+	            				    					 '</button>'
+	            				    	verifyGroup.append(btn);
+									}
+	            				    
+	            				    layer.close(index);
+	            			  }
+		            	});
+		        });
 				
 			},
 			openCode:function(data){

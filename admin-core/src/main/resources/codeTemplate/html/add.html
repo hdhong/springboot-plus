@@ -17,10 +17,10 @@
             <label class="layui-form-label">${item.displayName}</label>
             <div class="layui-input-inline">
 				@if(isEmpty(item.dictType)){
-                <input type="text" name="${item.name}" class="layui-input" >
+                <input type="text" name="${item.name}" class="layui-input" ${isNotEmpty(item.verifyList)?('lay-verify="'+verifyFormat(item.verifyList)+'"'):''}>
 				@}else{
-                <layui:simpleDictSelect style='layui-input-inline' type="${item.dictType}" 
-					id="${item.name}" name="${item.name}" value="" />
+                <layui:simpleDictSelect style='layui-input-inline' type="${item.dictType}" layVerify="${verifyFormat(item.verifyList)}" 
+                			id="${item.name}" name="${item.name}" value="" />
 				@}
             </div>
             </div>
@@ -32,7 +32,7 @@
 	@if(entity.attachment){
     <div class="layui-row">
         <!-- 业务对象得有一个字段保存附件id，假设是attachmentId  -->
-        <layui:attachment name="attachmentId" batchFileUUID="\${uuid()}"  bizType="entity.name" isNew="true"/>
+        <layui:attachment name="attachmentId" batchFileUUID="\${uuid()}"  bizType="entity.name" isNew="true" layVerify="${verifyFormat(item.verifyList)}" />
     </div>
 	@}
     <layui:submitButtons id="addButton" />

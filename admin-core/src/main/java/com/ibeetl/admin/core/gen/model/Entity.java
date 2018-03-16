@@ -9,7 +9,6 @@ public class Entity {
 	String code;
 	String displayName;
 	ArrayList<Attribute> list = new ArrayList<Attribute>();
-	Attribute[] temp = null;
 	Attribute idAttribute;
 	Attribute nameAttribute;
 	String comment;
@@ -76,13 +75,6 @@ public class Entity {
 		this.comment = comment;
 	}
 	
-	
-	public Attribute[] getTemp() {
-		return temp;
-	}
-	public void setTemp(Attribute[] temp) {
-		this.temp = temp;
-	}
 	public List<Attribute> getGeneralList(){
 		List<Attribute> newList = new ArrayList<Attribute>();
 		for(Attribute attr:list) {

@@ -318,10 +318,12 @@ public class CoreCodeGenController {
 		    attr.setDisplayName(info.getList().get(i).getDisplayName());
 		    attr.setShowInQuery(info.getList().get(i).isShowInQuery());
 		    attr.setDictType(info.getList().get(i).getDictType());
+		    attr.setVerifyList(info.getList().get(i).getVerifyList());
 		    if(attr.getName().equals(data.getNameAttr())) {
 		        entity.setNameAttribute(attr);
 		    }
 		}
+		
 		if (StringUtils.isEmpty(entity.getCode()) || StringUtils.isEmpty(entity.getSystem())) {
 			throw new PlatformException("code,system不能为空");
 		}

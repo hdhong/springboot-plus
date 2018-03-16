@@ -9,12 +9,13 @@ layui.define([ 'form', 'laydate', 'table','functionApi'], function(exports) {
 			},
 			initSubmit:function(){
 				$("#saveFunction").click(function(){
-					functionApi.addFunction(function(){
-						Common.info("添加成功");
-						Lib.closeFrame();
+					form.on('submit(form)', function(){
+						functionApi.addFunction(function(){
+							Common.info("添加成功");
+							Lib.closeFrame();
+						});
+						parent.window.dataReload();
 					});
-					parent.window.dataReload();
-					
 				});
 				
 				$("#saveFunction-cancel").click(function(){

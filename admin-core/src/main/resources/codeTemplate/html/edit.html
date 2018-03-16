@@ -16,11 +16,10 @@
             <label class="layui-form-label">${item.displayName}</label>
             <div class="layui-input-inline">
 				@if(isEmpty(item.dictType)){
-                <input type="text" id="${item.name}" name="${item.name}"  value="\${${entity.code}.${item.name}}"
-					 class="layui-input" >
+                <input type="text" id="${item.name}" name="${item.name}"  value="\${${entity.code}.${item.name}}"  ${isNotEmpty(item.verifyList)?('lay-verify="'+verifyFormat(item.verifyList)+'"'):''} class="layui-input" >
 				@}else{
                 <layui:simpleDictSelect style='layui-input-inline' type="${item.dictType}" 
-					id="${item.name}" name="${item.name}" value="\${${entity.code}.${item.name}}" />
+					id="${item.name}" name="${item.name}" value="\${${entity.code}.${item.name}}" layVerify="${verifyFormat(item.verifyList)}" />
 				@}
             </div>
             </div>
@@ -34,7 +33,7 @@
         <layui:attachment name="attachmentId" batchFileUUID="\${${entity.code}.attachmentId}" isNew="false" bizId="\${${entity.code}.${entity.idAttribute.name}}" bizType="${entity.name}"/>
     </div>
 	@}
-    <input type="hidden" name="${entity.idAttribute.name}" value=\${${entity.code}.${entity.idAttribute.name}} />
+    <input type="hidden" name="${entity.idAttribute.name}" value=\${${entity.code}.${entity.idAttribute.name}} ${isNotEmpty(item.verifyList)?('lay-verify="'+verifyFormat(item.verifyList)+'"'):''}/>
     <layui:submitButtons id="updateButton" />
 </form>
 <!--#} -->

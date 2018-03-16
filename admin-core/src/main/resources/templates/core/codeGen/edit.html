@@ -13,13 +13,13 @@
 
 	<fieldset class="layui-elem-field layui-field-title"
 		style="margin-top: 30px;">
-		<legend>主健字段</legend>
+		<legend>主键字段</legend>
 	</fieldset>
 
 	<div class="layui-row">
 		<div class="layui-form-item">
 			<div class="layui-inline">
-				<label class="layui-form-label">主健</label>
+				<label class="layui-form-label">主键</label>
 				<div class="layui-input-inline">
 					<input type="text" name="entity.idAttribute.name" disable
 						value="${entity.idAttribute.name}" class="layui-input">
@@ -163,6 +163,7 @@
 				<th>显示名</th>
 				<th>查询</th>
 				<th>字典类型(可选)</th>
+				<th>字段校验(可选)</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -182,6 +183,11 @@
 					lay-skin="primary" value="true" title="作为搜索"></td>
 				<td><input type="text" name="entity.list[${attrLP.index-1}].dictType"  value=""
 					class="layui-input"></td>
+				<td>
+						<div class="layui-btn-container verifyGroup" data-index="${attrLP.index-1}">
+							<div class="layui-btn layui-btn-xs addVerify"><i class="layui-icon">&#xe654;</i></div>
+						</div>
+				</td>
 			</tr>
 			<!--# }  -->
 		</tbody>

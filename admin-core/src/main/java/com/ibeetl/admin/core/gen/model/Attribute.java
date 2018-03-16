@@ -1,5 +1,8 @@
 package com.ibeetl.admin.core.gen.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Attribute {
 	private String name;
 	private String colName;
@@ -10,6 +13,8 @@ public class Attribute {
 	//数据字典
 	private String dictType;
 	private String comment;
+	//校验对象
+	private List<Verify> verifyList = new ArrayList<>();
 	
 	
 	public Attribute() {
@@ -66,5 +71,11 @@ public class Attribute {
     public void setDictType(String dictType) {
         this.dictType = dictType;
     }
+	public List<Verify> getVerifyList() {
+		return verifyList;
+	}
+	public void setVerifyList(List<Verify> verifyList) {
+		this.verifyList = verifyList;
+	}
 	
 }

@@ -19,11 +19,10 @@ if(has(readonly)){
 	}
 -->
 <input type="text"  class="layui-input input-readonly" value="${selectedDict.name}"></input>
-<input type="hidden"  name="${name}"  
-					  value="${expected}"></input>
+<input type="hidden"  name="${name}" ${isNotEmpty(layVerify)?('lay-verify="'+layVerify+'"'):''} value="${expected}"></input>
 <!--#}else{  -->
 
-	<select  data-group="${group!}" name="${name}" ${has(id)?("id="+id):''}>
+	<select  data-group="${group!}" name="${name}" ${has(id)?("id="+id):''} ${isNotEmpty(layVerify)?('lay-verify="'+layVerify+'"'):''}>
 	<option  value="">请选择</option>
 	<!--# 
 		var dicts = [];

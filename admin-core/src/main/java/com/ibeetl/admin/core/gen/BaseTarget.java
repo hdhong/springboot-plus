@@ -8,6 +8,8 @@ import org.beetl.core.Function;
 import org.beetl.core.GroupTemplate;
 import org.beetl.core.resource.ClasspathResourceLoader;
 
+import com.ibeetl.admin.core.util.beetl.VerifyForamtFunction;
+
 public abstract class BaseTarget implements Target {
 	
 	protected GroupTemplate gt = null;
@@ -36,6 +38,7 @@ public abstract class BaseTarget implements Target {
 			cfg.setStatementEnd(null);
 			cfg.setHtmlTagSupport(false);
 			gt = new GroupTemplate(rs,cfg);
+            gt.registerFunction("verifyFormat", new VerifyForamtFunction());
 			gt.registerFunction("upperFirst", new Function() {
 
 				@Override

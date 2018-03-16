@@ -9,10 +9,12 @@ layui.define([ 'form', 'laydate', 'table','${entity.code}Api'], function(exports
         },
         initSubmit:function(){
             $("#addButton").click(function(){
-                ${entity.code}Api.add${upperFirst(entity.code)}($('#addForm'),function(){
-                    parent.window.dataReload();
-                    Common.info("添加成功");
-                    Lib.closeFrame();
+            	form.on('submit(form)', function(){
+	                ${entity.code}Api.add${upperFirst(entity.code)}($('#addForm'),function(){
+	                    parent.window.dataReload();
+	                    Common.info("添加成功");
+	                    Lib.closeFrame();
+	                });
                 });
             });
         
