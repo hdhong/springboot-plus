@@ -185,6 +185,14 @@ var Lib = {
 				range : '至'
 			});
 		})
+		
+		$(form).find(".input-date").each(function() {
+            laydate = layui.laydate;
+            laydate.render({
+                elem : $(this)[0],
+            });
+        })
+		
 
 	},
 	_dropdown : function(layuiForm, data, form, select, groupName) {

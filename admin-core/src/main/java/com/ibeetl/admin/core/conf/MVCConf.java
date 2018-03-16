@@ -92,6 +92,7 @@ public class MVCConf implements WebMvcConfigurer, InitializingBean {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new DateFormatter("yyyy-MM-dd HH:mm:ss"));
+        registry.addFormatter(new DateFormatter("yyyy-MM-dd"));
     }
 
 

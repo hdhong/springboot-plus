@@ -118,6 +118,15 @@ public class BeetlConf {
 
                 });
                 
+                groupTemplate.registerFunction("abcd", new Function() {
+
+                    @Override
+                    public Boolean call(Object[] paras, Context ctx) {
+                      return true;
+                    }
+
+                });
+                
                 groupTemplate.registerFunction("env", new Function() {
 
                     @Override

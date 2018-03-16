@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import org.beetl.sql.core.engine.PageQuery;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +20,7 @@ import com.ibeetl.admin.core.web.JsonResult;
 @Configuration
 public class JasonConfig {
 	@Bean
+	@ConditionalOnMissingBean(ObjectMapper.class)
 	public ObjectMapper getObjectMapper() {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
@@ -34,7 +36,7 @@ public class JasonConfig {
 	 * @author xiandafu
 	 *
 	 */
-	static class CustomJsonResultSerializer extends JsonSerializer<JsonResult> {
+	public static class CustomJsonResultSerializer extends JsonSerializer<JsonResult> {
 
 	    public CustomJsonResultSerializer() {
 	    }
