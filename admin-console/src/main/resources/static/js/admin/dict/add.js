@@ -10,9 +10,12 @@ layui.define([ 'form', 'laydate', 'table','dictApi'], function(exports) {
 			initSubmit:function(){
 				$("#addButton").click(function(){
 					dictApi.addDict($("#addForm"),function(){
-						parent.window.dataReload();
-						Common.info("添加成功");
-						Lib.closeFrame();
+					    parent.window.dataReload();
+						Common.openConfirm("添加成功，继续添加？",null,function(){
+						    Lib.closeFrame();
+						})
+						
+						
 					});
 					
 					

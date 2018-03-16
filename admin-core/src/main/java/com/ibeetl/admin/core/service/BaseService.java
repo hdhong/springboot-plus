@@ -167,26 +167,30 @@ public class BaseService<T> {
         }
         
         TailBean ext  = (TailBean)bean;
-        Field[] fields = ext.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            if (field.isAnnotationPresent(Dict.class)) {
-                field.setAccessible(true);
-                Dict dict = field.getAnnotation(Dict.class);
-                
-                try {
-                    String display = "";
-                    Object fieldValue = field.get(ext);
-                    if (fieldValue != null) {
-                        CoreDict  dbDict = dictUtil.findCoreDict(dict.type(),fieldValue.toString());
-                        display = dbDict!=null?dbDict.getName():null;
+        Class c = ext.getClass();
+        do {
+            Field[] fields = c.getDeclaredFields();
+            for (Field field : fields) {
+                if (field.isAnnotationPresent(Dict.class)) {
+                    field.setAccessible(true);
+                    Dict dict = field.getAnnotation(Dict.class);
+                    
+                    try {
+                        String display = "";
+                        Object fieldValue = field.get(ext);
+                        if (fieldValue != null) {
+                            CoreDict  dbDict = dictUtil.findCoreDict(dict.type(),fieldValue.toString());
+                            display = dbDict!=null?dbDict.getName():null;
+                        }
+                        ext.set(field.getName() + dict.suffix(), display);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    ext.set(field.getName() + dict.suffix(), display);
-                } catch (Exception e) {
-                    e.printStackTrace();
+    
                 }
-
             }
-        }
+         c = c.getSuperclass();
+        }while(c!=TailBean.class);
         
     }
 

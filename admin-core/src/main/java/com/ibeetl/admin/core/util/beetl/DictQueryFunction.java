@@ -23,5 +23,16 @@ public class DictQueryFunction  {
 	    
 	    return dictService.findAllByGroup(group,value);
 	}
+	
+	/**
+	 * 根据字典类型和值，找到对应的字典类型定义
+	 * 数据字典在一个type下只有唯一的值
+	 * @param type
+	 * @param value
+	 * @return
+	 */
+	public CoreDict getDict(String type,String value) {
+	    return dictService.findCoreDict(type, value);
+	}
 
 }
