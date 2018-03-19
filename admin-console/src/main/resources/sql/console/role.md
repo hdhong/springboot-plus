@@ -5,7 +5,7 @@ queryByCondtion
 	@pageTag(){
 	    r.*
 	@}
-	from core_ROLE r where 1=1
+	from core_role r where 1=1
 	@if(!isEmpty(code)){
 	    and  r.code like #"%"+code+"%"#
 	@}
@@ -49,7 +49,7 @@ batchDelByIds
 
 * 批量删除角色，同时也参考batchDeleteRoleFunction，batchDeleteRoleMenu等方法删除其他关联数据
 	
-	delete from core_ROLE  where id in( #join(ids)#);
+	delete from core_role  where id in( #join(ids)#);
 
 batchDeleteRoleFunction
 ===
@@ -66,4 +66,4 @@ batchDeleteUserRole
 
 queryAllByDelflag
 =================
-    select * from core_ROLE r where r.del_flag = #delFlag#
+    select * from core_role r where r.del_flag = #delFlag#
